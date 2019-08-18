@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Chaochao Ou">
+  
+  
+  
+  <link rel="prev" href="https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_5/" />
+  <link rel="next" href="https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_7/" />
+  <link rel="canonical" href="https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           系统学习Docker践行DevOps理念2_6 | LeaveIt
+       
+  </title>
+  <meta name="title" content="系统学习Docker践行DevOps理念2_6 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ouchaochao.github.io\/"
+    },
+    "articleSection" : "post",
+    "name" : "系统学习Docker践行DevOps理念2_6",
+    "headline" : "系统学习Docker践行DevOps理念2_6",
+    "description" : "dockerfile语法梳理 FROM：从哪里构建image FROM scratch # 制作base image FROM centos # 使用base image FROM ubuntu:18.04  注意：为了安全，请使用官方的image\nLABEL：标签 LABEL maintainer=\x26quot;abc@gmail.com\x26quot; LABEL version=\x26quot;1.1\x26quot; LABEL description=\x26quot;This is description\x26quot;  注意：Metadata不可少！\nRUN 为了美观，复杂的RUN请用反斜线换行，避免无用分层，合并多条命令成一行\nRUN yum update \x26amp;\x26amp; yum install -y vim \\ python-dev # 反斜线换行 RUN apt-get update \x26amp;\x26amp; apt-get install -y perl\\ pwgen --no-install-recommends \x26amp;\x26amp; rm -rf \\ \/var\/lib\/apt\/list\/* # 注意清理cache RUN \/bin\/bash -c \x27source $HOME\/.bashrc; echo $HOME\x27  WORKDIR：设定当前工作目录 WORKDIR \/root WORKDIR \/test # 如果没有，会自动创建的 WORKDIR demo RUN pwd # 输出结果应该是 \/test\/demo  注意：不要用RUN cd代替WORKDIR，尽量使用绝对目录",
+    "inLanguage" : "zh-cn",
+    "author" : "Chaochao Ou",
+    "creator" : "Chaochao Ou",
+    "publisher": "Chaochao Ou",
+    "accountablePerson" : "Chaochao Ou",
+    "copyrightHolder" : "Chaochao Ou",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-08-18 20:11:15 \x2b0800 CST",
+    "dateModified" : "2019-08-18 20:11:15 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6\/",
+    "wordCount" : "126",
+    "keywords" : [ "docker", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">系统学习Docker践行DevOps理念2_6</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-08-18 itemprop="datePublished">August 18, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="dockerfile语法梳理">dockerfile语法梳理</h2>
+
+<h3 id="from-从哪里构建image">FROM：从哪里构建image</h3>
+
+<pre><code>FROM scratch # 制作base image
+FROM centos # 使用base image
+FROM ubuntu:18.04
+</code></pre>
+
+<p>注意：为了安全，请使用官方的image</p>
+
+<h3 id="label-标签">LABEL：标签</h3>
+
+<pre><code>LABEL maintainer=&quot;abc@gmail.com&quot;
+LABEL version=&quot;1.1&quot;
+LABEL description=&quot;This is description&quot;
+</code></pre>
+
+<p>注意：Metadata不可少！</p>
+
+<h3 id="run">RUN</h3>
+
+<p>为了美观，复杂的RUN请用反斜线换行，避免无用分层，合并多条命令成一行</p>
+
+<pre><code>RUN yum update &amp;&amp; yum install -y vim \
+    python-dev # 反斜线换行
+RUN apt-get update &amp;&amp; apt-get install -y perl\
+    pwgen --no-install-recommends &amp;&amp; rm -rf \
+    /var/lib/apt/list/* # 注意清理cache
+RUN /bin/bash -c 'source $HOME/.bashrc; echo
+    $HOME'
+</code></pre>
+
+<h3 id="workdir-设定当前工作目录">WORKDIR：设定当前工作目录</h3>
+
+<pre><code>WORKDIR /root
+WORKDIR /test # 如果没有，会自动创建的
+WORKDIR demo
+RUN pwd # 输出结果应该是 /test/demo
+</code></pre>
+
+<p>注意：不要用RUN cd代替WORKDIR，尽量使用绝对目录</p>
+
+<h3 id="add和copy">ADD和COPY</h3>
+
+<pre><code>ADD hello /
+</code></pre>
+
+<pre><code>ADD test.tar.gz # 添加到根目录并解压
+</code></pre>
+
+<pre><code>WORKDIR /root
+ADD hello test # /root/test/hello
+</code></pre>
+
+<pre><code>WORKDIR /root
+COPY hello test # /root/test/hello
+</code></pre>
+
+<p>大部分情况copy优于add
+add除了copy功能外，还附带解压缩
+添加远程文件/目录请使用curl或者wget</p>
+
+<h3 id="env-定义常量">ENV 定义常量</h3>
+
+<p>env可增加可维护性</p>
+
+<pre><code>ENV MYSQL_VERSION 5.6
+RUN apt-get install -y mysql-server= &quot;${MYSQL_VERSION}&quot; \
+&amp;&amp; rm -rf /var/lib/apt/lists/* # 引用常量
+</code></pre>
+
+<p><a href="https://github.com/docker-library/mysql/blob/master/5.6/Dockerfile" rel="nofollow noreferrer" target="_blank">Dockerfile Demo Time</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Chaochao Ou </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6/>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/docker/">
+                    #docker</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ouchaochao.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_5/" class="prev" rel="prev" title="系统学习Docker践行DevOps理念2_5"><i class="iconfont icon-left"></i>&nbsp;系统学习Docker践行DevOps理念2_5</a>
+         
+        
+        <a href="https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_7/" class="next" rel="next" title="系统学习Docker践行DevOps理念2_7">系统学习Docker践行DevOps理念2_7&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ouchaochao.github.io/">Chaochao Ou</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

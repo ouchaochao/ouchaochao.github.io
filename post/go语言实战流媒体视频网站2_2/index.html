@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Chaochao Ou">
+  
+  
+  
+  <link rel="prev" href="https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_1/" />
+  <link rel="next" href="https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_3/" />
+  <link rel="canonical" href="https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_2/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Go语言实战流媒体视频网站2_2 | LeaveIt
+       
+  </title>
+  <meta name="title" content="Go语言实战流媒体视频网站2_2 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ouchaochao.github.io\/"
+    },
+    "articleSection" : "post",
+    "name" : "Go语言实战流媒体视频网站2_2",
+    "headline" : "Go语言实战流媒体视频网站2_2",
+    "description" : "golang项目中test的写法 main_test.go文件\npackage main import ( \x26quot;testing\x26quot; \x26quot;fmt\x26quot; ) func TestPrint(t *testing.T){ res := Print1to20() fmt.Println(\x26quot;testing\x26quot;) if res != 210{ t.Errorf(\x26quot;Result Worng!\x26quot;) } }  Test注意要点:\n 每个test文件必须import一个testing test文件下的每一个test case均须以Test开头并且符合TestXxx形式，否则go test会直接跳过测试不执行 test case的入参为t *testing.T或者b *testing.B t.Errorf为打印错误信息，并且当前test case会被跳过 t.SkipNow()为跳过当前test，并且直接按PASS处理继续下一个test，例子如下：\npackage main import ( \x26quot;testing\x26quot; \x26quot;fmt\x26quot; ) func TestPrint(t *testing.T){ t.SkipNow() res := Print1to20() fmt.Println(\x26quot;testing\x26quot;) if res != 210{ t.Errorf(\x26quot;Result Worng!\x26quot;) } }  Go的test不会保证多个TestXxx是顺序执行，但是通常会顺序执行\n 使用t.Run来执行subtest可以做到控制test输出已经test的顺序，例子如下：\npackage main import ( \x26quot;testing\x26quot; \x26quot;fmt\x26quot; ) func TestPrint(t *testing.",
+    "inLanguage" : "zh-cn",
+    "author" : "Chaochao Ou",
+    "creator" : "Chaochao Ou",
+    "publisher": "Chaochao Ou",
+    "accountablePerson" : "Chaochao Ou",
+    "copyrightHolder" : "Chaochao Ou",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-08-03 09:35:52 \x2b0800 CST",
+    "dateModified" : "2019-08-03 09:35:52 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_2\/",
+    "wordCount" : "146",
+    "keywords" : [ "go", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Go语言实战流媒体视频网站2_2</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-08-03 itemprop="datePublished">August 3, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="golang项目中test的写法">golang项目中test的写法</h2>
+
+<p>main_test.go文件</p>
+
+<pre><code class="language-go">package main
+
+import (
+  &quot;testing&quot;
+  &quot;fmt&quot;
+)
+
+func TestPrint(t *testing.T){
+  res := Print1to20()
+  fmt.Println(&quot;testing&quot;)
+  if res != 210{
+    t.Errorf(&quot;Result Worng!&quot;)
+  }
+}
+</code></pre>
+
+<p><strong>Test注意要点:</strong></p>
+
+<ol>
+<li>每个test文件必须import一个testing</li>
+<li>test文件下的每一个test case均须以Test开头并且符合TestXxx形式，否则go test会直接跳过测试不执行</li>
+<li>test case的入参为t *testing.T或者b *testing.B</li>
+<li>t.Errorf为打印错误信息，并且当前test case会被跳过</li>
+
+<li><p>t.SkipNow()为跳过当前test，并且直接按PASS处理继续下一个test，例子如下：</p>
+
+<pre><code class="language-go">package main
+
+import (
+&quot;testing&quot;
+&quot;fmt&quot;
+)
+
+func TestPrint(t *testing.T){
+	t.SkipNow()
+res := Print1to20()
+fmt.Println(&quot;testing&quot;)
+if res != 210{
+t.Errorf(&quot;Result Worng!&quot;)
+}
+}
+</code></pre></li>
+
+<li><p>Go的test不会保证多个TestXxx是顺序执行，但是通常会顺序执行</p></li>
+
+<li><p>使用t.Run来执行subtest可以做到控制test输出已经test的顺序，例子如下：</p>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;testing&quot;
+	&quot;fmt&quot;
+)
+
+func TestPrint(t *testing.T){
+t.run(&quot;a1&quot;, func(t *testing.T){fmt.Println(&quot;a1&quot;)})
+t.run(&quot;a2&quot;, func(t *testing.T){fmt.Println(&quot;a2&quot;)})  
+t.run(&quot;a3&quot;, func(t *testing.T){fmt.Println(&quot;a3&quot;)})  
+}
+</code></pre></li>
+
+<li><p>使用TestMain作为初始化test，并且使用m.Run()来调用其它tests可以完成一些需要初始化操作的testing，毕业数据库连接，文件打开，REST服务登陆等，例子如下：</p>
+
+<pre><code class="language-go">func TestMain(m *testing.M){
+	fmt.Println(&quot;test main first&quot;)
+	m.Run()
+}
+</code></pre></li>
+
+<li><p>如果没有在TestMain中调用m.Run()则除了TestMain以外的其它tests都不会执行</p></li>
+</ol>
+
+<p><strong>下面来看一个控制test顺序和TestMain的例子：</strong></p>
+
+<pre><code class="language-go">package main
+  
+import (
+  &quot;testing&quot;
+  &quot;fmt&quot;
+)
+
+func testPrint(t *testing.T){
+  res := Print1to20()
+  fmt.Println(&quot;testing&quot;)
+  if res != 210{
+    t.Errorf(&quot;Result Worng!&quot;)
+  }
+}
+
+func testPrint2(t *testing.T){
+  res := Print1to20()
+  fmt.Println(&quot;testing&quot;)
+  if res != 220{
+    t.Errorf(&quot;TestPrint2 Worng!&quot;)
+  }
+}
+
+func TestAll(t *testing.T){
+  t.Run(&quot;TestPrint&quot;, testPrint)
+  t.Run(&quot;TestPrint2&quot;, testPrint2)
+}
+
+func TestMain(m *testing.M){
+  fmt.Println(&quot;TestMain runing...&quot;)
+  m.Run() // 注释本行后会如何？动手试一下吧~
+}
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Chaochao Ou </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_2/>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_2/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/go/">
+                    #go</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ouchaochao.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_1/" class="prev" rel="prev" title="Go语言实战流媒体视频网站2_1"><i class="iconfont icon-left"></i>&nbsp;Go语言实战流媒体视频网站2_1</a>
+         
+        
+        <a href="https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_3/" class="next" rel="next" title="Go语言实战流媒体视频网站2_3">Go语言实战流媒体视频网站2_3&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ouchaochao.github.io/">Chaochao Ou</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

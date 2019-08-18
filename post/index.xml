@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on LeaveIt</title>
+    <link>https://ouchaochao.github.io/post/</link>
+    <description>Recent content in Posts on LeaveIt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 18 Aug 2019 20:14:36 +0800</lastBuildDate>
+    
+	<atom:link href="https://ouchaochao.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go自动化部署项目</title>
+      <link>https://ouchaochao.github.io/post/go%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Sun, 18 Aug 2019 20:14:36 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/</guid>
+      <description>趁着有点时间学了一下DevOps和云计算初识, 发现一个以前没想到过的点 &amp;ndash; 自动化部署项目.
+这个项目是用Go写的, 大致的过程如下:
+1. 在本地写完代码之后, git push到github上 2. github里的Webhooks会被触发, 进而会访问一个设定好的网站 3. 这个网站就是DeployServer, 它会从github里git pull你刚push的代码 4. 代码返回到服务器 5. DeployServer停掉旧版本的WebServer, 然后运行最新的Webserver代码 6. 完成更新, 浏览器打开WebServer的网址就能访问最新的网页  下面是Webhooks的示意图:
+下面是DeployServer的sh文件写法, 仅供参考:</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_8</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_8/</link>
+      <pubDate>Sun, 18 Aug 2019 20:13:31 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_8/</guid>
+      <description>镜像的分布 docker hub 首先在终端中登陆账号(账号在docker hub里注册)：
+docker login  然后就是push自己的docker：
+方法一：docker hub
+Usage: docker push [OPTIONS] NAME[:TAG] 例如： docker push ouchaochao/hello-world:latest  这种方法不好的地方就是别人会担心你的docker里有病毒，所以一般使用方法二。
+方法二：dockerfile
+通过关联github和docker hub，我们只要在github上维护dockerfile就行了，docker hub会根据关联的dockerfile自动build好docker仓库。
+下面讲解如何关联github和docker hub：
+ 打开account setting:  往下找到linked accounts，绑定github  在github中新建dockerfile项目  在docker hub中绑定github的dockerfile  完成结果   搭建公司/自己的docker hub docker hub 中搜索registry，linux系统中输入以下代码就完成了部署
+docker run -d -p 5000:5000 --restart always --name registry registry:2  怎么push
+ build的改变，把NAME部分换成ip地址，如
+docker build -t 47.94.131.35:5000/hello-world . # 换成自己的ip  查看image</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_7</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_7/</link>
+      <pubDate>Sun, 18 Aug 2019 20:12:15 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_7/</guid>
+      <description>run-vs-cmd-vs-entrypoint 首先明确一下概念:
+run:执行命令并创建新的 image layer cmd:设置容器启动后默认执行的命令和参数 entrypoint:设置容器启动时运行的命令  在介绍cmd和entrypoint之前,先了解一下shell和exec格式: - shell:
+FROM centos RUN apt-get install -y vim ENV name docker CMD echo &amp;quot;hello docker&amp;quot; ENTRYPOINT echo &amp;quot;hello $name &amp;quot;   exec
+FROM centos RUN [&amp;quot;apt-get&amp;quot;, &amp;quot;install&amp;quot;, &amp;quot;-y&amp;quot;, &amp;quot;vim&amp;quot;] ENV name docker CMD [&amp;quot;/bin/echo&amp;quot;, &amp;quot;hello docker&amp;quot;] ENTRYPOINT [&amp;quot;/bin/bash&amp;quot;,&amp;quot;-c&amp;quot;, &amp;quot;echo hello $name &amp;quot;]  build一个docker
+cd somefile docker build -t cc/xxx .  CMD 容器启动时默认执行的命令
+FROM centos ENV name docker CMD echo &amp;quot;hello $name&amp;quot;  情况一：如果docker run指定了其它命令，CMD命令被忽略</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_6</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6/</link>
+      <pubDate>Sun, 18 Aug 2019 20:11:15 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6/</guid>
+      <description>dockerfile语法梳理 FROM：从哪里构建image FROM scratch # 制作base image FROM centos # 使用base image FROM ubuntu:18.04  注意：为了安全，请使用官方的image
+LABEL：标签 LABEL maintainer=&amp;quot;abc@gmail.com&amp;quot; LABEL version=&amp;quot;1.1&amp;quot; LABEL description=&amp;quot;This is description&amp;quot;  注意：Metadata不可少！
+RUN 为了美观，复杂的RUN请用反斜线换行，避免无用分层，合并多条命令成一行
+RUN yum update &amp;amp;&amp;amp; yum install -y vim \ python-dev # 反斜线换行 RUN apt-get update &amp;amp;&amp;amp; apt-get install -y perl\ pwgen --no-install-recommends &amp;amp;&amp;amp; rm -rf \ /var/lib/apt/list/* # 注意清理cache RUN /bin/bash -c &#39;source $HOME/.bashrc; echo $HOME&#39;  WORKDIR：设定当前工作目录 WORKDIR /root WORKDIR /test # 如果没有，会自动创建的 WORKDIR demo RUN pwd # 输出结果应该是 /test/demo  注意：不要用RUN cd代替WORKDIR，尽量使用绝对目录</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_5</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_5/</link>
+      <pubDate>Sun, 18 Aug 2019 20:09:45 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_5/</guid>
+      <description> 构建自己的Docker镜像 把一个Container commit成自己的 $ docker run -it centos $ yum install -y vim $ docker commit container_name cc/centos-vim  用dockerfile构建（推荐） $ mkdir centos-vim $ cd centos-vim $ vim Dockerfile FROM centos RUN yum install -y vim # 思考为什么image只读却可以写 $ docker build -t cc/centos-vim .  </description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_4</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_4/</link>
+      <pubDate>Sun, 18 Aug 2019 20:09:02 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_4/</guid>
+      <description> 初识Container系统  通过Image创建（copy） 在Image layer之上建立一个container layer（可读写） 类比面向对象：类和实例 Image负责app的存储和分发，Container负责运行app  # docker交互 -it docker run -it centos  Docker 的一些命令 docker --help docker container --help  </description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_3</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_3/</link>
+      <pubDate>Sun, 18 Aug 2019 20:07:02 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_3/</guid>
+      <description> DIY-Base-Image # 将docker加入管理员，以后使用docker不用再加sudo $ sudo groupadd docker $ sudo gpasswd -a username docker # 完成后重启命令行  接下来建立自己的docker
+$ mkdir halo $ cd halo $ vim halo.c #include&amp;lt;stdio.h&amp;gt; int main() { printf(&amp;quot;halo done!\n&amp;quot;); } $ gcc -static halo.c -o halo $ vim Dockerfile FROM scratch ADD halo / CMD [&amp;quot;/halo&amp;quot;] $ docker build -t cc/halo . $ docker run cc/halo  </description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_2</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2/</link>
+      <pubDate>Sun, 18 Aug 2019 20:06:16 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2/</guid>
+      <description> 什么是Image  文件和meta data的集合（root file system） 分层的， 并且每一层都可以添加改变删除文件成为一个新的image 不同的image可以共享相同的layer Image本身是read-only  Image的获取  Build from Dockerfile Pull from Registry  </description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_1</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_1/</link>
+      <pubDate>Sun, 18 Aug 2019 20:05:28 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_1/</guid>
+      <description> Docker架构和底层技术简介系统学习  docker提供一个开发、打包、运行app的平台
+ 把app和底层infrastructure隔离开
+  docker engine
+ 后台进程（dockerd） REST API Server CLI接口（docker）  docker architecture
+底层技术支持
+ namespaces: 做隔离pid, net, ipc, mnt, uts control groups: 做资源限制 union file systems: container 和 image的分层  </description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念1</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B51/</link>
+      <pubDate>Sun, 18 Aug 2019 20:04:20 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B51/</guid>
+      <description>docker是什么 Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
+说人话就是，docker把环境封装成一个集装箱，集装箱之间的环境（如python2/3）不会相互干扰。
+安装docker 请对应自己的系统点击以下链接进行安装： centos debain fedora ubuntu mac windows</description>
+    </item>
+    
+    <item>
+      <title>自动部署hugo脚本</title>
+      <link>https://ouchaochao.github.io/post/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2hugo%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Sun, 18 Aug 2019 19:09:42 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2hugo%E8%84%9A%E6%9C%AC/</guid>
+      <description>写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：
+#!/bin/sh input = &amp;quot;&amp;quot; function list(){ echo &amp;quot;查询到有以下md文件:&amp;quot; cd content/post/ ls cd ../../ } function add(){ echo &amp;quot;请输入文章的题目：&amp;quot; read input hugo new post/$input.md vim content/post/$input.md hugo cd public git add . git commit -m &amp;quot;add $input&amp;quot; git push origin master echo &amp;quot;&amp;quot; echo &amp;quot;Add $input done!&amp;quot; } function deploy(){ hugo cd public git add . git commit -m &amp;quot;add $input&amp;quot; git push origin master echo &amp;quot;&amp;quot; echo &amp;quot;Deploy done!&amp;quot; } function change(){ list echo &amp;quot;请输入要修改的文章题目：&amp;quot; read input vim content/post/$input.</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频网站3_7</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_7/</link>
+      <pubDate>Fri, 09 Aug 2019 09:21:36 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_7/</guid>
+      <description>api数据库层设计 数据库设计: 用户    TABLE users postscript     id UNSIGNED INT
+PRIMARY KEY
+AUTO_INCREMENT 用户不可见
+主键
+自动增量更新   login_name VARCHAR(64)
+UNIQUE KEY -
+用户名不能重复   pwd TEXT -    数据库设计: 视频资源    TABLE video_info postscript     id VARCHAR(64)
+PRIMARY KEY
+NOT NULL 资源多,要长
+主键
+不为空   author_id UNSIGNED INT 上传视频的用户id
+起到外键作用, 但是是在代码逻辑中处理   name TEXT -   display_ctime TEXT 展示给用户看   create_time DATETIME 用户理解会有困难, 所以创建display_ctime    数据库设计: 评论    TABLE comments postscript     id VARCHAR(64)</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频网站3_6</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_6/</link>
+      <pubDate>Thu, 08 Aug 2019 09:04:33 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_6/</guid>
+      <description>api之http handler层 总览: api │ handlers.go │ main.go │ response.go │ ├─dbops │ api.go │ └─defs apidef.go errs.go  流程:
+handler-&amp;gt;validation{1.request, 2.user}-&amp;gt;business logic-&amp;gt;response 1. data model. 2. error handing.
+handler.go会调用dbops, 拿到它想要的东西, 然后做进一步处理, 处理包括消息/信息的定义, 然后将它们一起组装成response, 最后调取response.go, response返回结果到handler.go, 最后输出.
+handlers.go package main import ( &amp;quot;github.com/julienschmidt/httprouter&amp;quot; &amp;quot;io&amp;quot; &amp;quot;net/http&amp;quot; ) func CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) { io.WriteString(w, &amp;quot;Create User Handler&amp;quot;) } func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) { uname := p.</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频3_3至3_5</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%913_3%E8%87%B33_5/</link>
+      <pubDate>Wed, 07 Aug 2019 09:41:54 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%913_3%E8%87%B33_5/</guid>
+      <description>API实现之详细设计 在项目开始之前，首先把GOPATH的路径明确好，输入：
+go env 可以得到： ··· GOPATH=&amp;quot;/Users/ouchaochao/go&amp;quot; ···  在这个路径下，新建文件夹： /Users/ouchaochao/go/src/ouchaochao.cn/video/api
+api项目结构如下 api ├── auth.go ├── dbops # 与数据库交互部分 │ ├── api.go │ ├── api_test.go │ ├── conn.go │ └── internal.go ├── defs # 配置、定义等 │ ├── apidef.go │ └── errs.go ├── handlers.go # 逻辑处理的放在这 ├── main.go # 放一些简单的定义性的东西 ├── response.go ├── session │ └── ops.go └── utils └── uuid.go  在编辑.go文件之前，先把依赖装好，如：
+go get github.com/julienschmidt/httprouter  编辑main.go package main import ( &amp;quot;github.</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频网站3_2</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_2/</link>
+      <pubDate>Tue, 06 Aug 2019 09:43:11 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_2/</guid>
+      <description>API 设计与架构 后端服务 API  REST(Representational Status Transfer) API REST是一种设计风格，不是任何架构标准 当今RESTful API通常使用HTTP作为通信协议，JSON作为数据格式  特点
+ 统一接口（Uniform Interface）&amp;lt;接口要统一风格&amp;gt;
+ 无状态（Stateless）&amp;lt;我什么时候调用这个API，这个API必须返回是我想要的东西；幂等的&amp;gt;
+幂等的含义： 在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同。 幂等函数，或幂等方法，是指可以使用相同参数重复执行，并能获得相同结果的函数。  可缓存（Cacheable）&amp;lt;常用的/读远大于写的数据放在缓存&amp;gt;
+ 分层（Layered System）&amp;lt;将一个API的service分层很多层，分成很多个服务&amp;gt;
+ CS模式（Client-server Atchitecture）
+  API设计原则  以URL（统一资源定位符）风格设计API
+ 通过不同的method（get、post、put、delete）来区分对资源的crud
+ 返回码（Status Code）符合HTTP资源描述的规定
+  API设计：用户  创建（注册）用户：URL：/user，Method：post，SC：201/400/500
+201：(已创建)请求成功并且服务器创建了新的资源。  用户登录：URL：/user/:username，Method：post， SC：200/400/500
+ 获取用户基本信息：URL：/user/:username，Method：get，SC：200/400/401/403/500
+为什么多加了401和403： 对用户验证的时候，由于验证不通过而返回的错误码 401：并没有验证 403：通过验证，但是不具备操作某一项资源的权限  用户注销：URL：/user/:username，Method：delete， SC：204/400/401/403/500
+204：表示请求执行成功，但是没有数据，浏览器不用刷新页面.也不用导向新的页面。 用户注销后，我们不用返回任何东西，但是要表示确实注销成功了   延伸阅读： HTTP的状态码有很多种,主要有1xx（临时响应）、2xx（成功）、3xx（已重定向）、4xx（请求错误）以及5xx（服务器错误）五个大类，每个大类还对应一些具体的分类。
+百度百科状态码</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频网站3_1</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_1/</link>
+      <pubDate>Mon, 05 Aug 2019 09:36:59 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_1/</guid>
+      <description> 流媒体网站整体介绍与架构梳理 为什么选择做视频网站  GO是一门网络编程语言 视频网站包含GO在实战项目中的绝大部分技能要点 优良的native http库以及模板引擎（无需任何第三方框架）  总体架构 什么是前后端解耦  前后端解耦是时下流行的web网站架构 前端页面和服务通过普通的web引擎渲染 后端数据通过渲染后的页面脚本调用后处理和呈现  前后端解耦的优势  解放生产力，提高合作效率 松耦合的架构更灵活，部署更方便，更符合微服务的设计的特征 性能的提升，提升可靠性  前后端解耦的劣势  工作量大 前后端分离带来的团队成本以及学习成本 系统复杂度加大  </description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频网站2_3</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_3/</link>
+      <pubDate>Sun, 04 Aug 2019 09:36:25 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_3/</guid>
+      <description> benchmark的写法  benchmark函数一般以Benchmark开头 benchmark的case一般会跑b.N次，而且每次执行都会如此 在执行过程中go会根据实际case的执行时间是否稳定来决定b.N的次数，最后达到稳态  下面举栗子：（在main_test.go中加入以下代码）
+package main import ( &amp;quot;testing&amp;quot; ) func BenchmarkAll(b *testing.B){ for n := 0; n &amp;lt; b.N; n++{ Print1to20() } }  命令行输入：
+go test -bench=.  注意：
+千万不要测试非稳态的代码，如：
+func aaa(n int)int{ for n &amp;gt; 0{ n-- } return n } func BenchmarkAll(b *testing.B){ for n := 0; n &amp;lt; b.N; n++{ aaa(n) } } // 运行不会停  </description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频网站2_2</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_2/</link>
+      <pubDate>Sat, 03 Aug 2019 09:35:52 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_2/</guid>
+      <description>golang项目中test的写法 main_test.go文件
+package main import ( &amp;quot;testing&amp;quot; &amp;quot;fmt&amp;quot; ) func TestPrint(t *testing.T){ res := Print1to20() fmt.Println(&amp;quot;testing&amp;quot;) if res != 210{ t.Errorf(&amp;quot;Result Worng!&amp;quot;) } }  Test注意要点:
+ 每个test文件必须import一个testing test文件下的每一个test case均须以Test开头并且符合TestXxx形式，否则go test会直接跳过测试不执行 test case的入参为t *testing.T或者b *testing.B t.Errorf为打印错误信息，并且当前test case会被跳过 t.SkipNow()为跳过当前test，并且直接按PASS处理继续下一个test，例子如下：
+package main import ( &amp;quot;testing&amp;quot; &amp;quot;fmt&amp;quot; ) func TestPrint(t *testing.T){ t.SkipNow() res := Print1to20() fmt.Println(&amp;quot;testing&amp;quot;) if res != 210{ t.Errorf(&amp;quot;Result Worng!&amp;quot;) } }  Go的test不会保证多个TestXxx是顺序执行，但是通常会顺序执行
+ 使用t.Run来执行subtest可以做到控制test输出已经test的顺序，例子如下：
+package main import ( &amp;quot;testing&amp;quot; &amp;quot;fmt&amp;quot; ) func TestPrint(t *testing.</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频网站2_1</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_1/</link>
+      <pubDate>Fri, 02 Aug 2019 09:34:41 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_1/</guid>
+      <description>一个例子了解GO Go有如下命令：
+Go is a tool for managing Go source code. Usage: go &amp;lt;command&amp;gt; [arguments] The commands are: bug start a bug report build compile packages and dependencies clean remove object files and cached files doc show documentation for package or symbol env print Go environment information fix update packages to use new APIs fmt gofmt (reformat) package sources generate generate Go files by processing source get download and install packages and dependencies install compile and install packages and dependencies list list packages or modules mod module maintenance run compile and run Go program test test packages tool run specified go tool version print Go version vet report likely mistakes in packages  下面介绍一下常用的命令：</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频网站1</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%991/</link>
+      <pubDate>Thu, 01 Aug 2019 09:34:41 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%991/</guid>
+      <description>本系列将记录在慕课学习Go做流媒体视频网站的过程。 第一节就用一张图来概括了：</description>
+    </item>
+    
+  </channel>
+</rss>

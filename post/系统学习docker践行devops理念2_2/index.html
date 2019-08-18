@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Chaochao Ou">
+  
+  
+  
+  <link rel="prev" href="https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_1/" />
+  <link rel="next" href="https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_3/" />
+  <link rel="canonical" href="https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           系统学习Docker践行DevOps理念2_2 | LeaveIt
+       
+  </title>
+  <meta name="title" content="系统学习Docker践行DevOps理念2_2 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ouchaochao.github.io\/"
+    },
+    "articleSection" : "post",
+    "name" : "系统学习Docker践行DevOps理念2_2",
+    "headline" : "系统学习Docker践行DevOps理念2_2",
+    "description" : " 什么是Image  文件和meta data的集合（root file system） 分层的， 并且每一层都可以添加改变删除文件成为一个新的image 不同的image可以共享相同的layer Image本身是read-only  Image的获取  Build from Dockerfile Pull from Registry  ",
+    "inLanguage" : "zh-cn",
+    "author" : "Chaochao Ou",
+    "creator" : "Chaochao Ou",
+    "publisher": "Chaochao Ou",
+    "accountablePerson" : "Chaochao Ou",
+    "copyrightHolder" : "Chaochao Ou",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-08-18 20:06:16 \x2b0800 CST",
+    "dateModified" : "2019-08-18 20:06:16 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2\/",
+    "wordCount" : "16",
+    "keywords" : [ "docker", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">系统学习Docker践行DevOps理念2_2</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-08-18 itemprop="datePublished">August 18, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="什么是image">什么是Image</h2>
+
+<ul>
+<li>文件和meta data的集合（root file system）</li>
+<li>分层的， 并且每一层都可以添加改变删除文件成为一个新的image</li>
+<li>不同的image可以共享相同的layer</li>
+<li>Image本身是read-only</li>
+</ul>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/8/16c70af5695a7bc5?w=512&amp;h=286&amp;f=png&amp;s=87618" alt="image-20190803233642422.png" class="lazyload"><figcaption class="image-caption">image-20190803233642422.png</figcaption></figure></p>
+
+<h2 id="image的获取">Image的获取</h2>
+
+<ol>
+<li>Build from Dockerfile</li>
+<li>Pull from Registry</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Chaochao Ou </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2/>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/docker/">
+                    #docker</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ouchaochao.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_1/" class="prev" rel="prev" title="系统学习Docker践行DevOps理念2_1"><i class="iconfont icon-left"></i>&nbsp;系统学习Docker践行DevOps理念2_1</a>
+         
+        
+        <a href="https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_3/" class="next" rel="next" title="系统学习Docker践行DevOps理念2_3">系统学习Docker践行DevOps理念2_3&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ouchaochao.github.io/">Chaochao Ou</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

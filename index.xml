@@ -1,0 +1,1223 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LeaveIt on LeaveIt</title>
+    <link>https://ouchaochao.github.io/</link>
+    <description>Recent content in LeaveIt on LeaveIt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 18 Aug 2019 20:14:36 +0800</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Go自动化部署项目</title>
+      <link>https://ouchaochao.github.io/post/go%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Sun, 18 Aug 2019 20:14:36 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/</guid>
+      <description>&lt;p&gt;趁着有点时间学了一下&lt;a href=&#34;https://www.imooc.com/learn/910&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;DevOps和云计算初识&lt;/a&gt;, 发现一个以前没想到过的点 &amp;ndash; 自动化部署项目.&lt;/p&gt;
+
+&lt;p&gt;这个项目是用Go写的, 大致的过程如下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;1. 在本地写完代码之后, git push到github上
+2. github里的Webhooks会被触发, 进而会访问一个设定好的网站
+3. 这个网站就是DeployServer, 它会从github里git pull你刚push的代码
+4. 代码返回到服务器
+5. DeployServer停掉旧版本的WebServer, 然后运行最新的Webserver代码
+6. 完成更新, 浏览器打开WebServer的网址就能访问最新的网页
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/15/16c940fefadd16a3?w=1030&amp;amp;h=379&amp;amp;f=png&amp;amp;s=39733&#34; alt=&#34;图&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下面是Webhooks的示意图:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/15/16c94195aa976da0?w=1007&amp;amp;h=715&amp;amp;f=png&amp;amp;s=80518&#34; alt=&#34;Webhooks&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下面是DeployServer的sh文件写法, 仅供参考:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/15/16c941ac519f9eec?w=1337&amp;amp;h=304&amp;amp;f=png&amp;amp;s=233500&#34; alt=&#34;DeployServer&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_8</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_8/</link>
+      <pubDate>Sun, 18 Aug 2019 20:13:31 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_8/</guid>
+      <description>
+
+&lt;h2 id=&#34;镜像的分布&#34;&gt;镜像的分布&lt;/h2&gt;
+
+&lt;h3 id=&#34;docker-hub&#34;&gt;docker hub&lt;/h3&gt;
+
+&lt;p&gt;首先在终端中登陆账号(账号在docker hub里注册)：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker login
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后就是push自己的docker：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;方法一：docker hub&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;Usage:  docker push [OPTIONS] NAME[:TAG]
+例如：
+docker push ouchaochao/hello-world:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这种方法不好的地方就是别人会担心你的docker里有病毒，所以一般使用方法二。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;方法二：dockerfile&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;通过关联github和docker hub，我们只要在github上维护dockerfile就行了，docker hub会根据关联的dockerfile自动build好docker仓库。&lt;/p&gt;
+
+&lt;p&gt;下面讲解如何关联github和docker hub：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;打开account setting:
+&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c2ec188f79e?w=1279&amp;amp;h=328&amp;amp;f=png&amp;amp;s=65094&#34; alt=&#34;account setting&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;往下找到linked accounts，绑定github
+&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c37de2ae63e?w=1155&amp;amp;h=403&amp;amp;f=png&amp;amp;s=73603&#34; alt=&#34;linked accounts&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;在github中新建dockerfile项目
+&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c3d2aa7bf3e?w=1025&amp;amp;h=480&amp;amp;f=png&amp;amp;s=98165&#34; alt=&#34;dockerfile&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;在docker hub中绑定github的dockerfile
+&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c45a9c28d79?w=1142&amp;amp;h=915&amp;amp;f=png&amp;amp;s=123096&#34; alt=&#34;绑定&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;完成结果
+&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c4b7b2b7803?w=1135&amp;amp;h=622&amp;amp;f=png&amp;amp;s=91840&#34; alt=&#34;完成结果&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;搭建公司-自己的docker-hub&#34;&gt;搭建公司/自己的docker hub&lt;/h3&gt;
+
+&lt;p&gt;docker hub 中搜索registry，linux系统中输入以下代码就完成了部署&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker run -d -p 5000:5000 --restart always --name registry registry:2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;怎么push&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;build的改变，把NAME部分换成ip地址，如&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker build -t 47.94.131.35:5000/hello-world . # 换成自己的ip
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;查看image&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker image ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;修改docker下的daemon.json文件，把服务器添加信任，然后点Apply &amp;amp; Restart
+&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c51d0acec68?w=502&amp;amp;h=527&amp;amp;f=png&amp;amp;s=52682&#34; alt=&#34;修改docker下的daemon&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;接下来就是push&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker push 47.94.131.35:5000/hello-world
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;通过在网页打开以下网站查看是否上传成功&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;http://47.94.131.35:5000/v2/_catalog
+
+成功的话会有以下输出：
+// 20190812013314
+// http://47.94.131.35:5000/v2/_catalog
+
+{
+&amp;quot;repositories&amp;quot;: [
+&amp;quot;hello-world&amp;quot;
+]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;备注&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Registry Api &lt;a href=&#34;https://docs.docker.com/registry/spec/api/#listing-repositories&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;网站&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_7</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_7/</link>
+      <pubDate>Sun, 18 Aug 2019 20:12:15 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_7/</guid>
+      <description>
+
+&lt;h2 id=&#34;run-vs-cmd-vs-entrypoint&#34;&gt;run-vs-cmd-vs-entrypoint&lt;/h2&gt;
+
+&lt;p&gt;首先明确一下概念:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;run:执行命令并创建新的 image layer
+cmd:设置容器启动后默认执行的命令和参数
+entrypoint:设置容器启动时运行的命令
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在介绍cmd和entrypoint之前,先了解一下shell和exec格式:
+- shell:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM centos
+RUN apt-get install -y vim
+ENV name docker
+CMD echo &amp;quot;hello docker&amp;quot;
+ENTRYPOINT echo &amp;quot;hello $name &amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;exec&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM centos  
+RUN [&amp;quot;apt-get&amp;quot;, &amp;quot;install&amp;quot;, &amp;quot;-y&amp;quot;, &amp;quot;vim&amp;quot;]
+ENV name docker
+CMD [&amp;quot;/bin/echo&amp;quot;, &amp;quot;hello docker&amp;quot;]
+ENTRYPOINT [&amp;quot;/bin/bash&amp;quot;,&amp;quot;-c&amp;quot;,  &amp;quot;echo hello $name &amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;build一个docker&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd somefile
+docker build -t cc/xxx .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;cmd&#34;&gt;CMD&lt;/h2&gt;
+
+&lt;p&gt;容器启动时默认执行的命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM centos
+ENV name docker
+CMD echo &amp;quot;hello $name&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;情况一：如果docker run指定了其它命令，CMD命令被忽略&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run -it [image] /bin/bsh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;情况二：如果定义了多个CMD，只有最后一个执行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+CMD echo &amp;quot;hello ab&amp;quot;
+CMD echo &amp;quot;hello $name&amp;quot;  # 只执行这个
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;entrypoint&#34;&gt;ENTRYPOINT&lt;/h2&gt;
+
+&lt;p&gt;让容器以应用程序或者服务的形式运行
+特点：不会被忽略，一定执行
+最佳实践：写一个shell脚本作为entrypoint&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;COPY docker-entrypoint.sh /usr/local/bin
+ENTRYPOINT [&amp;quot;docker-entrypoint.sh&amp;quot;]
+EXPOSE 27017
+CMD [&amp;quot;mongoDB&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_6</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6/</link>
+      <pubDate>Sun, 18 Aug 2019 20:11:15 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6/</guid>
+      <description>
+
+&lt;h2 id=&#34;dockerfile语法梳理&#34;&gt;dockerfile语法梳理&lt;/h2&gt;
+
+&lt;h3 id=&#34;from-从哪里构建image&#34;&gt;FROM：从哪里构建image&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM scratch # 制作base image
+FROM centos # 使用base image
+FROM ubuntu:18.04
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意：为了安全，请使用官方的image&lt;/p&gt;
+
+&lt;h3 id=&#34;label-标签&#34;&gt;LABEL：标签&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL maintainer=&amp;quot;abc@gmail.com&amp;quot;
+LABEL version=&amp;quot;1.1&amp;quot;
+LABEL description=&amp;quot;This is description&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意：Metadata不可少！&lt;/p&gt;
+
+&lt;h3 id=&#34;run&#34;&gt;RUN&lt;/h3&gt;
+
+&lt;p&gt;为了美观，复杂的RUN请用反斜线换行，避免无用分层，合并多条命令成一行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;RUN yum update &amp;amp;&amp;amp; yum install -y vim \
+    python-dev # 反斜线换行
+RUN apt-get update &amp;amp;&amp;amp; apt-get install -y perl\
+    pwgen --no-install-recommends &amp;amp;&amp;amp; rm -rf \
+    /var/lib/apt/list/* # 注意清理cache
+RUN /bin/bash -c &#39;source $HOME/.bashrc; echo
+    $HOME&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;workdir-设定当前工作目录&#34;&gt;WORKDIR：设定当前工作目录&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;WORKDIR /root
+WORKDIR /test # 如果没有，会自动创建的
+WORKDIR demo
+RUN pwd # 输出结果应该是 /test/demo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意：不要用RUN cd代替WORKDIR，尽量使用绝对目录&lt;/p&gt;
+
+&lt;h3 id=&#34;add和copy&#34;&gt;ADD和COPY&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;ADD hello /
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;ADD test.tar.gz # 添加到根目录并解压
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;WORKDIR /root
+ADD hello test # /root/test/hello
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;WORKDIR /root
+COPY hello test # /root/test/hello
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;大部分情况copy优于add
+add除了copy功能外，还附带解压缩
+添加远程文件/目录请使用curl或者wget&lt;/p&gt;
+
+&lt;h3 id=&#34;env-定义常量&#34;&gt;ENV 定义常量&lt;/h3&gt;
+
+&lt;p&gt;env可增加可维护性&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ENV MYSQL_VERSION 5.6
+RUN apt-get install -y mysql-server= &amp;quot;${MYSQL_VERSION}&amp;quot; \
+&amp;amp;&amp;amp; rm -rf /var/lib/apt/lists/* # 引用常量
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/docker-library/mysql/blob/master/5.6/Dockerfile&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Dockerfile Demo Time&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_5</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_5/</link>
+      <pubDate>Sun, 18 Aug 2019 20:09:45 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_5/</guid>
+      <description>
+
+&lt;h2 id=&#34;构建自己的docker镜像&#34;&gt;构建自己的Docker镜像&lt;/h2&gt;
+
+&lt;h3 id=&#34;把一个container-commit成自己的&#34;&gt;把一个Container commit成自己的&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -it centos
+$ yum install -y vim
+$ docker commit container_name cc/centos-vim
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;用dockerfile构建-推荐&#34;&gt;用dockerfile构建（推荐）&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir centos-vim 
+$ cd centos-vim
+$ vim Dockerfile
+
+FROM centos
+RUN yum install -y vim # 思考为什么image只读却可以写
+
+$ docker build -t cc/centos-vim .
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_4</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_4/</link>
+      <pubDate>Sun, 18 Aug 2019 20:09:02 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_4/</guid>
+      <description>
+
+&lt;h2 id=&#34;初识container系统&#34;&gt;初识Container系统&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过Image创建（copy）&lt;/li&gt;
+&lt;li&gt;在Image layer之上建立一个container layer（可读写）&lt;/li&gt;
+&lt;li&gt;类比面向对象：类和实例&lt;/li&gt;
+&lt;li&gt;Image负责app的存储和分发，Container负责运行app&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/8/16c70b0c5a75287f?w=566&amp;amp;h=348&amp;amp;f=png&amp;amp;s=90105&#34; alt=&#34;image-20190803235435593.png&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# docker交互 -it
+docker run -it centos
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;docker-的一些命令&#34;&gt;Docker 的一些命令&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;docker --help
+docker container --help
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_3</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_3/</link>
+      <pubDate>Sun, 18 Aug 2019 20:07:02 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_3/</guid>
+      <description>
+
+&lt;h2 id=&#34;diy-base-image&#34;&gt;DIY-Base-Image&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;# 将docker加入管理员，以后使用docker不用再加sudo
+$ sudo groupadd docker
+$ sudo gpasswd -a username docker
+# 完成后重启命令行
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接下来建立自己的docker&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir halo
+$ cd halo
+$ vim halo.c
+
+#include&amp;lt;stdio.h&amp;gt;
+int main()
+{
+printf(&amp;quot;halo done!\n&amp;quot;);
+}
+
+$ gcc -static halo.c -o halo
+$ vim Dockerfile
+
+FROM scratch
+ADD halo /
+CMD [&amp;quot;/halo&amp;quot;]
+
+$ docker build -t cc/halo .
+$ docker run cc/halo
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_2</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2/</link>
+      <pubDate>Sun, 18 Aug 2019 20:06:16 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2/</guid>
+      <description>
+
+&lt;h2 id=&#34;什么是image&#34;&gt;什么是Image&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;文件和meta data的集合（root file system）&lt;/li&gt;
+&lt;li&gt;分层的， 并且每一层都可以添加改变删除文件成为一个新的image&lt;/li&gt;
+&lt;li&gt;不同的image可以共享相同的layer&lt;/li&gt;
+&lt;li&gt;Image本身是read-only&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/8/16c70af5695a7bc5?w=512&amp;amp;h=286&amp;amp;f=png&amp;amp;s=87618&#34; alt=&#34;image-20190803233642422.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;image的获取&#34;&gt;Image的获取&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Build from Dockerfile&lt;/li&gt;
+&lt;li&gt;Pull from Registry&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_1</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_1/</link>
+      <pubDate>Sun, 18 Aug 2019 20:05:28 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_1/</guid>
+      <description>
+
+&lt;h2 id=&#34;docker架构和底层技术简介系统学习&#34;&gt;Docker架构和底层技术简介系统学习&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;docker提供一个开发、打包、运行app的平台&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;把app和底层infrastructure隔离开&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/8/16c70ad74e6e06ea?w=648&amp;amp;h=195&amp;amp;f=png&amp;amp;s=42284&#34; alt=&#34;image-20190803230457777.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;docker engine&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;后台进程（dockerd）&lt;/li&gt;
+&lt;li&gt;REST API Server&lt;/li&gt;
+&lt;li&gt;CLI接口（docker）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/8/16c70ad74e783214?w=575&amp;amp;h=396&amp;amp;f=png&amp;amp;s=116192&#34; alt=&#34;image-20190803232406410.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;docker architecture&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/8/16c70ad74eb69937?w=831&amp;amp;h=434&amp;amp;f=png&amp;amp;s=201066&#34; alt=&#34;image-20190803233005792.png&#34; /&gt;
+&lt;strong&gt;底层技术支持&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;namespaces: 做隔离pid, net, ipc, mnt, uts&lt;/li&gt;
+&lt;li&gt;control groups: 做资源限制&lt;/li&gt;
+&lt;li&gt;union file systems: container 和 image的分层&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念1</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B51/</link>
+      <pubDate>Sun, 18 Aug 2019 20:04:20 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B51/</guid>
+      <description>
+
+&lt;h2 id=&#34;docker是什么&#34;&gt;docker是什么&lt;/h2&gt;
+
+&lt;p&gt;Docker 是一个&lt;a href=&#34;https://baike.baidu.com/item/%E5%BC%80%E6%BA%90/246339&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;开源&lt;/a&gt;的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 &lt;a href=&#34;https://baike.baidu.com/item/Linux&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Linux&lt;/a&gt;或Windows 机器上，也可以实现&lt;a href=&#34;https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F%E5%8C%96/547949&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;虚拟化&lt;/a&gt;。容器是完全使用&lt;a href=&#34;https://baike.baidu.com/item/%E6%B2%99%E7%AE%B1/393318&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;沙箱&lt;/a&gt;机制，相互之间不会有任何接口。&lt;/p&gt;
+
+&lt;p&gt;说人话就是，docker把环境封装成一个集装箱，集装箱之间的环境（如python2/3）不会相互干扰。&lt;/p&gt;
+
+&lt;h2 id=&#34;安装docker&#34;&gt;安装docker&lt;/h2&gt;
+
+&lt;p&gt;请对应自己的系统点击以下链接进行安装：
+&lt;a href=&#34;https://docs.docker.com/install/linux/docker-ce/centos/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;centos&lt;/a&gt;
+&lt;a href=&#34;https://docs.docker.com/install/linux/docker-ce/debian/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;debain&lt;/a&gt;
+&lt;a href=&#34;https://docs.docker.com/install/linux/docker-ce/fedora/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;fedora&lt;/a&gt;
+&lt;a href=&#34;https://docs.docker.com/install/linux/docker-ce/ubuntu/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;ubuntu&lt;/a&gt;
+&lt;a href=&#34;https://docs.docker.com/docker-for-mac/install/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;mac&lt;/a&gt;
+&lt;a href=&#34;https://docs.docker.com/docker-for-windows/install/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;windows&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>自动部署hugo脚本</title>
+      <link>https://ouchaochao.github.io/post/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2hugo%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Sun, 18 Aug 2019 19:09:42 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2hugo%E8%84%9A%E6%9C%AC/</guid>
+      <description>&lt;p&gt;写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;#!/bin/sh
+input = &amp;quot;&amp;quot;
+
+function list(){
+echo &amp;quot;查询到有以下md文件:&amp;quot;
+cd content/post/
+ls
+cd ../../
+}
+
+function add(){
+echo &amp;quot;请输入文章的题目：&amp;quot;
+read input
+hugo new post/$input.md
+vim content/post/$input.md
+hugo
+cd public
+git add .
+git commit -m &amp;quot;add $input&amp;quot;
+git push origin master
+echo &amp;quot;&amp;quot;
+echo &amp;quot;Add $input done!&amp;quot;
+}
+
+function deploy(){
+hugo
+cd public
+git add .
+git commit -m &amp;quot;add $input&amp;quot;
+git push origin master
+echo &amp;quot;&amp;quot;
+echo &amp;quot;Deploy done!&amp;quot;
+}
+
+function change(){
+list
+echo &amp;quot;请输入要修改的文章题目：&amp;quot;
+read input    
+vim content/post/$input.md
+hugo
+cd public
+git add .
+git commit -m &amp;quot;change $input&amp;quot;
+git push origin master
+echo &amp;quot;&amp;quot;
+echo &amp;quot;Change $input done!&amp;quot;
+
+}
+
+function del(){
+list
+echo &amp;quot;请输入要删除的文章题目：&amp;quot;
+read input    
+rm content/post/$input.md
+hugo
+cd public
+git add .
+git commit -m &amp;quot;del $input&amp;quot;
+git push origin master
+echo &amp;quot;&amp;quot;
+echo &amp;quot;Del $input done!&amp;quot;
+}
+
+echo &amp;quot;请输入序号：&amp;quot;
+echo &amp;quot;    1.新建post&amp;quot;
+echo &amp;quot;    2.修改post&amp;quot;
+echo &amp;quot;    3.删除post&amp;quot;
+echo &amp;quot;    4.部署&amp;quot;
+echo &amp;quot;    5.退出&amp;quot;
+read b
+
+if (( $b==1 ));then
+add
+elif (( $b==2 ));then
+change
+elif (( $b==3 ));then
+del
+elif (( $b==4 ));then
+deploy
+else
+echo &amp;quot;退出成功&amp;quot;
+fi
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;目录结构如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;myblog
+├── archetypes
+├── config.toml
+├── content
+├── data
+├── layouts
+├── new.sh
+├── public
+├── resources
+├── static
+└── themes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我把它放在了myblog文件夹下，命名为new.sh，当我要新建/修改/删除博客的时候就只要输入&lt;code&gt;./new.sh&lt;/code&gt;就行了，下面是操作示例：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;新建&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;myblog ./new.sh
+./new.sh: line 2: input: command not found
+请输入序号：
+	1.新建post
+	2.修改post
+	3.删除post
+	4.退出
+1
+请输入文章的题目：
+test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接着就是在vim中编辑Markdown文件了，保存退出后会自动部署到github上&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;/Users/ouchaochao/myblog/content/post/test.md created
+Building sites … WARN 2019/08/18 19:16:54 Page&#39;s .URL is deprecated and will be removed in a future release. Use .Permalink or .RelPermalink. If what you want is the front matter URL value, use .Params.url.
+WARN 2019/08/18 19:16:54 Page&#39;s .RSSLink is deprecated and will be removed in a future release. Use the Output Format&#39;s link, e.g. something like: 
+    {{ with .OutputFormats.Get &amp;quot;RSS&amp;quot; }}{{ .RelPermalink }}{{ end }}.
+WARN 2019/08/18 19:16:54 Page&#39;s .Hugo is deprecated and will be removed in a future release. Use the global hugo function.
+
+                   | EN  
++------------------+----+
+  Pages            | 19  
+  Paginator pages  |  2  
+  Non-page files   |  0  
+  Static files     | 28  
+  Processed images |  0  
+  Aliases          |  6  
+  Sitemaps         |  1  
+  Cleaned          |  0  
+
+Total in 15 ms
+[master 364f578] add test
+ 12 files changed, 1274 insertions(+), 108 deletions(-)
+ create mode 100644 &amp;quot;2019/08/18/\350\207\252\345\212\250\351\203\250\347\275\262hugo\350\204\232\346\234\254/index.html&amp;quot;
+ create mode 100644 page/2/index.html
+ create mode 100644 post/page/2/index.html
+枚举对象: 45, 完成.
+对象计数中: 100% (45/45), 完成.
+使用 6 个线程进行压缩
+压缩对象中: 100% (19/19), 完成.
+写入对象中: 100% (26/26), 6.20 KiB | 6.20 MiB/s, 完成.
+总共 26 （差异 13），复用 0 （差异 0）
+remote: Resolving deltas: 100% (13/13), completed with 8 local objects.
+To https://github.com/ouchaochao/ouchaochao.github.io.git
+   fa466d6..364f578  master -&amp;gt; master
+
+Add test done!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其它的操作同理，在此就不一一赘述了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频网站3_7</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_7/</link>
+      <pubDate>Fri, 09 Aug 2019 09:21:36 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_7/</guid>
+      <description>
+
+&lt;h2 id=&#34;api数据库层设计&#34;&gt;api数据库层设计&lt;/h2&gt;
+
+&lt;h3 id=&#34;数据库设计-用户&#34;&gt;数据库设计: 用户&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;TABLE&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;users&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;postscript&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;id&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;UNSIGNED INT&lt;br&gt;PRIMARY KEY&lt;br&gt;AUTO_INCREMENT&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;用户不可见&lt;br&gt;主键&lt;br&gt;自动增量更新&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;login_name&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;VARCHAR(64)&lt;br&gt;UNIQUE KEY&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;-&lt;br&gt;用户名不能重复&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;pwd&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;TEXT&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;数据库设计-视频资源&#34;&gt;数据库设计: 视频资源&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;TABLE&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;video_info&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;postscript&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;id&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;VARCHAR(64)&lt;br&gt;PRIMARY KEY&lt;br&gt;NOT NULL&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;资源多,要长&lt;br&gt;主键&lt;br&gt;不为空&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;author_id&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;UNSIGNED INT&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;上传视频的用户id&lt;br&gt;起到外键作用, 但是是在代码逻辑中处理&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;name&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;TEXT&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;display_ctime&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;TEXT&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;展示给用户看&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;create_time&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;DATETIME&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;用户理解会有困难, 所以创建display_ctime&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;数据库设计-评论&#34;&gt;数据库设计: 评论&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;TABLE&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;comments&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;postscript&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;id&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;VARCHAR(64)&lt;br&gt;PRIMARY KEY&lt;br&gt;NOT NULL&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;-&lt;br&gt;-&lt;br&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;video_id&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;VARCHAR(64)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;视频的id&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;author_id&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;UNSIGNED INT&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;上传视频的用户id&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;content&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;TEXT&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;time&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;DATETIME&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;数据库设计-sessions&#34;&gt;数据库设计: sessions&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;TABLE&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;sessions&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;postscript&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;id&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;TINYTEXT&lt;br&gt;PRIMARY KEY&lt;br&gt;NOT NULL&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;用户登录是无限次的, 所以要非常大的数字&lt;br&gt;-&lt;br&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;TTL&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;TINYTEXT&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Time To Live: 过期时间&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;login_name&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;VARCHAR(64)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;四张表的关系&#34;&gt;四张表的关系&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/14/16c8ec74770789e8?w=659&amp;amp;h=700&amp;amp;f=png&amp;amp;s=205957&#34; alt=&#34;四张表的关系&#34; /&gt;
+接下来在mysql中创建对应的表格即可:
+&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/14/16c8f0903b727a6e?w=705&amp;amp;h=435&amp;amp;f=png&amp;amp;s=46445&#34; alt=&#34;mysql&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频网站3_6</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_6/</link>
+      <pubDate>Thu, 08 Aug 2019 09:04:33 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_6/</guid>
+      <description>
+
+&lt;h2 id=&#34;api之http-handler层&#34;&gt;api之http handler层&lt;/h2&gt;
+
+&lt;h3 id=&#34;总览&#34;&gt;总览:&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;api
+    │  handlers.go
+    │  main.go
+    │  response.go
+    │
+    ├─dbops
+    │      api.go
+    │
+    └─defs
+            apidef.go
+            errs.go
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;流程:&lt;/p&gt;
+
+&lt;p&gt;handler-&amp;gt;validation{1.request, 2.user}-&amp;gt;business logic-&amp;gt;response
+1. data model.
+2. error handing.&lt;/p&gt;
+
+&lt;p&gt;handler.go会调用dbops, 拿到它想要的东西, 然后做进一步处理, 处理包括消息/信息的定义, 然后将它们一起组装成response, 最后调取response.go, response返回结果到handler.go, 最后输出.&lt;/p&gt;
+
+&lt;h3 id=&#34;handlers-go&#34;&gt;handlers.go&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+
+import (
+	&amp;quot;github.com/julienschmidt/httprouter&amp;quot;
+	&amp;quot;io&amp;quot;
+	&amp;quot;net/http&amp;quot;
+)
+
+func CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	io.WriteString(w, &amp;quot;Create User Handler&amp;quot;)
+}
+
+func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	uname := p.ByName(&amp;quot;username&amp;quot;)
+	io.WriteString(w, uname)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;apidef-go-接受用户名和密码&#34;&gt;apidef.go 接受用户名和密码&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package defs
+
+type UserCredential struct {
+	Username string `json:&amp;quot;username&amp;quot;`
+	Pwd string `json:&amp;quot;pwd&amp;quot;`
+}
+
+--------------------------------------------
+`json`是go里打tag的一种方式,会产生下面的结构
+{
+	Username:xxx
+	Pwd:xxx
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;errs-go-错误返回&#34;&gt;errs.go 错误返回&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package defs
+
+type Err struct {
+	Error string `json:&amp;quot;error&amp;quot;`
+	ErrorCode string `json:&amp;quot;error_code&amp;quot;`
+}
+
+type ErrResponse struct {
+	HttpSC int
+	Erros Err
+}
+
+var (
+	ErrorRequestBodyParseFailed = ErrResponse{HttpSC: 400, Error:Err{Error:&amp;quot;Request body is not correct&amp;quot;, ErrorCode:&amp;quot;001&amp;quot;}}
+	ErrorNotAuthUser = ErrResponse{HttpSC: 401, Error:Err{Error:&amp;quot;User authentical faild&amp;quot;, ErrorCode:&amp;quot;002&amp;quot;}}
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;dpops-api-go-连接数据库并操作&#34;&gt;dpops/api.go 连接数据库并操作&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package dbops
+
+import (
+	&amp;quot;database/sql&amp;quot;
+)
+
+func openConn() *sql.DB {
+
+}
+
+func AddUserCredential(loginName string, pwd string) error {
+
+}
+
+func GetUserCredential(loginName string ) (string, error)  {
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;response-go-根据处理结果返回相应的response&#34;&gt;response.go 根据处理结果返回相应的response&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+
+import (
+	//&amp;quot;io&amp;quot;
+	&amp;quot;net/http&amp;quot;
+)
+
+func sendErrorResponse(w http.ResponseWriter){
+
+}
+
+func sendNormalResponse(w http.ResponseWriter)  {
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频3_3至3_5</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%913_3%E8%87%B33_5/</link>
+      <pubDate>Wed, 07 Aug 2019 09:41:54 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%913_3%E8%87%B33_5/</guid>
+      <description>
+
+&lt;h2 id=&#34;api实现之详细设计&#34;&gt;API实现之详细设计&lt;/h2&gt;
+
+&lt;p&gt;在项目开始之前，首先把GOPATH的路径明确好，输入：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go env
+
+可以得到：
+···
+GOPATH=&amp;quot;/Users/ouchaochao/go&amp;quot;
+···
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在这个路径下，新建文件夹：
+/Users/ouchaochao/go/src/ouchaochao.cn/video/api&lt;/p&gt;
+
+&lt;h3 id=&#34;api项目结构如下&#34;&gt;api项目结构如下&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;api
+├── auth.go
+├── dbops  # 与数据库交互部分
+│   ├── api.go
+│   ├── api_test.go
+│   ├── conn.go
+│   └── internal.go
+├── defs  # 配置、定义等
+│   ├── apidef.go
+│   └── errs.go
+├── handlers.go  # 逻辑处理的放在这
+├── main.go  # 放一些简单的定义性的东西
+├── response.go
+├── session
+│   └── ops.go
+└── utils
+    └── uuid.go
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在编辑.go文件之前，先把依赖装好，如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go get github.com/julienschmidt/httprouter
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;编辑main-go&#34;&gt;编辑main.go&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+
+import (
+	&amp;quot;github.com/julienschmidt/httprouter&amp;quot;
+	&amp;quot;net/http&amp;quot;
+	&amp;quot;ouchaochao.cn/video/api/handlers&amp;quot;
+)
+
+
+func RegisterHandlers() *httprouter.Router {
+    // 2.新建一个路由
+	router := httprouter.New()
+	// CreateUser在handlers.go文件
+	router.POST(&amp;quot;/user&amp;quot;, CreateUser)
+	// Login在handlers.go文件
+	router.POST(&amp;quot;/user/:username&amp;quot;, Login)
+	return router
+}
+
+func main() {
+    // 3.main是主入口，调用RegisterHandlers
+	r := RegisterHandlers()
+	
+    // 1.监听8000端口
+	http.ListenAndServe(&amp;quot;:8000&amp;quot;, r)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;编辑handlers-go&#34;&gt;编辑handlers.go&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+
+import (
+	&amp;quot;github.com/julienschmidt/httprouter&amp;quot;
+	&amp;quot;io&amp;quot;
+	&amp;quot;net/http&amp;quot;
+)
+
+func CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	io.WriteString(w, &amp;quot;Create User Handler&amp;quot;)
+}
+
+func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	uname := p.ByName(&amp;quot;username&amp;quot;)
+	io.WriteString(w, uname)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时我们可以在api/目录下输入：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go install
+
+运行上面代码后会在/Users/ouchaochao/go/bin/下会生成一个二进制文件：api，运行这个二进制文件:
+./api
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在chrome中打开：&lt;a href=&#34;chrome-extension://aejoelaoggembcahagimdiliamlcdmfm/restlet_client.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;测试网页&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;如下图所示输入：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;http://127.0.0.1:8000/user
+METHOD选择post
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/13/16c8b8bc9988c048?w=1026&amp;amp;h=731&amp;amp;f=jpeg&amp;amp;s=88892&#34; alt=&#34;测试&#34; /&gt;
+成功后返回：200 OK字样。&lt;/p&gt;
+
+&lt;h3 id=&#34;总结-golang处理http请求的过程&#34;&gt;总结：golang处理http请求的过程&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;main.go -&amp;gt; ListenAndServe -&amp;gt; RegisterHandlers -&amp;gt; routers -&amp;gt; handlers.go -&amp;gt; 找对应的函数
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;api设计-用户资源&#34;&gt;API设计：用户资源&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;List all videos:
+    URL: /user/:username/videos
+    Method: GET
+    SC: 200, 400, 500
+
+Get one video:
+    URL: /user/:username/videos/:vid-id
+    Method: GET
+    SC: 200, 400, 500
+
+Delete one video:
+    URL: /user/:username/videos/:vid-id
+    Method: DELETE
+    SC: 204: 400, 401, 403, 500
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;api设计-评论&#34;&gt;API设计：评论&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;Show comments:
+    URL: /videos/:vid-id/comments
+    Method: GET
+    SC: 200, 400, 500
+
+Post a comment:
+    URL: /videos/:vid-id/comments
+    Method: POST
+    SC: 201, 400, 500
+
+Delete a comment:
+    URL: /videos/:vid-id/comment-id
+    Method: DELETE
+    SC: 204, 400, 401, 403, 500
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;restful-api设计&#34;&gt;RESTful API设计&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/13/16c8bacba3757e78?w=1021&amp;amp;h=549&amp;amp;f=png&amp;amp;s=194347&#34; alt=&#34;API设计&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;本节完&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战流媒体视频网站3_2</title>
+      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_2/</link>
+      <pubDate>Tue, 06 Aug 2019 09:43:11 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_2/</guid>
+      <description>
+
+&lt;h2 id=&#34;api-设计与架构&#34;&gt;API 设计与架构&lt;/h2&gt;
+
+&lt;h3 id=&#34;后端服务&#34;&gt;后端服务&lt;/h3&gt;
+
+&lt;h4 id=&#34;api&#34;&gt;API&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;REST(Representational Status Transfer) API&lt;/li&gt;
+&lt;li&gt;REST是一种设计风格，不是任何架构标准&lt;/li&gt;
+&lt;li&gt;当今RESTful API通常使用HTTP作为通信协议，JSON作为数据格式&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;特点&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;统一接口（Uniform Interface）&amp;lt;接口要统一风格&amp;gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;无状态（Stateless）&amp;lt;我什么时候调用这个API，这个API必须返回是我想要的东西；幂等的&amp;gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;幂等的含义：
+在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同。
+幂等函数，或幂等方法，是指可以使用相同参数重复执行，并能获得相同结果的函数。
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;可缓存（Cacheable）&amp;lt;常用的/读远大于写的数据放在缓存&amp;gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;分层（Layered System）&amp;lt;将一个API的service分层很多层，分成很多个服务&amp;gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;CS模式（Client-server Atchitecture）&lt;client和server都可被替换的&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&#34;api设计原则&#34;&gt;API设计原则&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;以URL（统一资源定位符）风格设计API&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;通过不同的method（get、post、put、delete）来区分对资源的crud&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;返回码（Status Code）符合HTTP资源描述的规定&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/11/16c7f6aa582928b4?w=1008&amp;amp;h=691&amp;amp;f=png&amp;amp;s=202571&#34; alt=&#34;设计原则&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;api设计-用户&#34;&gt;API设计：用户&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;创建（注册）用户：URL：/user，Method：post，SC：201/400/500&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;201：(已创建)请求成功并且服务器创建了新的资源。
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;用户登录：URL：/user/:username，Method：post， SC：200/400/500&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;获取用户基本信息：URL：/user/:username，Method：get，SC：200/400/401/403/500&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;为什么多加了401和403：
+对用户验证的时候，由于验证不通过而返回的错误码
+401：并没有验证
+403：通过验证，但是不具备操作某一项资源的权限
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;用户注销：URL：/user/:username，Method：delete， SC：204/400/401/403/500&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;204：表示请求执行成功，但是没有数据，浏览器不用刷新页面.也不用导向新的页面。
+用户注销后，我们不用返回任何东西，但是要表示确实注销成功了
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;延伸阅读：&lt;/strong&gt;
+HTTP的状态码有很多种,主要有1xx（临时响应）、2xx（成功）、3xx（已重定向）、4xx（请求错误）以及5xx（服务器错误）五个大类，每个大类还对应一些具体的分类。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://baike.baidu.com/item/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/5053660?fr=aladdin&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;百度百科状态码&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

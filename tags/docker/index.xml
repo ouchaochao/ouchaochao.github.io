@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on LeaveIt</title>
+    <link>https://ouchaochao.github.io/tags/docker/</link>
+    <description>Recent content in docker on LeaveIt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 18 Aug 2019 20:13:31 +0800</lastBuildDate>
+    
+	<atom:link href="https://ouchaochao.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_8</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_8/</link>
+      <pubDate>Sun, 18 Aug 2019 20:13:31 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_8/</guid>
+      <description>镜像的分布 docker hub 首先在终端中登陆账号(账号在docker hub里注册)：
+docker login  然后就是push自己的docker：
+方法一：docker hub
+Usage: docker push [OPTIONS] NAME[:TAG] 例如： docker push ouchaochao/hello-world:latest  这种方法不好的地方就是别人会担心你的docker里有病毒，所以一般使用方法二。
+方法二：dockerfile
+通过关联github和docker hub，我们只要在github上维护dockerfile就行了，docker hub会根据关联的dockerfile自动build好docker仓库。
+下面讲解如何关联github和docker hub：
+ 打开account setting:  往下找到linked accounts，绑定github  在github中新建dockerfile项目  在docker hub中绑定github的dockerfile  完成结果   搭建公司/自己的docker hub docker hub 中搜索registry，linux系统中输入以下代码就完成了部署
+docker run -d -p 5000:5000 --restart always --name registry registry:2  怎么push
+ build的改变，把NAME部分换成ip地址，如
+docker build -t 47.94.131.35:5000/hello-world . # 换成自己的ip  查看image</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_7</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_7/</link>
+      <pubDate>Sun, 18 Aug 2019 20:12:15 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_7/</guid>
+      <description>run-vs-cmd-vs-entrypoint 首先明确一下概念:
+run:执行命令并创建新的 image layer cmd:设置容器启动后默认执行的命令和参数 entrypoint:设置容器启动时运行的命令  在介绍cmd和entrypoint之前,先了解一下shell和exec格式: - shell:
+FROM centos RUN apt-get install -y vim ENV name docker CMD echo &amp;quot;hello docker&amp;quot; ENTRYPOINT echo &amp;quot;hello $name &amp;quot;   exec
+FROM centos RUN [&amp;quot;apt-get&amp;quot;, &amp;quot;install&amp;quot;, &amp;quot;-y&amp;quot;, &amp;quot;vim&amp;quot;] ENV name docker CMD [&amp;quot;/bin/echo&amp;quot;, &amp;quot;hello docker&amp;quot;] ENTRYPOINT [&amp;quot;/bin/bash&amp;quot;,&amp;quot;-c&amp;quot;, &amp;quot;echo hello $name &amp;quot;]  build一个docker
+cd somefile docker build -t cc/xxx .  CMD 容器启动时默认执行的命令
+FROM centos ENV name docker CMD echo &amp;quot;hello $name&amp;quot;  情况一：如果docker run指定了其它命令，CMD命令被忽略</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_6</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6/</link>
+      <pubDate>Sun, 18 Aug 2019 20:11:15 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6/</guid>
+      <description>dockerfile语法梳理 FROM：从哪里构建image FROM scratch # 制作base image FROM centos # 使用base image FROM ubuntu:18.04  注意：为了安全，请使用官方的image
+LABEL：标签 LABEL maintainer=&amp;quot;abc@gmail.com&amp;quot; LABEL version=&amp;quot;1.1&amp;quot; LABEL description=&amp;quot;This is description&amp;quot;  注意：Metadata不可少！
+RUN 为了美观，复杂的RUN请用反斜线换行，避免无用分层，合并多条命令成一行
+RUN yum update &amp;amp;&amp;amp; yum install -y vim \ python-dev # 反斜线换行 RUN apt-get update &amp;amp;&amp;amp; apt-get install -y perl\ pwgen --no-install-recommends &amp;amp;&amp;amp; rm -rf \ /var/lib/apt/list/* # 注意清理cache RUN /bin/bash -c &#39;source $HOME/.bashrc; echo $HOME&#39;  WORKDIR：设定当前工作目录 WORKDIR /root WORKDIR /test # 如果没有，会自动创建的 WORKDIR demo RUN pwd # 输出结果应该是 /test/demo  注意：不要用RUN cd代替WORKDIR，尽量使用绝对目录</description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_5</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_5/</link>
+      <pubDate>Sun, 18 Aug 2019 20:09:45 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_5/</guid>
+      <description> 构建自己的Docker镜像 把一个Container commit成自己的 $ docker run -it centos $ yum install -y vim $ docker commit container_name cc/centos-vim  用dockerfile构建（推荐） $ mkdir centos-vim $ cd centos-vim $ vim Dockerfile FROM centos RUN yum install -y vim # 思考为什么image只读却可以写 $ docker build -t cc/centos-vim .  </description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_4</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_4/</link>
+      <pubDate>Sun, 18 Aug 2019 20:09:02 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_4/</guid>
+      <description> 初识Container系统  通过Image创建（copy） 在Image layer之上建立一个container layer（可读写） 类比面向对象：类和实例 Image负责app的存储和分发，Container负责运行app  # docker交互 -it docker run -it centos  Docker 的一些命令 docker --help docker container --help  </description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_3</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_3/</link>
+      <pubDate>Sun, 18 Aug 2019 20:07:02 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_3/</guid>
+      <description> DIY-Base-Image # 将docker加入管理员，以后使用docker不用再加sudo $ sudo groupadd docker $ sudo gpasswd -a username docker # 完成后重启命令行  接下来建立自己的docker
+$ mkdir halo $ cd halo $ vim halo.c #include&amp;lt;stdio.h&amp;gt; int main() { printf(&amp;quot;halo done!\n&amp;quot;); } $ gcc -static halo.c -o halo $ vim Dockerfile FROM scratch ADD halo / CMD [&amp;quot;/halo&amp;quot;] $ docker build -t cc/halo . $ docker run cc/halo  </description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_2</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2/</link>
+      <pubDate>Sun, 18 Aug 2019 20:06:16 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2/</guid>
+      <description> 什么是Image  文件和meta data的集合（root file system） 分层的， 并且每一层都可以添加改变删除文件成为一个新的image 不同的image可以共享相同的layer Image本身是read-only  Image的获取  Build from Dockerfile Pull from Registry  </description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念2_1</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_1/</link>
+      <pubDate>Sun, 18 Aug 2019 20:05:28 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_1/</guid>
+      <description> Docker架构和底层技术简介系统学习  docker提供一个开发、打包、运行app的平台
+ 把app和底层infrastructure隔离开
+  docker engine
+ 后台进程（dockerd） REST API Server CLI接口（docker）  docker architecture
+底层技术支持
+ namespaces: 做隔离pid, net, ipc, mnt, uts control groups: 做资源限制 union file systems: container 和 image的分层  </description>
+    </item>
+    
+    <item>
+      <title>系统学习Docker践行DevOps理念1</title>
+      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B51/</link>
+      <pubDate>Sun, 18 Aug 2019 20:04:20 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B51/</guid>
+      <description>docker是什么 Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
+说人话就是，docker把环境封装成一个集装箱，集装箱之间的环境（如python2/3）不会相互干扰。
+安装docker 请对应自己的系统点击以下链接进行安装： centos debain fedora ubuntu mac windows</description>
+    </item>
+    
+  </channel>
+</rss>

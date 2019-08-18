@@ -1,0 +1,20 @@
+---
+title: "系统学习Docker"
+date: 2019-08-18T20:02:26+08:00
+draft: true
+---
+## docker是什么
+Docker 是一个[开源](https://baike.baidu.com/item/%E5%BC%80%E6%BA%90/246339)的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 [Linux](https://baike.baidu.com/item/Linux)或Windows 机器上，也可以实现[虚拟化](https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F%E5%8C%96/547949)。容器是完全使用[沙箱](https://baike.baidu.com/item/%E6%B2%99%E7%AE%B1/393318)机制，相互之间不会有任何接口。
+
+说人话就是，docker把环境封装成一个集装箱，集装箱之间的环境（如python2/3）不会相互干扰。
+
+## 安装docker
+请对应自己的系统点击以下链接进行安装：
+[centos](https://docs.docker.com/install/linux/docker-ce/centos/)
+[debain](https://docs.docker.com/install/linux/docker-ce/debian/)
+[fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
+[ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+[mac](https://docs.docker.com/docker-for-mac/install/)
+[windows](https://docs.docker.com/docker-for-windows/install/)
+
+
