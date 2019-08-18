@@ -9,9 +9,9 @@
   
   
   
-  <link rel="prev" href="https://ouchaochao.github.io/post/docker2_8/" />
-  <link rel="next" href="https://ouchaochao.github.io/post/test/" />
-  <link rel="canonical" href="https://ouchaochao.github.io/post/developgo/" />
+  <link rel="prev" href="https://ouchaochao.github.io/post/developgo/" />
+  
+  <link rel="canonical" href="https://ouchaochao.github.io/post/test/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           Go自动化部署项目 | LeaveIt
+           Test | LeaveIt
        
   </title>
-  <meta name="title" content="Go自动化部署项目 | LeaveIt">
+  <meta name="title" content="Test | LeaveIt">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,9 +44,9 @@
          "@id": "https:\/\/ouchaochao.github.io\/"
     },
     "articleSection" : "post",
-    "name" : "Go自动化部署项目",
-    "headline" : "Go自动化部署项目",
-    "description" : "趁着有点时间学了一下DevOps和云计算初识, 发现一个以前没想到过的点 \x26ndash; 自动化部署项目.\n这个项目是用Go写的, 大致的过程如下:\n1. 在本地写完代码之后, git push到github上 2. github里的Webhooks会被触发, 进而会访问一个设定好的网站 3. 这个网站就是DeployServer, 它会从github里git pull你刚push的代码 4. 代码返回到服务器 5. DeployServer停掉旧版本的WebServer, 然后运行最新的Webserver代码 6. 完成更新, 浏览器打开WebServer的网址就能访问最新的网页  下面是Webhooks的示意图:\n下面是DeployServer的sh文件写法, 仅供参考:",
+    "name" : "Test",
+    "headline" : "Test",
+    "description" : "for test",
     "inLanguage" : "zh-cn",
     "author" : "Chaochao Ou",
     "creator" : "Chaochao Ou",
@@ -54,10 +54,10 @@
     "accountablePerson" : "Chaochao Ou",
     "copyrightHolder" : "Chaochao Ou",
     "copyrightYear" : "2019",
-    "datePublished": "2019-08-18 20:14:36 \x2b0800 CST",
-    "dateModified" : "2019-08-18 20:14:36 \x2b0800 CST",
-    "url" : "https:\/\/ouchaochao.github.io\/post\/developgo\/",
-    "wordCount" : "28",
+    "datePublished": "2019-08-18 22:06:27 \x2b0800 CST",
+    "dateModified" : "2019-08-18 22:06:27 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/test\/",
+    "wordCount" : "2",
     "keywords" : [ "go", "LeaveIt"]
 }
 </script>
@@ -108,21 +108,23 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Go自动化部署项目</h1>
+        <h1 class="post-title" itemprop="name headline">Test</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
                 <span class="post-time">
                 on <time datetime=2019-08-18 itemprop="datePublished">August 18, 2019</time>
                 </span>
                 in
-                
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ouchaochao.github.io/categories/go/"> go </a>
+                        
+                </span>
         </div>
     </header>
     <div class="post-content">
         
 
-        
-            
         
 
         
@@ -136,27 +138,7 @@
           
           
 
-          <p>趁着有点时间学了一下<a href="https://www.imooc.com/learn/910" rel="nofollow noreferrer" target="_blank">DevOps和云计算初识</a>, 发现一个以前没想到过的点 &ndash; 自动化部署项目.</p>
-
-<p>这个项目是用Go写的, 大致的过程如下:</p>
-
-<pre><code class="language-shell">1. 在本地写完代码之后, git push到github上
-2. github里的Webhooks会被触发, 进而会访问一个设定好的网站
-3. 这个网站就是DeployServer, 它会从github里git pull你刚push的代码
-4. 代码返回到服务器
-5. DeployServer停掉旧版本的WebServer, 然后运行最新的Webserver代码
-6. 完成更新, 浏览器打开WebServer的网址就能访问最新的网页
-</code></pre>
-
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/15/16c940fefadd16a3?w=1030&amp;h=379&amp;f=png&amp;s=39733" alt="图" class="lazyload"><figcaption class="image-caption">图</figcaption></figure></p>
-
-<p>下面是Webhooks的示意图:</p>
-
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/15/16c94195aa976da0?w=1007&amp;h=715&amp;f=png&amp;s=80518" alt="Webhooks" class="lazyload"><figcaption class="image-caption">Webhooks</figcaption></figure></p>
-
-<p>下面是DeployServer的sh文件写法, 仅供参考:</p>
-
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/15/16c941ac519f9eec?w=1337&amp;h=304&amp;f=png&amp;s=233500" alt="DeployServer" class="lazyload"><figcaption class="image-caption">DeployServer</figcaption></figure></p>
+          <p>for test</p>
 
     </div>
 
@@ -171,7 +153,7 @@
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://ouchaochao.github.io/post/developgo/>https://ouchaochao.github.io/post/developgo/</span>
+                    <a href=https://ouchaochao.github.io/post/test/>https://ouchaochao.github.io/post/test/</span>
             </p>
             
              
@@ -200,10 +182,8 @@
 
     <div class="post-nav">
         
-        <a href="https://ouchaochao.github.io/post/docker2_8/" class="prev" rel="prev" title="系统学习Docker践行DevOps理念2_8"><i class="iconfont icon-left"></i>&nbsp;系统学习Docker践行DevOps理念2_8</a>
+        <a href="https://ouchaochao.github.io/post/developgo/" class="prev" rel="prev" title="Go自动化部署项目"><i class="iconfont icon-left"></i>&nbsp;Go自动化部署项目</a>
          
-        
-        <a href="https://ouchaochao.github.io/post/test/" class="next" rel="next" title="Test">Test&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 
@@ -245,9 +225,8 @@
 
 
     
-     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
-      
-     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
     
   
 

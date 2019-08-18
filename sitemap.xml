@@ -2,11 +2,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
-      <loc>https://ouchaochao.github.io/post/developgo/</loc>
+      <loc>https://ouchaochao.github.io/categories/</loc>
       
-      <lastmod>2019-08-18T20:14:36+08:00</lastmod>
+      <lastmod>2019-08-18T22:06:27+08:00</lastmod>
       
       
+      
+      <priority>0</priority>
       
       
     </url>
@@ -14,7 +16,7 @@
     <url>
       <loc>https://ouchaochao.github.io/</loc>
       
-      <lastmod>2019-08-18T20:14:36+08:00</lastmod>
+      <lastmod>2019-08-18T22:06:27+08:00</lastmod>
       
       
       
@@ -26,7 +28,7 @@
     <url>
       <loc>https://ouchaochao.github.io/post/</loc>
       
-      <lastmod>2019-08-18T20:14:36+08:00</lastmod>
+      <lastmod>2019-08-18T22:06:27+08:00</lastmod>
       
       
       
@@ -38,7 +40,7 @@
     <url>
       <loc>https://ouchaochao.github.io/tags/</loc>
       
-      <lastmod>2019-08-18T20:14:36+08:00</lastmod>
+      <lastmod>2019-08-18T22:06:27+08:00</lastmod>
       
       
       
@@ -48,13 +50,45 @@
     </url>
   
     <url>
+      <loc>https://ouchaochao.github.io/post/test/</loc>
+      
+      <lastmod>2019-08-18T22:06:27+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
       <loc>https://ouchaochao.github.io/tags/go/</loc>
       
-      <lastmod>2019-08-18T20:14:36+08:00</lastmod>
+      <lastmod>2019-08-18T22:06:27+08:00</lastmod>
       
       
       
       <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://ouchaochao.github.io/categories/go/</loc>
+      
+      <lastmod>2019-08-18T22:06:27+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://ouchaochao.github.io/post/developgo/</loc>
+      
+      <lastmod>2019-08-18T20:14:36+08:00</lastmod>
+      
+      
       
       
     </url>
@@ -269,16 +303,6 @@
       <lastmod>2019-08-01T09:34:41+08:00</lastmod>
       
       
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://ouchaochao.github.io/categories/</loc>
-      
-      
-      
-      <priority>0</priority>
       
       
     </url>

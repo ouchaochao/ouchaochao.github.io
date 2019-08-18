@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go on LeaveIt</title>
+    <link>https://ouchaochao.github.io/categories/go/</link>
+    <description>Recent content in go on LeaveIt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 18 Aug 2019 22:06:27 +0800</lastBuildDate>
+    
+	<atom:link href="https://ouchaochao.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Test</title>
+      <link>https://ouchaochao.github.io/post/test/</link>
+      <pubDate>Sun, 18 Aug 2019 22:06:27 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/test/</guid>
+      <description>for test</description>
+    </item>
+    
+  </channel>
+</rss>
