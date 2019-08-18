@@ -10,10 +10,10 @@
     
     <item>
       <title>Go自动化部署项目</title>
-      <link>https://ouchaochao.github.io/post/go%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/</link>
+      <link>https://ouchaochao.github.io/post/developgo/</link>
       <pubDate>Sun, 18 Aug 2019 20:14:36 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/</guid>
+      <guid>https://ouchaochao.github.io/post/developgo/</guid>
       <description>&lt;p&gt;趁着有点时间学了一下&lt;a href=&#34;https://www.imooc.com/learn/910&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;DevOps和云计算初识&lt;/a&gt;, 发现一个以前没想到过的点 &amp;ndash; 自动化部署项目.&lt;/p&gt;
 
 &lt;p&gt;这个项目是用Go写的, 大致的过程如下:&lt;/p&gt;
@@ -40,10 +40,10 @@
     
     <item>
       <title>系统学习Docker践行DevOps理念2_8</title>
-      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_8/</link>
+      <link>https://ouchaochao.github.io/post/docker2_8/</link>
       <pubDate>Sun, 18 Aug 2019 20:13:31 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_8/</guid>
+      <guid>https://ouchaochao.github.io/post/docker2_8/</guid>
       <description>
 
 &lt;h2 id=&#34;镜像的分布&#34;&gt;镜像的分布&lt;/h2&gt;
@@ -141,10 +141,10 @@ docker push ouchaochao/hello-world:latest
     
     <item>
       <title>系统学习Docker践行DevOps理念2_7</title>
-      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_7/</link>
+      <link>https://ouchaochao.github.io/post/docker2_7/</link>
       <pubDate>Sun, 18 Aug 2019 20:12:15 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_7/</guid>
+      <guid>https://ouchaochao.github.io/post/docker2_7/</guid>
       <description>
 
 &lt;h2 id=&#34;run-vs-cmd-vs-entrypoint&#34;&gt;run-vs-cmd-vs-entrypoint&lt;/h2&gt;
@@ -220,10 +220,10 @@ CMD [&amp;quot;mongoDB&amp;quot;]
     
     <item>
       <title>系统学习Docker践行DevOps理念2_6</title>
-      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6/</link>
+      <link>https://ouchaochao.github.io/post/docker2_6/</link>
       <pubDate>Sun, 18 Aug 2019 20:11:15 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_6/</guid>
+      <guid>https://ouchaochao.github.io/post/docker2_6/</guid>
       <description>
 
 &lt;h2 id=&#34;dockerfile语法梳理&#34;&gt;dockerfile语法梳理&lt;/h2&gt;
@@ -304,10 +304,10 @@ RUN apt-get install -y mysql-server= &amp;quot;${MYSQL_VERSION}&amp;quot; \
     
     <item>
       <title>系统学习Docker践行DevOps理念2_5</title>
-      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_5/</link>
+      <link>https://ouchaochao.github.io/post/docker2_5/</link>
       <pubDate>Sun, 18 Aug 2019 20:09:45 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_5/</guid>
+      <guid>https://ouchaochao.github.io/post/docker2_5/</guid>
       <description>
 
 &lt;h2 id=&#34;构建自己的docker镜像&#34;&gt;构建自己的Docker镜像&lt;/h2&gt;
@@ -335,10 +335,10 @@ $ docker build -t cc/centos-vim .
     
     <item>
       <title>系统学习Docker践行DevOps理念2_4</title>
-      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_4/</link>
+      <link>https://ouchaochao.github.io/post/docker2_4/</link>
       <pubDate>Sun, 18 Aug 2019 20:09:02 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_4/</guid>
+      <guid>https://ouchaochao.github.io/post/docker2_4/</guid>
       <description>
 
 &lt;h2 id=&#34;初识container系统&#34;&gt;初识Container系统&lt;/h2&gt;
@@ -366,10 +366,10 @@ docker container --help
     
     <item>
       <title>系统学习Docker践行DevOps理念2_3</title>
-      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_3/</link>
+      <link>https://ouchaochao.github.io/post/docker2_3/</link>
       <pubDate>Sun, 18 Aug 2019 20:07:02 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_3/</guid>
+      <guid>https://ouchaochao.github.io/post/docker2_3/</guid>
       <description>
 
 &lt;h2 id=&#34;diy-base-image&#34;&gt;DIY-Base-Image&lt;/h2&gt;
@@ -407,10 +407,10 @@ $ docker run cc/halo
     
     <item>
       <title>系统学习Docker践行DevOps理念2_2</title>
-      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2/</link>
+      <link>https://ouchaochao.github.io/post/docker2_2/</link>
       <pubDate>Sun, 18 Aug 2019 20:06:16 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_2/</guid>
+      <guid>https://ouchaochao.github.io/post/docker2_2/</guid>
       <description>
 
 &lt;h2 id=&#34;什么是image&#34;&gt;什么是Image&lt;/h2&gt;
@@ -435,10 +435,10 @@ $ docker run cc/halo
     
     <item>
       <title>系统学习Docker践行DevOps理念2_1</title>
-      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_1/</link>
+      <link>https://ouchaochao.github.io/post/docker2_1/</link>
       <pubDate>Sun, 18 Aug 2019 20:05:28 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B52_1/</guid>
+      <guid>https://ouchaochao.github.io/post/docker2_1/</guid>
       <description>
 
 &lt;h2 id=&#34;docker架构和底层技术简介系统学习&#34;&gt;Docker架构和底层技术简介系统学习&lt;/h2&gt;
@@ -476,10 +476,10 @@ $ docker run cc/halo
     
     <item>
       <title>系统学习Docker践行DevOps理念1</title>
-      <link>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B51/</link>
+      <link>https://ouchaochao.github.io/post/docker1/</link>
       <pubDate>Sun, 18 Aug 2019 20:04:20 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0docker%E8%B7%B5%E8%A1%8Cdevops%E7%90%86%E5%BF%B51/</guid>
+      <guid>https://ouchaochao.github.io/post/docker1/</guid>
       <description>
 
 &lt;h2 id=&#34;docker是什么&#34;&gt;docker是什么&lt;/h2&gt;
@@ -502,10 +502,10 @@ $ docker run cc/halo
     
     <item>
       <title>自动部署hugo脚本</title>
-      <link>https://ouchaochao.github.io/post/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2hugo%E8%84%9A%E6%9C%AC/</link>
+      <link>https://ouchaochao.github.io/post/develophugo/</link>
       <pubDate>Sun, 18 Aug 2019 19:09:42 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2hugo%E8%84%9A%E6%9C%AC/</guid>
+      <guid>https://ouchaochao.github.io/post/develophugo/</guid>
       <description>&lt;p&gt;写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;#!/bin/sh
@@ -669,10 +669,10 @@ Add test done!
     
     <item>
       <title>Go语言实战流媒体视频网站3_7</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_7/</link>
+      <link>https://ouchaochao.github.io/post/go3_7/</link>
       <pubDate>Fri, 09 Aug 2019 09:21:36 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_7/</guid>
+      <guid>https://ouchaochao.github.io/post/go3_7/</guid>
       <description>
 
 &lt;h2 id=&#34;api数据库层设计&#34;&gt;api数据库层设计&lt;/h2&gt;
@@ -839,10 +839,10 @@ Add test done!
     
     <item>
       <title>Go语言实战流媒体视频网站3_6</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_6/</link>
+      <link>https://ouchaochao.github.io/post/go3_6/</link>
       <pubDate>Thu, 08 Aug 2019 09:04:33 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_6/</guid>
+      <guid>https://ouchaochao.github.io/post/go3_6/</guid>
       <description>
 
 &lt;h2 id=&#34;api之http-handler层&#34;&gt;api之http handler层&lt;/h2&gt;
@@ -971,10 +971,10 @@ func sendNormalResponse(w http.ResponseWriter)  {
     
     <item>
       <title>Go语言实战流媒体视频3_3至3_5</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%913_3%E8%87%B33_5/</link>
+      <link>https://ouchaochao.github.io/post/go3_3to3_5/</link>
       <pubDate>Wed, 07 Aug 2019 09:41:54 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%913_3%E8%87%B33_5/</guid>
+      <guid>https://ouchaochao.github.io/post/go3_3to3_5/</guid>
       <description>
 
 &lt;h2 id=&#34;api实现之详细设计&#34;&gt;API实现之详细设计&lt;/h2&gt;
@@ -1138,10 +1138,10 @@ Delete a comment:
     
     <item>
       <title>Go语言实战流媒体视频网站3_2</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_2/</link>
+      <link>https://ouchaochao.github.io/post/go3_2/</link>
       <pubDate>Tue, 06 Aug 2019 09:43:11 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_2/</guid>
+      <guid>https://ouchaochao.github.io/post/go3_2/</guid>
       <description>
 
 &lt;h2 id=&#34;api-设计与架构&#34;&gt;API 设计与架构&lt;/h2&gt;

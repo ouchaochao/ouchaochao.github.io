@@ -13,10 +13,10 @@
     
     <item>
       <title>自动部署hugo脚本</title>
-      <link>https://ouchaochao.github.io/post/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2hugo%E8%84%9A%E6%9C%AC/</link>
+      <link>https://ouchaochao.github.io/post/develophugo/</link>
       <pubDate>Sun, 18 Aug 2019 19:09:42 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2hugo%E8%84%9A%E6%9C%AC/</guid>
+      <guid>https://ouchaochao.github.io/post/develophugo/</guid>
       <description>写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：
 #!/bin/sh input = &amp;quot;&amp;quot; function list(){ echo &amp;quot;查询到有以下md文件:&amp;quot; cd content/post/ ls cd ../../ } function add(){ echo &amp;quot;请输入文章的题目：&amp;quot; read input hugo new post/$input.md vim content/post/$input.md hugo cd public git add . git commit -m &amp;quot;add $input&amp;quot; git push origin master echo &amp;quot;&amp;quot; echo &amp;quot;Add $input done!&amp;quot; } function deploy(){ hugo cd public git add . git commit -m &amp;quot;add $input&amp;quot; git push origin master echo &amp;quot;&amp;quot; echo &amp;quot;Deploy done!&amp;quot; } function change(){ list echo &amp;quot;请输入要修改的文章题目：&amp;quot; read input vim content/post/$input.</description>
     </item>

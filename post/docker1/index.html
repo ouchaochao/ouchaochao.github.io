@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Chaochao Ou">
+  
+  
+  
+  <link rel="prev" href="https://ouchaochao.github.io/post/develophugo/" />
+  <link rel="next" href="https://ouchaochao.github.io/post/docker2_1/" />
+  <link rel="canonical" href="https://ouchaochao.github.io/post/docker1/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           系统学习Docker践行DevOps理念1 | LeaveIt
+       
+  </title>
+  <meta name="title" content="系统学习Docker践行DevOps理念1 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ouchaochao.github.io\/"
+    },
+    "articleSection" : "post",
+    "name" : "系统学习Docker践行DevOps理念1",
+    "headline" : "系统学习Docker践行DevOps理念1",
+    "description" : "docker是什么 Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。\n说人话就是，docker把环境封装成一个集装箱，集装箱之间的环境（如python2\/3）不会相互干扰。\n安装docker 请对应自己的系统点击以下链接进行安装： centos debain fedora ubuntu mac windows",
+    "inLanguage" : "zh-cn",
+    "author" : "Chaochao Ou",
+    "creator" : "Chaochao Ou",
+    "publisher": "Chaochao Ou",
+    "accountablePerson" : "Chaochao Ou",
+    "copyrightHolder" : "Chaochao Ou",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-08-18 20:04:20 \x2b0800 CST",
+    "dateModified" : "2019-08-18 20:04:20 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/docker1\/",
+    "wordCount" : "14",
+    "keywords" : [ "docker", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">系统学习Docker践行DevOps理念1</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-08-18 itemprop="datePublished">August 18, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="docker是什么">docker是什么</h2>
+
+<p>Docker 是一个<a href="https://baike.baidu.com/item/%E5%BC%80%E6%BA%90/246339" rel="nofollow noreferrer" target="_blank">开源</a>的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 <a href="https://baike.baidu.com/item/Linux" rel="nofollow noreferrer" target="_blank">Linux</a>或Windows 机器上，也可以实现<a href="https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F%E5%8C%96/547949" rel="nofollow noreferrer" target="_blank">虚拟化</a>。容器是完全使用<a href="https://baike.baidu.com/item/%E6%B2%99%E7%AE%B1/393318" rel="nofollow noreferrer" target="_blank">沙箱</a>机制，相互之间不会有任何接口。</p>
+
+<p>说人话就是，docker把环境封装成一个集装箱，集装箱之间的环境（如python2/3）不会相互干扰。</p>
+
+<h2 id="安装docker">安装docker</h2>
+
+<p>请对应自己的系统点击以下链接进行安装：
+<a href="https://docs.docker.com/install/linux/docker-ce/centos/" rel="nofollow noreferrer" target="_blank">centos</a>
+<a href="https://docs.docker.com/install/linux/docker-ce/debian/" rel="nofollow noreferrer" target="_blank">debain</a>
+<a href="https://docs.docker.com/install/linux/docker-ce/fedora/" rel="nofollow noreferrer" target="_blank">fedora</a>
+<a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/" rel="nofollow noreferrer" target="_blank">ubuntu</a>
+<a href="https://docs.docker.com/docker-for-mac/install/" rel="nofollow noreferrer" target="_blank">mac</a>
+<a href="https://docs.docker.com/docker-for-windows/install/" rel="nofollow noreferrer" target="_blank">windows</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Chaochao Ou </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ouchaochao.github.io/post/docker1/>https://ouchaochao.github.io/post/docker1/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/docker/">
+                    #docker</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ouchaochao.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ouchaochao.github.io/post/develophugo/" class="prev" rel="prev" title="自动部署hugo脚本"><i class="iconfont icon-left"></i>&nbsp;自动部署hugo脚本</a>
+         
+        
+        <a href="https://ouchaochao.github.io/post/docker2_1/" class="next" rel="next" title="系统学习Docker践行DevOps理念2_1">系统学习Docker践行DevOps理念2_1&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ouchaochao.github.io/">Chaochao Ou</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

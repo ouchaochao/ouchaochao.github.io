@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Chaochao Ou">
+  
+  
+  
+  <link rel="prev" href="https://ouchaochao.github.io/post/docker2_7/" />
+  <link rel="next" href="https://ouchaochao.github.io/post/developgo/" />
+  <link rel="canonical" href="https://ouchaochao.github.io/post/docker2_8/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           系统学习Docker践行DevOps理念2_8 | LeaveIt
+       
+  </title>
+  <meta name="title" content="系统学习Docker践行DevOps理念2_8 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ouchaochao.github.io\/"
+    },
+    "articleSection" : "post",
+    "name" : "系统学习Docker践行DevOps理念2_8",
+    "headline" : "系统学习Docker践行DevOps理念2_8",
+    "description" : "镜像的分布 docker hub 首先在终端中登陆账号(账号在docker hub里注册)：\ndocker login  然后就是push自己的docker：\n方法一：docker hub\nUsage: docker push [OPTIONS] NAME[:TAG] 例如： docker push ouchaochao\/hello-world:latest  这种方法不好的地方就是别人会担心你的docker里有病毒，所以一般使用方法二。\n方法二：dockerfile\n通过关联github和docker hub，我们只要在github上维护dockerfile就行了，docker hub会根据关联的dockerfile自动build好docker仓库。\n下面讲解如何关联github和docker hub：\n 打开account setting:  往下找到linked accounts，绑定github  在github中新建dockerfile项目  在docker hub中绑定github的dockerfile  完成结果   搭建公司\/自己的docker hub docker hub 中搜索registry，linux系统中输入以下代码就完成了部署\ndocker run -d -p 5000:5000 --restart always --name registry registry:2  怎么push\n build的改变，把NAME部分换成ip地址，如\ndocker build -t 47.94.131.35:5000\/hello-world . # 换成自己的ip  查看image",
+    "inLanguage" : "zh-cn",
+    "author" : "Chaochao Ou",
+    "creator" : "Chaochao Ou",
+    "publisher": "Chaochao Ou",
+    "accountablePerson" : "Chaochao Ou",
+    "copyrightHolder" : "Chaochao Ou",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-08-18 20:13:31 \x2b0800 CST",
+    "dateModified" : "2019-08-18 20:13:31 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/docker2_8\/",
+    "wordCount" : "86",
+    "keywords" : [ "docker", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">系统学习Docker践行DevOps理念2_8</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-08-18 itemprop="datePublished">August 18, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="镜像的分布">镜像的分布</h2>
+
+<h3 id="docker-hub">docker hub</h3>
+
+<p>首先在终端中登陆账号(账号在docker hub里注册)：</p>
+
+<pre><code class="language-shell">docker login
+</code></pre>
+
+<p>然后就是push自己的docker：</p>
+
+<p><strong>方法一：docker hub</strong></p>
+
+<pre><code class="language-shell">Usage:  docker push [OPTIONS] NAME[:TAG]
+例如：
+docker push ouchaochao/hello-world:latest
+</code></pre>
+
+<p>这种方法不好的地方就是别人会担心你的docker里有病毒，所以一般使用方法二。</p>
+
+<p><strong>方法二：dockerfile</strong></p>
+
+<p>通过关联github和docker hub，我们只要在github上维护dockerfile就行了，docker hub会根据关联的dockerfile自动build好docker仓库。</p>
+
+<p>下面讲解如何关联github和docker hub：</p>
+
+<ol>
+<li><p>打开account setting:
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/12/16c81c2ec188f79e?w=1279&amp;h=328&amp;f=png&amp;s=65094" alt="account setting" class="lazyload"><figcaption class="image-caption">account setting</figcaption></figure></p></li>
+
+<li><p>往下找到linked accounts，绑定github
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/12/16c81c37de2ae63e?w=1155&amp;h=403&amp;f=png&amp;s=73603" alt="linked accounts" class="lazyload"><figcaption class="image-caption">linked accounts</figcaption></figure></p></li>
+
+<li><p>在github中新建dockerfile项目
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/12/16c81c3d2aa7bf3e?w=1025&amp;h=480&amp;f=png&amp;s=98165" alt="dockerfile" class="lazyload"><figcaption class="image-caption">dockerfile</figcaption></figure></p></li>
+
+<li><p>在docker hub中绑定github的dockerfile
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/12/16c81c45a9c28d79?w=1142&amp;h=915&amp;f=png&amp;s=123096" alt="绑定" class="lazyload"><figcaption class="image-caption">绑定</figcaption></figure></p></li>
+
+<li><p>完成结果
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/12/16c81c4b7b2b7803?w=1135&amp;h=622&amp;f=png&amp;s=91840" alt="完成结果" class="lazyload"><figcaption class="image-caption">完成结果</figcaption></figure></p></li>
+</ol>
+
+<h3 id="搭建公司-自己的docker-hub">搭建公司/自己的docker hub</h3>
+
+<p>docker hub 中搜索registry，linux系统中输入以下代码就完成了部署</p>
+
+<pre><code class="language-shell">docker run -d -p 5000:5000 --restart always --name registry registry:2
+</code></pre>
+
+<p><strong>怎么push</strong></p>
+
+<ol>
+<li><p>build的改变，把NAME部分换成ip地址，如</p>
+
+<pre><code class="language-shell">docker build -t 47.94.131.35:5000/hello-world . # 换成自己的ip
+</code></pre></li>
+
+<li><p>查看image</p>
+
+<pre><code class="language-shell">docker image ls
+</code></pre></li>
+
+<li><p>修改docker下的daemon.json文件，把服务器添加信任，然后点Apply &amp; Restart
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/12/16c81c51d0acec68?w=502&amp;h=527&amp;f=png&amp;s=52682" alt="修改docker下的daemon" class="lazyload"><figcaption class="image-caption">修改docker下的daemon</figcaption></figure></p></li>
+
+<li><p>接下来就是push</p>
+
+<pre><code class="language-shell">docker push 47.94.131.35:5000/hello-world
+</code></pre></li>
+
+<li><p>通过在网页打开以下网站查看是否上传成功</p>
+
+<pre><code class="language-shell">http://47.94.131.35:5000/v2/_catalog
+
+成功的话会有以下输出：
+// 20190812013314
+// http://47.94.131.35:5000/v2/_catalog
+
+{
+&quot;repositories&quot;: [
+&quot;hello-world&quot;
+]
+}
+</code></pre></li>
+</ol>
+
+<p><strong>备注</strong></p>
+
+<p>Registry Api <a href="https://docs.docker.com/registry/spec/api/#listing-repositories" rel="nofollow noreferrer" target="_blank">网站</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Chaochao Ou </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ouchaochao.github.io/post/docker2_8/>https://ouchaochao.github.io/post/docker2_8/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/docker/">
+                    #docker</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ouchaochao.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ouchaochao.github.io/post/docker2_7/" class="prev" rel="prev" title="系统学习Docker践行DevOps理念2_7"><i class="iconfont icon-left"></i>&nbsp;系统学习Docker践行DevOps理念2_7</a>
+         
+        
+        <a href="https://ouchaochao.github.io/post/developgo/" class="next" rel="next" title="Go自动化部署项目">Go自动化部署项目&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ouchaochao.github.io/">Chaochao Ou</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Chaochao Ou">
+  
+  
+  
+  <link rel="prev" href="https://ouchaochao.github.io/post/go3_6/" />
+  <link rel="next" href="https://ouchaochao.github.io/post/develophugo/" />
+  <link rel="canonical" href="https://ouchaochao.github.io/post/go3_7/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Go语言实战流媒体视频网站3_7 | LeaveIt
+       
+  </title>
+  <meta name="title" content="Go语言实战流媒体视频网站3_7 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ouchaochao.github.io\/"
+    },
+    "articleSection" : "post",
+    "name" : "Go语言实战流媒体视频网站3_7",
+    "headline" : "Go语言实战流媒体视频网站3_7",
+    "description" : "api数据库层设计 数据库设计: 用户    TABLE users postscript     id UNSIGNED INT\nPRIMARY KEY\nAUTO_INCREMENT 用户不可见\n主键\n自动增量更新   login_name VARCHAR(64)\nUNIQUE KEY -\n用户名不能重复   pwd TEXT -    数据库设计: 视频资源    TABLE video_info postscript     id VARCHAR(64)\nPRIMARY KEY\nNOT NULL 资源多,要长\n主键\n不为空   author_id UNSIGNED INT 上传视频的用户id\n起到外键作用, 但是是在代码逻辑中处理   name TEXT -   display_ctime TEXT 展示给用户看   create_time DATETIME 用户理解会有困难, 所以创建display_ctime    数据库设计: 评论    TABLE comments postscript     id VARCHAR(64)",
+    "inLanguage" : "zh-cn",
+    "author" : "Chaochao Ou",
+    "creator" : "Chaochao Ou",
+    "publisher": "Chaochao Ou",
+    "accountablePerson" : "Chaochao Ou",
+    "copyrightHolder" : "Chaochao Ou",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-08-09 09:21:36 \x2b0800 CST",
+    "dateModified" : "2019-08-09 09:21:36 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/go3_7\/",
+    "wordCount" : "107",
+    "keywords" : [ "go", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Go语言实战流媒体视频网站3_7</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-08-09 itemprop="datePublished">August 9, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="api数据库层设计">api数据库层设计</h2>
+
+<h3 id="数据库设计-用户">数据库设计: 用户</h3>
+
+<table>
+<thead>
+<tr>
+<th align="center">TABLE</th>
+<th align="center">users</th>
+<th align="center">postscript</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">id</td>
+<td align="center">UNSIGNED INT<br>PRIMARY KEY<br>AUTO_INCREMENT</td>
+<td align="center">用户不可见<br>主键<br>自动增量更新</td>
+</tr>
+
+<tr>
+<td align="center">login_name</td>
+<td align="center">VARCHAR(64)<br>UNIQUE KEY</td>
+<td align="center">-<br>用户名不能重复</td>
+</tr>
+
+<tr>
+<td align="center">pwd</td>
+<td align="center">TEXT</td>
+<td align="center">-</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="数据库设计-视频资源">数据库设计: 视频资源</h3>
+
+<table>
+<thead>
+<tr>
+<th align="center">TABLE</th>
+<th align="center">video_info</th>
+<th align="center">postscript</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">id</td>
+<td align="center">VARCHAR(64)<br>PRIMARY KEY<br>NOT NULL</td>
+<td align="center">资源多,要长<br>主键<br>不为空</td>
+</tr>
+
+<tr>
+<td align="center">author_id</td>
+<td align="center">UNSIGNED INT</td>
+<td align="center">上传视频的用户id<br>起到外键作用, 但是是在代码逻辑中处理</td>
+</tr>
+
+<tr>
+<td align="center">name</td>
+<td align="center">TEXT</td>
+<td align="center">-</td>
+</tr>
+
+<tr>
+<td align="center">display_ctime</td>
+<td align="center">TEXT</td>
+<td align="center">展示给用户看</td>
+</tr>
+
+<tr>
+<td align="center">create_time</td>
+<td align="center">DATETIME</td>
+<td align="center">用户理解会有困难, 所以创建display_ctime</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="数据库设计-评论">数据库设计: 评论</h3>
+
+<table>
+<thead>
+<tr>
+<th align="center">TABLE</th>
+<th align="center">comments</th>
+<th align="center">postscript</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">id</td>
+<td align="center">VARCHAR(64)<br>PRIMARY KEY<br>NOT NULL</td>
+<td align="center">-<br>-<br>-</td>
+</tr>
+
+<tr>
+<td align="center">video_id</td>
+<td align="center">VARCHAR(64)</td>
+<td align="center">视频的id</td>
+</tr>
+
+<tr>
+<td align="center">author_id</td>
+<td align="center">UNSIGNED INT</td>
+<td align="center">上传视频的用户id</td>
+</tr>
+
+<tr>
+<td align="center">content</td>
+<td align="center">TEXT</td>
+<td align="center">-</td>
+</tr>
+
+<tr>
+<td align="center">time</td>
+<td align="center">DATETIME</td>
+<td align="center">-</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="数据库设计-sessions">数据库设计: sessions</h3>
+
+<table>
+<thead>
+<tr>
+<th align="center">TABLE</th>
+<th align="center">sessions</th>
+<th align="center">postscript</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">id</td>
+<td align="center">TINYTEXT<br>PRIMARY KEY<br>NOT NULL</td>
+<td align="center">用户登录是无限次的, 所以要非常大的数字<br>-<br>-</td>
+</tr>
+
+<tr>
+<td align="center">TTL</td>
+<td align="center">TINYTEXT</td>
+<td align="center">Time To Live: 过期时间</td>
+</tr>
+
+<tr>
+<td align="center">login_name</td>
+<td align="center">VARCHAR(64)</td>
+<td align="center">-</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="四张表的关系">四张表的关系</h3>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/14/16c8ec74770789e8?w=659&amp;h=700&amp;f=png&amp;s=205957" alt="四张表的关系" class="lazyload"><figcaption class="image-caption">四张表的关系</figcaption></figure>
+接下来在mysql中创建对应的表格即可:
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/14/16c8f0903b727a6e?w=705&amp;h=435&amp;f=png&amp;s=46445" alt="mysql" class="lazyload"><figcaption class="image-caption">mysql</figcaption></figure></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Chaochao Ou </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ouchaochao.github.io/post/go3_7/>https://ouchaochao.github.io/post/go3_7/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/go/">
+                    #go</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ouchaochao.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ouchaochao.github.io/post/go3_6/" class="prev" rel="prev" title="Go语言实战流媒体视频网站3_6"><i class="iconfont icon-left"></i>&nbsp;Go语言实战流媒体视频网站3_6</a>
+         
+        
+        <a href="https://ouchaochao.github.io/post/develophugo/" class="next" rel="next" title="自动部署hugo脚本">自动部署hugo脚本&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ouchaochao.github.io/">Chaochao Ou</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Chaochao Ou">
+  
+  
+  
+  <link rel="prev" href="https://ouchaochao.github.io/post/go3_1/" />
+  <link rel="next" href="https://ouchaochao.github.io/post/go3_3to3_5/" />
+  <link rel="canonical" href="https://ouchaochao.github.io/post/go3_2/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Go语言实战流媒体视频网站3_2 | LeaveIt
+       
+  </title>
+  <meta name="title" content="Go语言实战流媒体视频网站3_2 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ouchaochao.github.io\/"
+    },
+    "articleSection" : "post",
+    "name" : "Go语言实战流媒体视频网站3_2",
+    "headline" : "Go语言实战流媒体视频网站3_2",
+    "description" : "API 设计与架构 后端服务 API  REST(Representational Status Transfer) API REST是一种设计风格，不是任何架构标准 当今RESTful API通常使用HTTP作为通信协议，JSON作为数据格式  特点\n 统一接口（Uniform Interface）\x26lt;接口要统一风格\x26gt;\n 无状态（Stateless）\x26lt;我什么时候调用这个API，这个API必须返回是我想要的东西；幂等的\x26gt;\n幂等的含义： 在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同。 幂等函数，或幂等方法，是指可以使用相同参数重复执行，并能获得相同结果的函数。  可缓存（Cacheable）\x26lt;常用的\/读远大于写的数据放在缓存\x26gt;\n 分层（Layered System）\x26lt;将一个API的service分层很多层，分成很多个服务\x26gt;\n CS模式（Client-server Atchitecture）\n  API设计原则  以URL（统一资源定位符）风格设计API\n 通过不同的method（get、post、put、delete）来区分对资源的crud\n 返回码（Status Code）符合HTTP资源描述的规定\n  API设计：用户  创建（注册）用户：URL：\/user，Method：post，SC：201\/400\/500\n201：(已创建)请求成功并且服务器创建了新的资源。  用户登录：URL：\/user\/:username，Method：post， SC：200\/400\/500\n 获取用户基本信息：URL：\/user\/:username，Method：get，SC：200\/400\/401\/403\/500\n为什么多加了401和403： 对用户验证的时候，由于验证不通过而返回的错误码 401：并没有验证 403：通过验证，但是不具备操作某一项资源的权限  用户注销：URL：\/user\/:username，Method：delete， SC：204\/400\/401\/403\/500\n204：表示请求执行成功，但是没有数据，浏览器不用刷新页面.也不用导向新的页面。 用户注销后，我们不用返回任何东西，但是要表示确实注销成功了   延伸阅读： HTTP的状态码有很多种,主要有1xx（临时响应）、2xx（成功）、3xx（已重定向）、4xx（请求错误）以及5xx（服务器错误）五个大类，每个大类还对应一些具体的分类。\n百度百科状态码",
+    "inLanguage" : "zh-cn",
+    "author" : "Chaochao Ou",
+    "creator" : "Chaochao Ou",
+    "publisher": "Chaochao Ou",
+    "accountablePerson" : "Chaochao Ou",
+    "copyrightHolder" : "Chaochao Ou",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-08-06 09:43:11 \x2b0800 CST",
+    "dateModified" : "2019-08-06 09:43:11 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/go3_2\/",
+    "wordCount" : "45",
+    "keywords" : [ "go", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Go语言实战流媒体视频网站3_2</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-08-06 itemprop="datePublished">August 6, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="api-设计与架构">API 设计与架构</h2>
+
+<h3 id="后端服务">后端服务</h3>
+
+<h4 id="api">API</h4>
+
+<ol>
+<li>REST(Representational Status Transfer) API</li>
+<li>REST是一种设计风格，不是任何架构标准</li>
+<li>当今RESTful API通常使用HTTP作为通信协议，JSON作为数据格式</li>
+</ol>
+
+<p><strong>特点</strong></p>
+
+<ol>
+<li><p>统一接口（Uniform Interface）&lt;接口要统一风格&gt;</p></li>
+
+<li><p>无状态（Stateless）&lt;我什么时候调用这个API，这个API必须返回是我想要的东西；幂等的&gt;</p>
+
+<pre><code class="language-shell">幂等的含义：
+在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同。
+幂等函数，或幂等方法，是指可以使用相同参数重复执行，并能获得相同结果的函数。
+</code></pre></li>
+
+<li><p>可缓存（Cacheable）&lt;常用的/读远大于写的数据放在缓存&gt;</p></li>
+
+<li><p>分层（Layered System）&lt;将一个API的service分层很多层，分成很多个服务&gt;</p></li>
+
+<li><p>CS模式（Client-server Atchitecture）<client和server都可被替换的></p></li>
+</ol>
+
+<h4 id="api设计原则">API设计原则</h4>
+
+<ol>
+<li><p>以URL（统一资源定位符）风格设计API</p></li>
+
+<li><p>通过不同的method（get、post、put、delete）来区分对资源的crud</p></li>
+
+<li><p>返回码（Status Code）符合HTTP资源描述的规定</p></li>
+</ol>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://user-gold-cdn.xitu.io/2019/8/11/16c7f6aa582928b4?w=1008&amp;h=691&amp;f=png&amp;s=202571" alt="设计原则" class="lazyload"><figcaption class="image-caption">设计原则</figcaption></figure></p>
+
+<h4 id="api设计-用户">API设计：用户</h4>
+
+<ul>
+<li><p>创建（注册）用户：URL：/user，Method：post，SC：201/400/500</p>
+
+<pre><code class="language-shell">201：(已创建)请求成功并且服务器创建了新的资源。
+</code></pre></li>
+
+<li><p>用户登录：URL：/user/:username，Method：post， SC：200/400/500</p></li>
+
+<li><p>获取用户基本信息：URL：/user/:username，Method：get，SC：200/400/401/403/500</p>
+
+<pre><code class="language-shell">为什么多加了401和403：
+对用户验证的时候，由于验证不通过而返回的错误码
+401：并没有验证
+403：通过验证，但是不具备操作某一项资源的权限
+</code></pre></li>
+
+<li><p>用户注销：URL：/user/:username，Method：delete， SC：204/400/401/403/500</p>
+
+<pre><code class="language-shell">204：表示请求执行成功，但是没有数据，浏览器不用刷新页面.也不用导向新的页面。
+用户注销后，我们不用返回任何东西，但是要表示确实注销成功了
+</code></pre></li>
+</ul>
+
+<p><strong>延伸阅读：</strong>
+HTTP的状态码有很多种,主要有1xx（临时响应）、2xx（成功）、3xx（已重定向）、4xx（请求错误）以及5xx（服务器错误）五个大类，每个大类还对应一些具体的分类。</p>
+
+<p><a href="https://baike.baidu.com/item/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/5053660?fr=aladdin" rel="nofollow noreferrer" target="_blank">百度百科状态码</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Chaochao Ou </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ouchaochao.github.io/post/go3_2/>https://ouchaochao.github.io/post/go3_2/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/go/">
+                    #go</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ouchaochao.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ouchaochao.github.io/post/go3_1/" class="prev" rel="prev" title="Go语言实战流媒体视频网站3_1"><i class="iconfont icon-left"></i>&nbsp;Go语言实战流媒体视频网站3_1</a>
+         
+        
+        <a href="https://ouchaochao.github.io/post/go3_3to3_5/" class="next" rel="next" title="Go语言实战流媒体视频3_3至3_5">Go语言实战流媒体视频3_3至3_5&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ouchaochao.github.io/">Chaochao Ou</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

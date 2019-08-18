@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Chaochao Ou">
+  
+  
+  
+  <link rel="prev" href="https://ouchaochao.github.io/post/go1/" />
+  <link rel="next" href="https://ouchaochao.github.io/post/go2_2/" />
+  <link rel="canonical" href="https://ouchaochao.github.io/post/go2_1/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Go语言实战流媒体视频网站2_1 | LeaveIt
+       
+  </title>
+  <meta name="title" content="Go语言实战流媒体视频网站2_1 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ouchaochao.github.io\/"
+    },
+    "articleSection" : "post",
+    "name" : "Go语言实战流媒体视频网站2_1",
+    "headline" : "Go语言实战流媒体视频网站2_1",
+    "description" : "一个例子了解GO Go有如下命令：\nGo is a tool for managing Go source code. Usage: go \x26lt;command\x26gt; [arguments] The commands are: bug start a bug report build compile packages and dependencies clean remove object files and cached files doc show documentation for package or symbol env print Go environment information fix update packages to use new APIs fmt gofmt (reformat) package sources generate generate Go files by processing source get download and install packages and dependencies install compile and install packages and dependencies list list packages or modules mod module maintenance run compile and run Go program test test packages tool run specified go tool version print Go version vet report likely mistakes in packages  下面介绍一下常用的命令：",
+    "inLanguage" : "zh-cn",
+    "author" : "Chaochao Ou",
+    "creator" : "Chaochao Ou",
+    "publisher": "Chaochao Ou",
+    "accountablePerson" : "Chaochao Ou",
+    "copyrightHolder" : "Chaochao Ou",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-08-02 09:34:41 \x2b0800 CST",
+    "dateModified" : "2019-08-02 09:34:41 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/go2_1\/",
+    "wordCount" : "248",
+    "keywords" : [ "go", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Go语言实战流媒体视频网站2_1</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-08-02 itemprop="datePublished">August 2, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="一个例子了解go">一个例子了解GO</h2>
+
+<p>Go有如下命令：</p>
+
+<pre><code>Go is a tool for managing Go source code.
+
+Usage:
+
+	go &lt;command&gt; [arguments]
+
+The commands are:
+
+	bug         start a bug report
+	build       compile packages and dependencies
+	clean       remove object files and cached files
+	doc         show documentation for package or symbol
+	env         print Go environment information
+	fix         update packages to use new APIs
+	fmt         gofmt (reformat) package sources
+	generate    generate Go files by processing source
+	get         download and install packages and dependencies
+	install     compile and install packages and dependencies
+	list        list packages or modules
+	mod         module maintenance
+	run         compile and run Go program
+	test        test packages
+	tool        run specified go tool
+	version     print Go version
+	vet         report likely mistakes in packages
+
+</code></pre>
+
+<p>下面介绍一下常用的命令：</p>
+
+<pre><code>build       compile packages and dependencies
+最常用的go command之一，编译go文件
+
+跨平台编译： env  GOOS=linux GOARCH=ARM64 go build
+GOOS：目标操作系统
+GOARCH：目标kernel
+</code></pre>
+
+<pre><code>install     compile and install packages and dependencies
+也是编译，与build最大的区别是编译后会将输出文件打包成库放在pkg下
+常用于本地打包编译的命令：go install
+</code></pre>
+
+<pre><code>get         download and install packages and dependencies
+用于获取go的第三方包，通常默认获取git repo上pull最新的版本
+常用命令如下：go get -u github.com/go-sql-driver/mysql (从GitHub上获取mysql的driver并安装到本地， -u表示下载最新的)
+</code></pre>
+
+<pre><code>fmt         gofmt (reformat) package sources
+统一代码风格和排版
+常用命令：go fmt
+</code></pre>
+
+<pre><code>test        test packages
+运行当前包目录下的tests
+常用命令：
+	go test: 打印测试结果
+	go test -v: 打印测试过程和结果
+
+测试文件命名
+/* main.go
+/* main_test.go
+test一般以XXX_test.go为文件名，后缀_test.go不要写错了，否则会报错
+</code></pre>
+
+<p>下面举例子说明：main.go</p>
+
+<pre><code class="language-go">package main
+
+import (
+  &quot;io&quot;
+  &quot;net/http&quot;
+)
+
+func Print1to20() int {
+  res := 0
+  for i := 1; i &lt;= 20; i++{
+    res += i
+  }
+  return res
+}
+
+func firstPage(w http.ResponseWriter, r *http.Request){
+  io.WriteString(w, &quot;&lt;h1&gt;Hi, lady-killer!&lt;/h1&gt;&quot;)
+}
+
+func main(){
+  http.HandleFunc(&quot;/&quot;, firstPage)
+  http.ListenAndServe(&quot;:8000&quot;, nil)
+}
+</code></pre>
+
+<p>main_test.go</p>
+
+<pre><code class="language-go">package main
+
+import (
+  &quot;testing&quot;
+  &quot;fmt&quot;
+)
+
+func TestPrint(t *testing.T){
+  res := Print1to20()
+  fmt.Println(&quot;testing&quot;)
+  if res != 210{
+    t.Errorf(&quot;Result Worng!&quot;)
+  }
+}
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Chaochao Ou </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ouchaochao.github.io/post/go2_1/>https://ouchaochao.github.io/post/go2_1/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/go/">
+                    #go</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ouchaochao.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ouchaochao.github.io/post/go1/" class="prev" rel="prev" title="Go语言实战流媒体视频网站1"><i class="iconfont icon-left"></i>&nbsp;Go语言实战流媒体视频网站1</a>
+         
+        
+        <a href="https://ouchaochao.github.io/post/go2_2/" class="next" rel="next" title="Go语言实战流媒体视频网站2_2">Go语言实战流媒体视频网站2_2&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ouchaochao.github.io/">Chaochao Ou</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

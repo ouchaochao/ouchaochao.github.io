@@ -13,10 +13,10 @@
     
     <item>
       <title>Go自动化部署项目</title>
-      <link>https://ouchaochao.github.io/post/go%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/</link>
+      <link>https://ouchaochao.github.io/post/developgo/</link>
       <pubDate>Sun, 18 Aug 2019 20:14:36 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/</guid>
+      <guid>https://ouchaochao.github.io/post/developgo/</guid>
       <description>趁着有点时间学了一下DevOps和云计算初识, 发现一个以前没想到过的点 &amp;ndash; 自动化部署项目.
 这个项目是用Go写的, 大致的过程如下:
 1. 在本地写完代码之后, git push到github上 2. github里的Webhooks会被触发, 进而会访问一个设定好的网站 3. 这个网站就是DeployServer, 它会从github里git pull你刚push的代码 4. 代码返回到服务器 5. DeployServer停掉旧版本的WebServer, 然后运行最新的Webserver代码 6. 完成更新, 浏览器打开WebServer的网址就能访问最新的网页  下面是Webhooks的示意图:
@@ -25,10 +25,10 @@
     
     <item>
       <title>Go语言实战流媒体视频网站3_7</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_7/</link>
+      <link>https://ouchaochao.github.io/post/go3_7/</link>
       <pubDate>Fri, 09 Aug 2019 09:21:36 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_7/</guid>
+      <guid>https://ouchaochao.github.io/post/go3_7/</guid>
       <description>api数据库层设计 数据库设计: 用户    TABLE users postscript     id UNSIGNED INT
 PRIMARY KEY
 AUTO_INCREMENT 用户不可见
@@ -45,10 +45,10 @@ NOT NULL 资源多,要长
     
     <item>
       <title>Go语言实战流媒体视频网站3_6</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_6/</link>
+      <link>https://ouchaochao.github.io/post/go3_6/</link>
       <pubDate>Thu, 08 Aug 2019 09:04:33 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_6/</guid>
+      <guid>https://ouchaochao.github.io/post/go3_6/</guid>
       <description>api之http handler层 总览: api │ handlers.go │ main.go │ response.go │ ├─dbops │ api.go │ └─defs apidef.go errs.go  流程:
 handler-&amp;gt;validation{1.request, 2.user}-&amp;gt;business logic-&amp;gt;response 1. data model. 2. error handing.
 handler.go会调用dbops, 拿到它想要的东西, 然后做进一步处理, 处理包括消息/信息的定义, 然后将它们一起组装成response, 最后调取response.go, response返回结果到handler.go, 最后输出.
@@ -57,10 +57,10 @@ handlers.go package main import ( &amp;quot;github.com/julienschmidt/httprouter&
     
     <item>
       <title>Go语言实战流媒体视频3_3至3_5</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%913_3%E8%87%B33_5/</link>
+      <link>https://ouchaochao.github.io/post/go3_3to3_5/</link>
       <pubDate>Wed, 07 Aug 2019 09:41:54 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%913_3%E8%87%B33_5/</guid>
+      <guid>https://ouchaochao.github.io/post/go3_3to3_5/</guid>
       <description>API实现之详细设计 在项目开始之前，首先把GOPATH的路径明确好，输入：
 go env 可以得到： ··· GOPATH=&amp;quot;/Users/ouchaochao/go&amp;quot; ···  在这个路径下，新建文件夹： /Users/ouchaochao/go/src/ouchaochao.cn/video/api
 api项目结构如下 api ├── auth.go ├── dbops # 与数据库交互部分 │ ├── api.go │ ├── api_test.go │ ├── conn.go │ └── internal.go ├── defs # 配置、定义等 │ ├── apidef.go │ └── errs.go ├── handlers.go # 逻辑处理的放在这 ├── main.go # 放一些简单的定义性的东西 ├── response.go ├── session │ └── ops.go └── utils └── uuid.go  在编辑.go文件之前，先把依赖装好，如：
@@ -69,10 +69,10 @@ go get github.com/julienschmidt/httprouter  编辑main.go package main import ( 
     
     <item>
       <title>Go语言实战流媒体视频网站3_2</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_2/</link>
+      <link>https://ouchaochao.github.io/post/go3_2/</link>
       <pubDate>Tue, 06 Aug 2019 09:43:11 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_2/</guid>
+      <guid>https://ouchaochao.github.io/post/go3_2/</guid>
       <description>API 设计与架构 后端服务 API  REST(Representational Status Transfer) API REST是一种设计风格，不是任何架构标准 当今RESTful API通常使用HTTP作为通信协议，JSON作为数据格式  特点
  统一接口（Uniform Interface）&amp;lt;接口要统一风格&amp;gt;
  无状态（Stateless）&amp;lt;我什么时候调用这个API，这个API必须返回是我想要的东西；幂等的&amp;gt;
@@ -92,19 +92,19 @@ go get github.com/julienschmidt/httprouter  编辑main.go package main import ( 
     
     <item>
       <title>Go语言实战流媒体视频网站3_1</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_1/</link>
+      <link>https://ouchaochao.github.io/post/go3_1/</link>
       <pubDate>Mon, 05 Aug 2019 09:36:59 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%993_1/</guid>
+      <guid>https://ouchaochao.github.io/post/go3_1/</guid>
       <description> 流媒体网站整体介绍与架构梳理 为什么选择做视频网站  GO是一门网络编程语言 视频网站包含GO在实战项目中的绝大部分技能要点 优良的native http库以及模板引擎（无需任何第三方框架）  总体架构 什么是前后端解耦  前后端解耦是时下流行的web网站架构 前端页面和服务通过普通的web引擎渲染 后端数据通过渲染后的页面脚本调用后处理和呈现  前后端解耦的优势  解放生产力，提高合作效率 松耦合的架构更灵活，部署更方便，更符合微服务的设计的特征 性能的提升，提升可靠性  前后端解耦的劣势  工作量大 前后端分离带来的团队成本以及学习成本 系统复杂度加大  </description>
     </item>
     
     <item>
       <title>Go语言实战流媒体视频网站2_3</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_3/</link>
+      <link>https://ouchaochao.github.io/post/go2_3/</link>
       <pubDate>Sun, 04 Aug 2019 09:36:25 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_3/</guid>
+      <guid>https://ouchaochao.github.io/post/go2_3/</guid>
       <description> benchmark的写法  benchmark函数一般以Benchmark开头 benchmark的case一般会跑b.N次，而且每次执行都会如此 在执行过程中go会根据实际case的执行时间是否稳定来决定b.N的次数，最后达到稳态  下面举栗子：（在main_test.go中加入以下代码）
 package main import ( &amp;quot;testing&amp;quot; ) func BenchmarkAll(b *testing.B){ for n := 0; n &amp;lt; b.N; n++{ Print1to20() } }  命令行输入：
 go test -bench=.  注意：
@@ -114,10 +114,10 @@ func aaa(n int)int{ for n &amp;gt; 0{ n-- } return n } func BenchmarkAll(b *test
     
     <item>
       <title>Go语言实战流媒体视频网站2_2</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_2/</link>
+      <link>https://ouchaochao.github.io/post/go2_2/</link>
       <pubDate>Sat, 03 Aug 2019 09:35:52 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_2/</guid>
+      <guid>https://ouchaochao.github.io/post/go2_2/</guid>
       <description>golang项目中test的写法 main_test.go文件
 package main import ( &amp;quot;testing&amp;quot; &amp;quot;fmt&amp;quot; ) func TestPrint(t *testing.T){ res := Print1to20() fmt.Println(&amp;quot;testing&amp;quot;) if res != 210{ t.Errorf(&amp;quot;Result Worng!&amp;quot;) } }  Test注意要点:
  每个test文件必须import一个testing test文件下的每一个test case均须以Test开头并且符合TestXxx形式，否则go test会直接跳过测试不执行 test case的入参为t *testing.T或者b *testing.B t.Errorf为打印错误信息，并且当前test case会被跳过 t.SkipNow()为跳过当前test，并且直接按PASS处理继续下一个test，例子如下：
@@ -128,20 +128,20 @@ package main import ( &amp;quot;testing&amp;quot; &amp;quot;fmt&amp;quot; ) func
     
     <item>
       <title>Go语言实战流媒体视频网站2_1</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_1/</link>
+      <link>https://ouchaochao.github.io/post/go2_1/</link>
       <pubDate>Fri, 02 Aug 2019 09:34:41 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%992_1/</guid>
+      <guid>https://ouchaochao.github.io/post/go2_1/</guid>
       <description>一个例子了解GO Go有如下命令：
 Go is a tool for managing Go source code. Usage: go &amp;lt;command&amp;gt; [arguments] The commands are: bug start a bug report build compile packages and dependencies clean remove object files and cached files doc show documentation for package or symbol env print Go environment information fix update packages to use new APIs fmt gofmt (reformat) package sources generate generate Go files by processing source get download and install packages and dependencies install compile and install packages and dependencies list list packages or modules mod module maintenance run compile and run Go program test test packages tool run specified go tool version print Go version vet report likely mistakes in packages  下面介绍一下常用的命令：</description>
     </item>
     
     <item>
       <title>Go语言实战流媒体视频网站1</title>
-      <link>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%991/</link>
+      <link>https://ouchaochao.github.io/post/go1/</link>
       <pubDate>Thu, 01 Aug 2019 09:34:41 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go%E8%AF%AD%E8%A8%80%E5%AE%9E%E6%88%98%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%991/</guid>
+      <guid>https://ouchaochao.github.io/post/go1/</guid>
       <description>本系列将记录在慕课学习Go做流媒体视频网站的过程。 第一节就用一张图来概括了：</description>
     </item>
     
