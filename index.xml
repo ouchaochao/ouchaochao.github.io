@@ -18,7 +18,7 @@
 
 &lt;p&gt;这个项目是用Go写的, 大致的过程如下:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;1. 在本地写完代码之后, git push到github上
+&lt;pre&gt;&lt;code&gt;1. 在本地写完代码之后, git push到github上
 2. github里的Webhooks会被触发, 进而会访问一个设定好的网站
 3. 这个网站就是DeployServer, 它会从github里git pull你刚push的代码
 4. 代码返回到服务器
@@ -151,7 +151,7 @@ docker push ouchaochao/hello-world:latest
 
 &lt;p&gt;首先明确一下概念:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;run:执行命令并创建新的 image layer
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;run:执行命令并创建新的 image layer
 cmd:设置容器启动后默认执行的命令和参数
 entrypoint:设置容器启动时运行的命令
 &lt;/code&gt;&lt;/pre&gt;
@@ -159,7 +159,7 @@ entrypoint:设置容器启动时运行的命令
 &lt;p&gt;在介绍cmd和entrypoint之前,先了解一下shell和exec格式:
 - shell:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;FROM centos
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;FROM centos
 RUN apt-get install -y vim
 ENV name docker
 CMD echo &amp;quot;hello docker&amp;quot;
@@ -169,7 +169,7 @@ ENTRYPOINT echo &amp;quot;hello $name &amp;quot;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;exec&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;FROM centos  
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;FROM centos  
 RUN [&amp;quot;apt-get&amp;quot;, &amp;quot;install&amp;quot;, &amp;quot;-y&amp;quot;, &amp;quot;vim&amp;quot;]
 ENV name docker
 CMD [&amp;quot;/bin/echo&amp;quot;, &amp;quot;hello docker&amp;quot;]
@@ -178,7 +178,7 @@ ENTRYPOINT [&amp;quot;/bin/bash&amp;quot;,&amp;quot;-c&amp;quot;,  &amp;quot;ech
 
 &lt;li&gt;&lt;p&gt;build一个docker&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cd somefile
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;cd somefile
 docker build -t cc/xxx .
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -186,19 +186,19 @@ docker build -t cc/xxx .
 
 &lt;p&gt;容器启动时默认执行的命令&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;FROM centos
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;FROM centos
 ENV name docker
 CMD echo &amp;quot;hello $name&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;情况一：如果docker run指定了其它命令，CMD命令被忽略&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker run -it [image] /bin/bsh
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker run -it [image] /bin/bsh
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;情况二：如果定义了多个CMD，只有最后一个执行&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;...
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;...
 CMD echo &amp;quot;hello ab&amp;quot;
 CMD echo &amp;quot;hello $name&amp;quot;  # 只执行这个
 &lt;/code&gt;&lt;/pre&gt;
@@ -209,7 +209,7 @@ CMD echo &amp;quot;hello $name&amp;quot;  # 只执行这个
 特点：不会被忽略，一定执行
 最佳实践：写一个shell脚本作为entrypoint&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;COPY docker-entrypoint.sh /usr/local/bin
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;COPY docker-entrypoint.sh /usr/local/bin
 ENTRYPOINT [&amp;quot;docker-entrypoint.sh&amp;quot;]
 EXPOSE 27017
 CMD [&amp;quot;mongoDB&amp;quot;]
@@ -508,7 +508,7 @@ $ docker run cc/halo
       <guid>https://ouchaochao.github.io/post/develophugo/</guid>
       <description>&lt;p&gt;写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;#!/bin/sh
+&lt;pre&gt;&lt;code&gt;#!/bin/sh
 input = &amp;quot;&amp;quot;
 
 function list(){
@@ -596,7 +596,7 @@ fi
 
 &lt;p&gt;目录结构如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;myblog
+&lt;pre&gt;&lt;code&gt;myblog
 ├── archetypes
 ├── config.toml
 ├── content
@@ -613,7 +613,7 @@ fi
 
 &lt;p&gt;&lt;strong&gt;新建&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;myblog ./new.sh
+&lt;pre&gt;&lt;code&gt;myblog ./new.sh
 ./new.sh: line 2: input: command not found
 请输入序号：
 	1.新建post
@@ -627,7 +627,7 @@ test
 
 &lt;p&gt;接着就是在vim中编辑Markdown文件了，保存退出后会自动部署到github上&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;/Users/ouchaochao/myblog/content/post/test.md created
+&lt;pre&gt;&lt;code&gt;/Users/ouchaochao/myblog/content/post/test.md created
 Building sites … WARN 2019/08/18 19:16:54 Page&#39;s .URL is deprecated and will be removed in a future release. Use .Permalink or .RelPermalink. If what you want is the front matter URL value, use .Params.url.
 WARN 2019/08/18 19:16:54 Page&#39;s .RSSLink is deprecated and will be removed in a future release. Use the Output Format&#39;s link, e.g. something like: 
     {{ with .OutputFormats.Get &amp;quot;RSS&amp;quot; }}{{ .RelPermalink }}{{ end }}.

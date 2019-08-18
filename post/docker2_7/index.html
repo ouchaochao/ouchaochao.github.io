@@ -140,7 +140,7 @@
 
 <p>首先明确一下概念:</p>
 
-<pre><code>run:执行命令并创建新的 image layer
+<pre><code class="language-shell">run:执行命令并创建新的 image layer
 cmd:设置容器启动后默认执行的命令和参数
 entrypoint:设置容器启动时运行的命令
 </code></pre>
@@ -148,7 +148,7 @@ entrypoint:设置容器启动时运行的命令
 <p>在介绍cmd和entrypoint之前,先了解一下shell和exec格式:
 - shell:</p>
 
-<pre><code>FROM centos
+<pre><code class="language-shell">FROM centos
 RUN apt-get install -y vim
 ENV name docker
 CMD echo &quot;hello docker&quot;
@@ -158,7 +158,7 @@ ENTRYPOINT echo &quot;hello $name &quot;
 <ul>
 <li><p>exec</p>
 
-<pre><code>FROM centos  
+<pre><code class="language-shell">FROM centos  
 RUN [&quot;apt-get&quot;, &quot;install&quot;, &quot;-y&quot;, &quot;vim&quot;]
 ENV name docker
 CMD [&quot;/bin/echo&quot;, &quot;hello docker&quot;]
@@ -167,7 +167,7 @@ ENTRYPOINT [&quot;/bin/bash&quot;,&quot;-c&quot;,  &quot;echo hello $name &quot;
 
 <li><p>build一个docker</p>
 
-<pre><code>cd somefile
+<pre><code class="language-shell">cd somefile
 docker build -t cc/xxx .
 </code></pre>
 
@@ -175,19 +175,19 @@ docker build -t cc/xxx .
 
 <p>容器启动时默认执行的命令</p>
 
-<pre><code>FROM centos
+<pre><code class="language-shell">FROM centos
 ENV name docker
 CMD echo &quot;hello $name&quot;
 </code></pre>
 
 <p>情况一：如果docker run指定了其它命令，CMD命令被忽略</p>
 
-<pre><code>docker run -it [image] /bin/bsh
+<pre><code class="language-shell">docker run -it [image] /bin/bsh
 </code></pre>
 
 <p>情况二：如果定义了多个CMD，只有最后一个执行</p>
 
-<pre><code>...
+<pre><code class="language-shell">...
 CMD echo &quot;hello ab&quot;
 CMD echo &quot;hello $name&quot;  # 只执行这个
 </code></pre>
@@ -198,7 +198,7 @@ CMD echo &quot;hello $name&quot;  # 只执行这个
 特点：不会被忽略，一定执行
 最佳实践：写一个shell脚本作为entrypoint</p>
 
-<pre><code>COPY docker-entrypoint.sh /usr/local/bin
+<pre><code class="language-shell">COPY docker-entrypoint.sh /usr/local/bin
 ENTRYPOINT [&quot;docker-entrypoint.sh&quot;]
 EXPOSE 27017
 CMD [&quot;mongoDB&quot;]
