@@ -46,7 +46,7 @@
     "articleSection" : "post",
     "name" : "系统学习Docker践行DevOps理念2_7",
     "headline" : "系统学习Docker践行DevOps理念2_7",
-    "description" : "run-vs-cmd-vs-entrypoint 首先明确一下概念:\nrun:执行命令并创建新的 image layer cmd:设置容器启动后默认执行的命令和参数 entrypoint:设置容器启动时运行的命令  在介绍cmd和entrypoint之前,先了解一下shell和exec格式: - shell:\nFROM centos RUN apt-get install -y vim ENV name docker CMD echo \x26quot;hello docker\x26quot; ENTRYPOINT echo \x26quot;hello $name \x26quot;   exec\nFROM centos RUN [\x26quot;apt-get\x26quot;, \x26quot;install\x26quot;, \x26quot;-y\x26quot;, \x26quot;vim\x26quot;] ENV name docker CMD [\x26quot;\/bin\/echo\x26quot;, \x26quot;hello docker\x26quot;] ENTRYPOINT [\x26quot;\/bin\/bash\x26quot;,\x26quot;-c\x26quot;, \x26quot;echo hello $name \x26quot;]  build一个docker\ncd somefile docker build -t cc\/xxx .  CMD 容器启动时默认执行的命令\nFROM centos ENV name docker CMD echo \x26quot;hello $name\x26quot;  情况一：如果docker run指定了其它命令，CMD命令被忽略",
+    "description" : "run-vs-cmd-vs-entrypoint 首先明确一下概念:\nrun:执行命令并创建新的 image layer cmd:设置容器启动后默认执行的命令和参数 entrypoint:设置容器启动时运行的命令  在介绍cmd和entrypoint之前,先了解一下shell和exec格式:\n shell:\nFROM centos RUN apt-get install -y vim ENV name docker CMD echo \x26quot;hello docker\x26quot; ENTRYPOINT echo \x26quot;hello $name \x26quot;  exec\nFROM centos RUN [\x26quot;apt-get\x26quot;, \x26quot;install\x26quot;, \x26quot;-y\x26quot;, \x26quot;vim\x26quot;] ENV name docker CMD [\x26quot;\/bin\/echo\x26quot;, \x26quot;hello docker\x26quot;] ENTRYPOINT [\x26quot;\/bin\/bash\x26quot;,\x26quot;-c\x26quot;, \x26quot;echo hello $name \x26quot;]  build一个docker\ncd somefile docker build -t cc\/xxx .  CMD 容器启动时默认执行的命令\nFROM centos ENV name docker CMD echo \x26quot;hello $name\x26quot;  情况一：如果docker run指定了其它命令，CMD命令被忽略",
     "inLanguage" : "zh-cn",
     "author" : "Chaochao Ou",
     "creator" : "Chaochao Ou",
@@ -57,7 +57,7 @@
     "datePublished": "2019-08-18 20:12:15 \x2b0800 CST",
     "dateModified" : "2019-08-18 20:12:15 \x2b0800 CST",
     "url" : "https:\/\/ouchaochao.github.io\/post\/docker2_7\/",
-    "wordCount" : "101",
+    "wordCount" : "100",
     "keywords" : [ "docker", "LeaveIt"]
 }
 </script>
@@ -145,17 +145,18 @@ cmd:设置容器启动后默认执行的命令和参数
 entrypoint:设置容器启动时运行的命令
 </code></pre>
 
-<p>在介绍cmd和entrypoint之前,先了解一下shell和exec格式:
-- shell:</p>
+<p>在介绍cmd和entrypoint之前,先了解一下shell和exec格式:</p>
+
+<ul>
+<li><p>shell:</p>
 
 <pre><code class="language-shell">FROM centos
 RUN apt-get install -y vim
 ENV name docker
 CMD echo &quot;hello docker&quot;
 ENTRYPOINT echo &quot;hello $name &quot;
-</code></pre>
+</code></pre></li>
 
-<ul>
 <li><p>exec</p>
 
 <pre><code class="language-shell">FROM centos  

@@ -140,7 +140,7 @@
 
 <h3 id="from-从哪里构建image">FROM：从哪里构建image</h3>
 
-<pre><code>FROM scratch # 制作base image
+<pre><code class="language-shell">FROM scratch # 制作base image
 FROM centos # 使用base image
 FROM ubuntu:18.04
 </code></pre>
@@ -149,7 +149,7 @@ FROM ubuntu:18.04
 
 <h3 id="label-标签">LABEL：标签</h3>
 
-<pre><code>LABEL maintainer=&quot;abc@gmail.com&quot;
+<pre><code class="language-shell">LABEL maintainer=&quot;abc@gmail.com&quot;
 LABEL version=&quot;1.1&quot;
 LABEL description=&quot;This is description&quot;
 </code></pre>
@@ -160,7 +160,7 @@ LABEL description=&quot;This is description&quot;
 
 <p>为了美观，复杂的RUN请用反斜线换行，避免无用分层，合并多条命令成一行</p>
 
-<pre><code>RUN yum update &amp;&amp; yum install -y vim \
+<pre><code class="language-shell">RUN yum update &amp;&amp; yum install -y vim \
     python-dev # 反斜线换行
 RUN apt-get update &amp;&amp; apt-get install -y perl\
     pwgen --no-install-recommends &amp;&amp; rm -rf \
@@ -171,7 +171,7 @@ RUN /bin/bash -c 'source $HOME/.bashrc; echo
 
 <h3 id="workdir-设定当前工作目录">WORKDIR：设定当前工作目录</h3>
 
-<pre><code>WORKDIR /root
+<pre><code class="language-shell">WORKDIR /root
 WORKDIR /test # 如果没有，会自动创建的
 WORKDIR demo
 RUN pwd # 输出结果应该是 /test/demo
@@ -181,17 +181,17 @@ RUN pwd # 输出结果应该是 /test/demo
 
 <h3 id="add和copy">ADD和COPY</h3>
 
-<pre><code>ADD hello /
+<pre><code class="language-shell">ADD hello /
 </code></pre>
 
-<pre><code>ADD test.tar.gz # 添加到根目录并解压
+<pre><code class="language-shell">ADD test.tar.gz # 添加到根目录并解压
 </code></pre>
 
-<pre><code>WORKDIR /root
+<pre><code class="language-shell">WORKDIR /root
 ADD hello test # /root/test/hello
 </code></pre>
 
-<pre><code>WORKDIR /root
+<pre><code class="language-shell">WORKDIR /root
 COPY hello test # /root/test/hello
 </code></pre>
 
@@ -203,7 +203,7 @@ add除了copy功能外，还附带解压缩
 
 <p>env可增加可维护性</p>
 
-<pre><code>ENV MYSQL_VERSION 5.6
+<pre><code class="language-shell">ENV MYSQL_VERSION 5.6
 RUN apt-get install -y mysql-server= &quot;${MYSQL_VERSION}&quot; \
 &amp;&amp; rm -rf /var/lib/apt/lists/* # 引用常量
 </code></pre>

@@ -18,7 +18,7 @@
 
 &lt;p&gt;这个项目是用Go写的, 大致的过程如下:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;1. 在本地写完代码之后, git push到github上
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;1. 在本地写完代码之后, git push到github上
 2. github里的Webhooks会被触发, 进而会访问一个设定好的网站
 3. 这个网站就是DeployServer, 它会从github里git pull你刚push的代码
 4. 代码返回到服务器
@@ -156,17 +156,18 @@ cmd:设置容器启动后默认执行的命令和参数
 entrypoint:设置容器启动时运行的命令
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;在介绍cmd和entrypoint之前,先了解一下shell和exec格式:
-- shell:&lt;/p&gt;
+&lt;p&gt;在介绍cmd和entrypoint之前,先了解一下shell和exec格式:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;shell:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;FROM centos
 RUN apt-get install -y vim
 ENV name docker
 CMD echo &amp;quot;hello docker&amp;quot;
 ENTRYPOINT echo &amp;quot;hello $name &amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 
-&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;exec&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;FROM centos  
@@ -230,7 +231,7 @@ CMD [&amp;quot;mongoDB&amp;quot;]
 
 &lt;h3 id=&#34;from-从哪里构建image&#34;&gt;FROM：从哪里构建image&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;FROM scratch # 制作base image
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;FROM scratch # 制作base image
 FROM centos # 使用base image
 FROM ubuntu:18.04
 &lt;/code&gt;&lt;/pre&gt;
@@ -239,7 +240,7 @@ FROM ubuntu:18.04
 
 &lt;h3 id=&#34;label-标签&#34;&gt;LABEL：标签&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;LABEL maintainer=&amp;quot;abc@gmail.com&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;LABEL maintainer=&amp;quot;abc@gmail.com&amp;quot;
 LABEL version=&amp;quot;1.1&amp;quot;
 LABEL description=&amp;quot;This is description&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
@@ -250,7 +251,7 @@ LABEL description=&amp;quot;This is description&amp;quot;
 
 &lt;p&gt;为了美观，复杂的RUN请用反斜线换行，避免无用分层，合并多条命令成一行&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;RUN yum update &amp;amp;&amp;amp; yum install -y vim \
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;RUN yum update &amp;amp;&amp;amp; yum install -y vim \
     python-dev # 反斜线换行
 RUN apt-get update &amp;amp;&amp;amp; apt-get install -y perl\
     pwgen --no-install-recommends &amp;amp;&amp;amp; rm -rf \
@@ -261,7 +262,7 @@ RUN /bin/bash -c &#39;source $HOME/.bashrc; echo
 
 &lt;h3 id=&#34;workdir-设定当前工作目录&#34;&gt;WORKDIR：设定当前工作目录&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;WORKDIR /root
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;WORKDIR /root
 WORKDIR /test # 如果没有，会自动创建的
 WORKDIR demo
 RUN pwd # 输出结果应该是 /test/demo
@@ -271,17 +272,17 @@ RUN pwd # 输出结果应该是 /test/demo
 
 &lt;h3 id=&#34;add和copy&#34;&gt;ADD和COPY&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;ADD hello /
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ADD hello /
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;ADD test.tar.gz # 添加到根目录并解压
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ADD test.tar.gz # 添加到根目录并解压
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;WORKDIR /root
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;WORKDIR /root
 ADD hello test # /root/test/hello
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;WORKDIR /root
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;WORKDIR /root
 COPY hello test # /root/test/hello
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -293,7 +294,7 @@ add除了copy功能外，还附带解压缩
 
 &lt;p&gt;env可增加可维护性&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;ENV MYSQL_VERSION 5.6
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;ENV MYSQL_VERSION 5.6
 RUN apt-get install -y mysql-server= &amp;quot;${MYSQL_VERSION}&amp;quot; \
 &amp;amp;&amp;amp; rm -rf /var/lib/apt/lists/* # 引用常量
 &lt;/code&gt;&lt;/pre&gt;
@@ -314,14 +315,14 @@ RUN apt-get install -y mysql-server= &amp;quot;${MYSQL_VERSION}&amp;quot; \
 
 &lt;h3 id=&#34;把一个container-commit成自己的&#34;&gt;把一个Container commit成自己的&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;$ docker run -it centos
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ docker run -it centos
 $ yum install -y vim
 $ docker commit container_name cc/centos-vim
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;用dockerfile构建-推荐&#34;&gt;用dockerfile构建（推荐）&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;$ mkdir centos-vim 
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ mkdir centos-vim 
 $ cd centos-vim
 $ vim Dockerfile
 
@@ -352,13 +353,13 @@ $ docker build -t cc/centos-vim .
 
 &lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/8/16c70b0c5a75287f?w=566&amp;amp;h=348&amp;amp;f=png&amp;amp;s=90105&#34; alt=&#34;image-20190803235435593.png&#34; /&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;# docker交互 -it
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# docker交互 -it
 docker run -it centos
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;docker-的一些命令&#34;&gt;Docker 的一些命令&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;docker --help
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker --help
 docker container --help
 &lt;/code&gt;&lt;/pre&gt;
 </description>
@@ -374,7 +375,7 @@ docker container --help
 
 &lt;h2 id=&#34;diy-base-image&#34;&gt;DIY-Base-Image&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;# 将docker加入管理员，以后使用docker不用再加sudo
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# 将docker加入管理员，以后使用docker不用再加sudo
 $ sudo groupadd docker
 $ sudo gpasswd -a username docker
 # 完成后重启命令行
@@ -382,7 +383,7 @@ $ sudo gpasswd -a username docker
 
 &lt;p&gt;接下来建立自己的docker&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ mkdir halo
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ mkdir halo
 $ cd halo
 $ vim halo.c
 
@@ -508,7 +509,7 @@ $ docker run cc/halo
       <guid>https://ouchaochao.github.io/post/develophugo/</guid>
       <description>&lt;p&gt;写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;#!/bin/sh
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;#!/bin/sh
 input = &amp;quot;&amp;quot;
 
 function list(){
@@ -596,7 +597,7 @@ fi
 
 &lt;p&gt;目录结构如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;myblog
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;myblog
 ├── archetypes
 ├── config.toml
 ├── content
@@ -613,7 +614,7 @@ fi
 
 &lt;p&gt;&lt;strong&gt;新建&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;myblog ./new.sh
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;myblog ./new.sh
 ./new.sh: line 2: input: command not found
 请输入序号：
 	1.新建post
@@ -627,7 +628,7 @@ test
 
 &lt;p&gt;接着就是在vim中编辑Markdown文件了，保存退出后会自动部署到github上&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;/Users/ouchaochao/myblog/content/post/test.md created
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;/Users/ouchaochao/myblog/content/post/test.md created
 Building sites … WARN 2019/08/18 19:16:54 Page&#39;s .URL is deprecated and will be removed in a future release. Use .Permalink or .RelPermalink. If what you want is the front matter URL value, use .Params.url.
 WARN 2019/08/18 19:16:54 Page&#39;s .RSSLink is deprecated and will be removed in a future release. Use the Output Format&#39;s link, e.g. something like: 
     {{ with .OutputFormats.Get &amp;quot;RSS&amp;quot; }}{{ .RelPermalink }}{{ end }}.

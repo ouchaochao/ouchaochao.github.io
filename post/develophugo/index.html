@@ -136,7 +136,7 @@
 
           <p>写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：</p>
 
-<pre><code>#!/bin/sh
+<pre><code class="language-shell">#!/bin/sh
 input = &quot;&quot;
 
 function list(){
@@ -224,7 +224,7 @@ fi
 
 <p>目录结构如下：</p>
 
-<pre><code>myblog
+<pre><code class="language-shell">myblog
 ├── archetypes
 ├── config.toml
 ├── content
@@ -241,7 +241,7 @@ fi
 
 <p><strong>新建</strong></p>
 
-<pre><code>myblog ./new.sh
+<pre><code class="language-shell">myblog ./new.sh
 ./new.sh: line 2: input: command not found
 请输入序号：
 	1.新建post
@@ -255,7 +255,7 @@ test
 
 <p>接着就是在vim中编辑Markdown文件了，保存退出后会自动部署到github上</p>
 
-<pre><code>/Users/ouchaochao/myblog/content/post/test.md created
+<pre><code class="language-shell">/Users/ouchaochao/myblog/content/post/test.md created
 Building sites … WARN 2019/08/18 19:16:54 Page's .URL is deprecated and will be removed in a future release. Use .Permalink or .RelPermalink. If what you want is the front matter URL value, use .Params.url.
 WARN 2019/08/18 19:16:54 Page's .RSSLink is deprecated and will be removed in a future release. Use the Output Format's link, e.g. something like: 
     {{ with .OutputFormats.Get &quot;RSS&quot; }}{{ .RelPermalink }}{{ end }}.

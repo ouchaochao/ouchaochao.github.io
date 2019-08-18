@@ -140,7 +140,7 @@
 
 <p>Go有如下命令：</p>
 
-<pre><code>Go is a tool for managing Go source code.
+<pre><code class="language-shell">Go is a tool for managing Go source code.
 
 Usage:
 
@@ -170,7 +170,7 @@ The commands are:
 
 <p>下面介绍一下常用的命令：</p>
 
-<pre><code>build       compile packages and dependencies
+<pre><code class="language-shell">build       compile packages and dependencies
 最常用的go command之一，编译go文件
 
 跨平台编译： env  GOOS=linux GOARCH=ARM64 go build
@@ -178,22 +178,22 @@ GOOS：目标操作系统
 GOARCH：目标kernel
 </code></pre>
 
-<pre><code>install     compile and install packages and dependencies
+<pre><code class="language-shell">install     compile and install packages and dependencies
 也是编译，与build最大的区别是编译后会将输出文件打包成库放在pkg下
 常用于本地打包编译的命令：go install
 </code></pre>
 
-<pre><code>get         download and install packages and dependencies
+<pre><code class="language-shell">get         download and install packages and dependencies
 用于获取go的第三方包，通常默认获取git repo上pull最新的版本
 常用命令如下：go get -u github.com/go-sql-driver/mysql (从GitHub上获取mysql的driver并安装到本地， -u表示下载最新的)
 </code></pre>
 
-<pre><code>fmt         gofmt (reformat) package sources
+<pre><code class="language-shell">fmt         gofmt (reformat) package sources
 统一代码风格和排版
 常用命令：go fmt
 </code></pre>
 
-<pre><code>test        test packages
+<pre><code class="language-shell">test        test packages
 运行当前包目录下的tests
 常用命令：
 	go test: 打印测试结果

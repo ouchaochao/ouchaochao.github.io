@@ -140,14 +140,14 @@
 
 <h3 id="把一个container-commit成自己的">把一个Container commit成自己的</h3>
 
-<pre><code>$ docker run -it centos
+<pre><code class="language-shell">$ docker run -it centos
 $ yum install -y vim
 $ docker commit container_name cc/centos-vim
 </code></pre>
 
 <h3 id="用dockerfile构建-推荐">用dockerfile构建（推荐）</h3>
 
-<pre><code>$ mkdir centos-vim 
+<pre><code class="language-shell">$ mkdir centos-vim 
 $ cd centos-vim
 $ vim Dockerfile
 

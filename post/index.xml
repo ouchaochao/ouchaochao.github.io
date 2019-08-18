@@ -49,8 +49,9 @@ docker build -t 47.94.131.35:5000/hello-world . # 换成自己的ip  查看image
       
       <guid>https://ouchaochao.github.io/post/docker2_7/</guid>
       <description>run-vs-cmd-vs-entrypoint 首先明确一下概念:
-run:执行命令并创建新的 image layer cmd:设置容器启动后默认执行的命令和参数 entrypoint:设置容器启动时运行的命令  在介绍cmd和entrypoint之前,先了解一下shell和exec格式: - shell:
-FROM centos RUN apt-get install -y vim ENV name docker CMD echo &amp;quot;hello docker&amp;quot; ENTRYPOINT echo &amp;quot;hello $name &amp;quot;   exec
+run:执行命令并创建新的 image layer cmd:设置容器启动后默认执行的命令和参数 entrypoint:设置容器启动时运行的命令  在介绍cmd和entrypoint之前,先了解一下shell和exec格式:
+ shell:
+FROM centos RUN apt-get install -y vim ENV name docker CMD echo &amp;quot;hello docker&amp;quot; ENTRYPOINT echo &amp;quot;hello $name &amp;quot;  exec
 FROM centos RUN [&amp;quot;apt-get&amp;quot;, &amp;quot;install&amp;quot;, &amp;quot;-y&amp;quot;, &amp;quot;vim&amp;quot;] ENV name docker CMD [&amp;quot;/bin/echo&amp;quot;, &amp;quot;hello docker&amp;quot;] ENTRYPOINT [&amp;quot;/bin/bash&amp;quot;,&amp;quot;-c&amp;quot;, &amp;quot;echo hello $name &amp;quot;]  build一个docker
 cd somefile docker build -t cc/xxx .  CMD 容器启动时默认执行的命令
 FROM centos ENV name docker CMD echo &amp;quot;hello $name&amp;quot;  情况一：如果docker run指定了其它命令，CMD命令被忽略</description>
