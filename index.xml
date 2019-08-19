@@ -26,15 +26,15 @@
 6. 完成更新, 浏览器打开WebServer的网址就能访问最新的网页
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/15/16c940fefadd16a3?w=1030&amp;amp;h=379&amp;amp;f=png&amp;amp;s=39733&#34; alt=&#34;图&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/0_1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;下面是Webhooks的示意图:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/15/16c94195aa976da0?w=1007&amp;amp;h=715&amp;amp;f=png&amp;amp;s=80518&#34; alt=&#34;Webhooks&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/0_2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;下面是DeployServer的sh文件写法, 仅供参考:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/15/16c941ac519f9eec?w=1337&amp;amp;h=304&amp;amp;f=png&amp;amp;s=233500&#34; alt=&#34;DeployServer&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/0_3.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -74,19 +74,19 @@ docker push ouchaochao/hello-world:latest
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;打开account setting:
-&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c2ec188f79e?w=1279&amp;amp;h=328&amp;amp;f=png&amp;amp;s=65094&#34; alt=&#34;account setting&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/docker/2_8_1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;往下找到linked accounts，绑定github
-&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c37de2ae63e?w=1155&amp;amp;h=403&amp;amp;f=png&amp;amp;s=73603&#34; alt=&#34;linked accounts&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/docker/2_8_2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;在github中新建dockerfile项目
-&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c3d2aa7bf3e?w=1025&amp;amp;h=480&amp;amp;f=png&amp;amp;s=98165&#34; alt=&#34;dockerfile&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/docker/2_8_3.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;在docker hub中绑定github的dockerfile
-&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c45a9c28d79?w=1142&amp;amp;h=915&amp;amp;f=png&amp;amp;s=123096&#34; alt=&#34;绑定&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/docker/2_8_4.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;完成结果
-&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c4b7b2b7803?w=1135&amp;amp;h=622&amp;amp;f=png&amp;amp;s=91840&#34; alt=&#34;完成结果&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/docker/2_8_5.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&#34;搭建公司-自己的docker-hub&#34;&gt;搭建公司/自己的docker hub&lt;/h3&gt;
@@ -110,7 +110,7 @@ docker push ouchaochao/hello-world:latest
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;修改docker下的daemon.json文件，把服务器添加信任，然后点Apply &amp;amp; Restart
-&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/12/16c81c51d0acec68?w=502&amp;amp;h=527&amp;amp;f=png&amp;amp;s=52682&#34; alt=&#34;修改docker下的daemon&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/docker/2_8_6.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;接下来就是push&lt;/p&gt;
 
@@ -351,7 +351,7 @@ $ docker build -t cc/centos-vim .
 &lt;li&gt;Image负责app的存储和分发，Container负责运行app&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/8/16c70b0c5a75287f?w=566&amp;amp;h=348&amp;amp;f=png&amp;amp;s=90105&#34; alt=&#34;image-20190803235435593.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/docker/2_4_1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# docker交互 -it
 docker run -it centos
@@ -423,7 +423,7 @@ $ docker run cc/halo
 &lt;li&gt;Image本身是read-only&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/8/16c70af5695a7bc5?w=512&amp;amp;h=286&amp;amp;f=png&amp;amp;s=87618&#34; alt=&#34;image-20190803233642422.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/docker/2_2_1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;image的获取&#34;&gt;Image的获取&lt;/h2&gt;
 
@@ -450,7 +450,7 @@ $ docker run cc/halo
 &lt;li&gt;&lt;p&gt;把app和底层infrastructure隔离开&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/8/16c70ad74e6e06ea?w=648&amp;amp;h=195&amp;amp;f=png&amp;amp;s=42284&#34; alt=&#34;image-20190803230457777.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/docker/2_1_1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;docker engine&lt;/strong&gt;&lt;/p&gt;
 
@@ -460,11 +460,11 @@ $ docker run cc/halo
 &lt;li&gt;CLI接口（docker）&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/8/16c70ad74e783214?w=575&amp;amp;h=396&amp;amp;f=png&amp;amp;s=116192&#34; alt=&#34;image-20190803232406410.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/docker/2_1_2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;docker architecture&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/8/16c70ad74eb69937?w=831&amp;amp;h=434&amp;amp;f=png&amp;amp;s=201066&#34; alt=&#34;image-20190803233005792.png&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/docker/2_1_3.png&#34; alt=&#34;&#34; /&gt;
 &lt;strong&gt;底层技术支持&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
@@ -832,9 +832,9 @@ Add test done!
 
 &lt;h3 id=&#34;四张表的关系&#34;&gt;四张表的关系&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/14/16c8ec74770789e8?w=659&amp;amp;h=700&amp;amp;f=png&amp;amp;s=205957&#34; alt=&#34;四张表的关系&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/3_7_1.png&#34; alt=&#34;&#34; /&gt;
 接下来在mysql中创建对应的表格即可:
-&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/14/16c8f0903b727a6e?w=705&amp;amp;h=435&amp;amp;f=png&amp;amp;s=46445&#34; alt=&#34;mysql&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/3_7_2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -1085,7 +1085,7 @@ func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 METHOD选择post
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/13/16c8b8bc9988c048?w=1026&amp;amp;h=731&amp;amp;f=jpeg&amp;amp;s=88892&#34; alt=&#34;测试&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/3_3_1.jpg&#34; alt=&#34;&#34; /&gt;
 成功后返回：200 OK字样。&lt;/p&gt;
 
 &lt;h3 id=&#34;总结-golang处理http请求的过程&#34;&gt;总结：golang处理http请求的过程&lt;/h3&gt;
@@ -1131,7 +1131,7 @@ Delete a comment:
 
 &lt;h3 id=&#34;restful-api设计&#34;&gt;RESTful API设计&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/13/16c8bacba3757e78?w=1021&amp;amp;h=549&amp;amp;f=png&amp;amp;s=194347&#34; alt=&#34;API设计&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/3_3_2.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;本节完&lt;/strong&gt;&lt;/p&gt;
 </description>
@@ -1186,7 +1186,7 @@ Delete a comment:
 &lt;li&gt;&lt;p&gt;返回码（Status Code）符合HTTP资源描述的规定&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://user-gold-cdn.xitu.io/2019/8/11/16c7f6aa582928b4?w=1008&amp;amp;h=691&amp;amp;f=png&amp;amp;s=202571&#34; alt=&#34;设计原则&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/3_2_1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;api设计-用户&#34;&gt;API设计：用户&lt;/h4&gt;
 
