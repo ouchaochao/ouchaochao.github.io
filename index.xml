@@ -5,8 +5,17 @@
     <description>Recent content in LeaveIt on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 20 Aug 2019 22:07:19 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Aug 2019 22:52:15 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Go3_15to3_16</title>
+      <link>https://ouchaochao.github.io/post/go3_15to3_16/</link>
+      <pubDate>Tue, 20 Aug 2019 22:52:15 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go3_15to3_16/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Go语言实战流媒体视频网站3_8至3_14</title>
@@ -1403,173 +1412,6 @@ func sendNormalResponse(w http.ResponseWriter)  {
 
 }
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Go语言实战流媒体视频3_3至3_5</title>
-      <link>https://ouchaochao.github.io/post/go3_3to3_5/</link>
-      <pubDate>Wed, 07 Aug 2019 09:41:54 +0800</pubDate>
-      
-      <guid>https://ouchaochao.github.io/post/go3_3to3_5/</guid>
-      <description>
-
-&lt;h2 id=&#34;api实现之详细设计&#34;&gt;API实现之详细设计&lt;/h2&gt;
-
-&lt;p&gt;在项目开始之前，首先把GOPATH的路径明确好，输入：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go env
-
-可以得到：
-···
-GOPATH=&amp;quot;/Users/ouchaochao/go&amp;quot;
-···
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在这个路径下，新建文件夹：
-/Users/ouchaochao/go/src/ouchaochao.cn/video/api&lt;/p&gt;
-
-&lt;h3 id=&#34;api项目结构如下&#34;&gt;api项目结构如下&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;api
-├── auth.go
-├── dbops  # 与数据库交互部分
-│   ├── api.go
-│   ├── api_test.go
-│   ├── conn.go
-│   └── internal.go
-├── defs  # 配置、定义等
-│   ├── apidef.go
-│   └── errs.go
-├── handlers.go  # 逻辑处理的放在这
-├── main.go  # 放一些简单的定义性的东西
-├── response.go
-├── session
-│   └── ops.go
-└── utils
-    └── uuid.go
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在编辑.go文件之前，先把依赖装好，如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go get github.com/julienschmidt/httprouter
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;编辑main-go&#34;&gt;编辑main.go&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
-
-import (
-	&amp;quot;github.com/julienschmidt/httprouter&amp;quot;
-	&amp;quot;net/http&amp;quot;
-	&amp;quot;ouchaochao.cn/video/api/handlers&amp;quot;
-)
-
-
-func RegisterHandlers() *httprouter.Router {
-    // 2.新建一个路由
-	router := httprouter.New()
-	// CreateUser在handlers.go文件
-	router.POST(&amp;quot;/user&amp;quot;, CreateUser)
-	// Login在handlers.go文件
-	router.POST(&amp;quot;/user/:username&amp;quot;, Login)
-	return router
-}
-
-func main() {
-    // 3.main是主入口，调用RegisterHandlers
-	r := RegisterHandlers()
-	
-    // 1.监听8000端口
-	http.ListenAndServe(&amp;quot;:8000&amp;quot;, r)
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;编辑handlers-go&#34;&gt;编辑handlers.go&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
-
-import (
-	&amp;quot;github.com/julienschmidt/httprouter&amp;quot;
-	&amp;quot;io&amp;quot;
-	&amp;quot;net/http&amp;quot;
-)
-
-func CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	io.WriteString(w, &amp;quot;Create User Handler&amp;quot;)
-}
-
-func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	uname := p.ByName(&amp;quot;username&amp;quot;)
-	io.WriteString(w, uname)
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;此时我们可以在api/目录下输入：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go install
-
-运行上面代码后会在/Users/ouchaochao/go/bin/下会生成一个二进制文件：api，运行这个二进制文件:
-./api
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在chrome中打开：&lt;a href=&#34;chrome-extension://aejoelaoggembcahagimdiliamlcdmfm/restlet_client.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;测试网页&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;如下图所示输入：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;http://127.0.0.1:8000/user
-METHOD选择post
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/3_3_1.jpg&#34; alt=&#34;&#34; /&gt;
-成功后返回：200 OK字样。&lt;/p&gt;
-
-&lt;h3 id=&#34;总结-golang处理http请求的过程&#34;&gt;总结：golang处理http请求的过程&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;main.go -&amp;gt; ListenAndServe -&amp;gt; RegisterHandlers -&amp;gt; routers -&amp;gt; handlers.go -&amp;gt; 找对应的函数
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;api设计-用户资源&#34;&gt;API设计：用户资源&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;List all videos:
-    URL: /user/:username/videos
-    Method: GET
-    SC: 200, 400, 500
-
-Get one video:
-    URL: /user/:username/videos/:vid-id
-    Method: GET
-    SC: 200, 400, 500
-
-Delete one video:
-    URL: /user/:username/videos/:vid-id
-    Method: DELETE
-    SC: 204: 400, 401, 403, 500
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;api设计-评论&#34;&gt;API设计：评论&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;Show comments:
-    URL: /videos/:vid-id/comments
-    Method: GET
-    SC: 200, 400, 500
-
-Post a comment:
-    URL: /videos/:vid-id/comments
-    Method: POST
-    SC: 201, 400, 500
-
-Delete a comment:
-    URL: /videos/:vid-id/comment-id
-    Method: DELETE
-    SC: 204, 400, 401, 403, 500
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;restful-api设计&#34;&gt;RESTful API设计&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/3_3_2.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;本节完&lt;/strong&gt;&lt;/p&gt;
 </description>
     </item>
     

@@ -6,10 +6,19 @@
     <description>Recent content in Posts on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 20 Aug 2019 22:07:19 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Aug 2019 22:52:15 +0800</lastBuildDate>
     
 	<atom:link href="https://ouchaochao.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go3_15to3_16</title>
+      <link>https://ouchaochao.github.io/post/go3_15to3_16/</link>
+      <pubDate>Tue, 20 Aug 2019 22:52:15 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go3_15to3_16/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Go语言实战流媒体视频网站3_8至3_14</title>
