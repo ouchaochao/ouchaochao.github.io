@@ -9,12 +9,439 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Go3_8</title>
-      <link>https://ouchaochao.github.io/post/go3_8/</link>
+      <title>Go语言实战流媒体视频网站3_8至3_14</title>
+      <link>https://ouchaochao.github.io/post/go3_8to3_14/</link>
       <pubDate>Tue, 20 Aug 2019 22:07:19 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/go3_8/</guid>
-      <description></description>
+      <guid>https://ouchaochao.github.io/post/go3_8to3_14/</guid>
+      <description>
+
+&lt;h2 id=&#34;数据库连接&#34;&gt;数据库连接&lt;/h2&gt;
+
+&lt;p&gt;首先先下载数据库连接工具：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;go get github.com/go-sql-driver/mysql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后在&lt;code&gt;dbops&lt;/code&gt;文件夹中新建三个文件，如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;dbops
+├── api.go
+├── api_test.go  // 测试api
+└── conn.go  // 连接数据库
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下面来看看mysql数据库的连接：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//conn.go
+package dbops
+
+import (
+	&amp;quot;database/sql&amp;quot;
+	_ &amp;quot;github.com/go-sql-driver/mysql&amp;quot;
+)
+
+var (
+	dbConn *sql.DB
+	err error
+)
+
+func init()  {
+	// 复用dbConn
+	dbConn, err = sql.Open(&amp;quot;mysql&amp;quot;, &amp;quot;root:1@tcp(47.94.131.35:3306)/video?charset=utf8&amp;quot;)
+	if err != nil{
+		// 无法连接时抛出异常
+		panic(err.Error())
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;连接完数据库，接下来就是对数据库的增删改查了，下面分别按&lt;code&gt;用户&lt;/code&gt;，&lt;code&gt;视频&lt;/code&gt;，&lt;code&gt;评论&lt;/code&gt;这三个模块来展示怎么写代码和测试：&lt;/p&gt;
+
+&lt;h2 id=&#34;用户&#34;&gt;用户&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;用户&lt;/code&gt;模块有三个功能，分别是增加、查询和删除：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//api.go
+package dbops
+
+import (
+	&amp;quot;database/sql&amp;quot;
+	_ &amp;quot;github.com/go-sql-driver/mysql&amp;quot;
+	&amp;quot;log&amp;quot;
+	&amp;quot;time&amp;quot;
+	&amp;quot;video/api/defs&amp;quot;
+	&amp;quot;video/api/utils&amp;quot;
+)
+
+/*
+下面三个函数分别是：
+	添加用户
+	获取用户信息
+	删除用户
+*/
+func AddUserCredential(loginName string, pwd string) error {
+	// 千万不要用+号来连接query的各个部分, 不安全, 容易被撞库攻击
+	//Prepare预编译, 更安全了, 会拦下撞库攻击
+	stmtIns, err := dbConn.Prepare(&amp;quot;INSERT INTO users (login_name, pwd) VALUES (?, ?)&amp;quot;)
+	if err != nil {
+		return err
+	}
+	// 执行, 将两个参数传到上面两个问号处
+	_, err = stmtIns.Exec(loginName, pwd)
+	if err != nil {
+		return err
+	}
+	// defer 是栈退出的时候才调用, 性能会有些许损耗
+	defer stmtIns.Close()
+	return nil
+}
+
+func GetUserCredential(loginName string) (string, error) {
+	stmtOut, err := dbConn.Prepare(&amp;quot;SELECT pwd FROM users WHERE login_name = ?&amp;quot;)
+	if err != nil {
+		log.Printf(&amp;quot;%s&amp;quot;, err)
+		// string 默认是没有内容的
+		return &amp;quot;&amp;quot;, err
+	}
+
+	var pwd string
+	err = stmtOut.QueryRow(loginName).Scan(&amp;amp;pwd)
+	if err != nil &amp;amp;&amp;amp; err != sql.ErrNoRows {
+		return &amp;quot;&amp;quot;, err
+	}
+	defer stmtOut.Close()
+	return pwd, nil
+}
+
+func DeleteUser(loginName string, pwd string) error {
+	stmtDel, err := dbConn.Prepare(&amp;quot;DELETE FROM users WHERE login_name=? AND pwd=?&amp;quot;)
+	if err != nil {
+		log.Printf(&amp;quot;DeleteUser error: %s&amp;quot;, err)
+		return err
+	}
+	_, err = stmtDel.Exec(loginName, pwd)
+	if err != nil {
+		return err
+	}
+
+	stmtDel.Close()
+	return nil
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;测试&lt;/code&gt;包含对添加、查询和修改的代码，其中多了一个Reget函数，是为了测试删除函数是否起到作用而存在的&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//api_test.go
+package dbops
+
+import (
+	&amp;quot;fmt&amp;quot;
+	&amp;quot;strconv&amp;quot;
+	&amp;quot;testing&amp;quot;
+	&amp;quot;time&amp;quot;
+)
+
+var tempvid string
+
+func clearTables() {
+	// 初始化, 保证数据库每次都是新的
+	dbConn.Exec(&amp;quot;truncate users&amp;quot;)
+	dbConn.Exec(&amp;quot;truncate video_info&amp;quot;)
+	dbConn.Exec(&amp;quot;truncate comments&amp;quot;)
+	dbConn.Exec(&amp;quot;truncate sessions&amp;quot;)
+}
+
+func TestMain(m *testing.M) {
+	clearTables()
+	m.Run()
+	clearTables()
+}
+
+/*
+测试有关用户的函数
+*/
+func TestUserWorkFlow(t *testing.T) {
+	t.Run(&amp;quot;Add&amp;quot;, testAddUser)
+	t.Run(&amp;quot;Get&amp;quot;, testGetUser)
+	t.Run(&amp;quot;Del&amp;quot;, testDeleteUser)
+	t.Run(&amp;quot;Reget&amp;quot;, testRegetUser)
+}
+
+func testAddUser(t *testing.T) {
+	err := AddUserCredential(&amp;quot;leo&amp;quot;, &amp;quot;123&amp;quot;)
+	if err != nil {
+		t.Errorf(&amp;quot;Error of AddUser: %v&amp;quot;, err)
+	}
+}
+
+func testGetUser(t *testing.T) {
+	pwd, err := GetUserCredential(&amp;quot;leo&amp;quot;)
+	if pwd != &amp;quot;123&amp;quot; || err != nil {
+		t.Errorf(&amp;quot;Error get user&amp;quot;)
+	}
+}
+
+func testDeleteUser(t *testing.T) {
+	err := DeleteUser(&amp;quot;leo&amp;quot;, &amp;quot;123&amp;quot;)
+	if err != nil {
+		t.Errorf(&amp;quot;Error delete user: %v&amp;quot;, err)
+	}
+}
+
+func testRegetUser(t *testing.T) {
+	pwd, err := GetUserCredential(&amp;quot;leo&amp;quot;)
+	if err != nil {
+		t.Errorf(&amp;quot;Error of reget user: %v&amp;quot;, err)
+	}
+	if pwd != &amp;quot;&amp;quot; {
+		t.Errorf(&amp;quot;Delete user test failed&amp;quot;)
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;视频&#34;&gt;视频&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;视频&lt;/code&gt;包含了增加、查询和删除&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//api.go
+/*
+下面三个函数分别是：
+	添加视频
+	获取视频
+	删除视频
+*/
+func AddVideoInfo(aid int, name string) (*defs.VideoInfo, error) {
+	//Create uuid
+	vid, err := utils.NewUUID()
+	if err != nil {
+		return nil, err
+	}
+	t := time.Now()
+	// 时间格式, go的彩蛋
+	ctime := t.Format(&amp;quot;Jan 02 2006, 15:04:05&amp;quot;)
+	stmtIns, err := dbConn.Prepare(&amp;quot;INSERT INTO video_info (id, author_id, name, display_ctime) VALUES (?,?,?,?)&amp;quot;)
+	if err != nil {
+		return nil, err
+	}
+
+	_, err = stmtIns.Exec(vid, aid, name, ctime)
+	if err != nil {
+		return nil, err
+	}
+	res := &amp;amp;defs.VideoInfo{Id: vid, AuthorId: aid, Name: name, DisplayCtime: ctime}
+	defer stmtIns.Close()
+	//怎么测试：res.XX
+	return res, nil
+}
+
+func GetVideoInfo(vid string) (*defs.VideoInfo, error) {
+	stmtOut, err := dbConn.Prepare(&amp;quot;SELECT author_id, name, display_ctime FROM video_info WHERE id=?&amp;quot;)
+
+	//var不能写在一起
+	var aid int
+	var dct string
+	var name string
+
+	err = stmtOut.QueryRow(vid).Scan(&amp;amp;aid, &amp;amp;name, &amp;amp;dct)
+	if err != nil &amp;amp;&amp;amp; err != sql.ErrNoRows {
+		return nil, err
+	}
+
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+
+	defer stmtOut.Close()
+	res := &amp;amp;defs.VideoInfo{Id: vid, AuthorId: aid, Name: name, DisplayCtime: dct}
+	return res, nil
+}
+
+func DeleteVideoInfo(vid string) error {
+	stmtDel, err := dbConn.Prepare(&amp;quot;DELETE FROM video_info WHERE id=?&amp;quot;)
+	if err != nil {
+		return err
+	}
+	_, err = stmtDel.Exec(vid)
+	if err != nil {
+		return nil
+	}
+	defer stmtDel.Close()
+	return nil
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;测试&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//api_test.go
+/*
+测试有关视频的函数，值得注意的是，添加视频前必须要有用户存在
+*/
+func TestVideoWorkFlow(t *testing.T) {
+	clearTables()
+	t.Run(&amp;quot;PrepareUser&amp;quot;, testAddUser)
+	t.Run(&amp;quot;AddVideo&amp;quot;, testAddVideoInfo)
+	t.Run(&amp;quot;GetVideo&amp;quot;, testGetVideoInfo)
+	t.Run(&amp;quot;DelVideo&amp;quot;, testDeleteVideoInfo)
+	t.Run(&amp;quot;RegetVideo&amp;quot;, testRegetVideoInfo)
+}
+
+func testAddVideoInfo(t *testing.T) {
+	vi, err := AddVideoInfo(1, &amp;quot;my_video&amp;quot;)
+	if err != nil {
+		t.Errorf(&amp;quot;Error add video: %v&amp;quot;, err)
+	}
+	tempvid = vi.Id
+}
+
+func testGetVideoInfo(t *testing.T) {
+	_, err := GetVideoInfo(tempvid)
+	if err != nil {
+		t.Errorf(&amp;quot;Error get video: %v&amp;quot;, err)
+	}
+}
+
+func testDeleteVideoInfo(t *testing.T) {
+	err := DeleteVideoInfo(tempvid)
+	if err != nil {
+		t.Errorf(&amp;quot;Error del video:%v&amp;quot;, err)
+	}
+}
+func testRegetVideoInfo(t *testing.T) {
+	vi, err := GetVideoInfo(tempvid)
+	if err != nil || vi != nil {
+		t.Errorf(&amp;quot;Error reget video: %v&amp;quot;, err)
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;评论&#34;&gt;评论&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;评论&lt;/code&gt;包含了添加和查询，没有删除&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//api.go
+/*
+下面两个函数分别是：
+	添加评论
+	查看评论
+	此处不添加删除评论
+*/
+func AddComments(vid string, aid int, content string) error {
+	id, err := utils.NewUUID()
+	if err != nil {
+		return err
+	}
+
+	stmtIns, err := dbConn.Prepare(&amp;quot;INSERT INTO comments (id, video_id, author_id, content) VALUES (?,?,?,?)&amp;quot;)
+	if err != nil {
+		return err
+	}
+
+	_, err = stmtIns.Exec(id, vid, aid, content)
+	if err != nil {
+		return nil
+	}
+	defer stmtIns.Close()
+	return nil
+}
+
+func ListComments(vid string, from, to int) ([]*defs.Comment, error) {
+	// 连接user和comments表查询字段
+	stmtOut, err := dbConn.Prepare(`SELECT comments.id, users.Login_name, comments.content FROM comments
+		INNER JOIN users ON comments.author_id=users.id
+		WHERE comments.video_id=? AND comments.time &amp;gt; FROM_UNIXTIME(?) AND comments.time &amp;lt;= FROM_UNIXTIME(?)`)
+
+	//此处定义了Comment，放在了apidef.go文件中
+	var res []*defs.Comment
+
+	rows, err := stmtOut.Query(vid, from, to)
+	if err != nil {
+		return res, err
+	}
+
+	for rows.Next() {
+		var id, name, content string
+		if err := rows.Scan(&amp;amp;id, &amp;amp;name, &amp;amp;content); err != nil {
+			return res, err
+		}
+		c := &amp;amp;defs.Comment{Id: id, VideoId: vid, Author: name, Content: content}
+		res = append(res, c)
+	}
+	defer stmtOut.Close()
+	return res, nil
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;附带一下定义了的结构体：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//apidef.go
+package defs
+
+type UserCredential struct {
+	Username string `json:&amp;quot;username&amp;quot;`
+	Pwd      string `json:&amp;quot;pwd&amp;quot;`
+}
+
+//Data model
+type VideoInfo struct {
+	Id           string
+	AuthorId     int
+	Name         string
+	DisplayCtime string
+}
+
+type Comment struct {
+	Id      string
+	VideoId string
+	Author  string
+	Content string
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;测试&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//api_test.go
+/*
+测试有关评论的函数
+*/
+func TestComments(t *testing.T) {
+	clearTables()
+	t.Run(&amp;quot;AddUser&amp;quot;, testAddUser)
+	t.Run(&amp;quot;AddComments&amp;quot;, testAddComments)
+	t.Run(&amp;quot;ListComments&amp;quot;, testListComments)
+}
+
+func testAddComments(t *testing.T) {
+	vid := &amp;quot;12345&amp;quot;
+	aid := 1
+	content := &amp;quot;test&amp;quot;
+
+	err := AddComments(vid, aid, content)
+	if err != nil {
+		t.Errorf(&amp;quot;Error add comment: %v&amp;quot;, err)
+	}
+}
+
+func testListComments(t *testing.T) {
+	vid := &amp;quot;12345&amp;quot;
+	from := 1514764800
+	// 把当前时间转化成, 单位: 纳秒
+	to, _ := strconv.Atoi(strconv.FormatInt(time.Now().UnixNano()/1000000000, 10))
+	res, err := ListComments(vid, from, to)
+	if err != nil {
+		t.Errorf(&amp;quot;Error list comments: %v&amp;quot;, err)
+	}
+
+	for i, ele := range res {
+		fmt.Printf(&amp;quot;comment:%d,%v\n&amp;quot;, i, ele)
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;总体来说，增删改查的代码很基础，也是重复的工作量，这里没有用到花里胡哨的技能，同时也@一下&lt;a href=&#34;https://github.com/dobio&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;颜威&lt;/a&gt;同学，在他那里学到了一个小技巧，就是每写一个函数就写一个测试函数，保证自己的代码能跑通，也能马上获得正反馈。&lt;/p&gt;
+</description>
     </item>
     
     <item>

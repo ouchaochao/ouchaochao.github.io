@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Chaochao Ou">
+  
+  
+  
+  <link rel="prev" href="https://ouchaochao.github.io/post/developgo/" />
+  
+  <link rel="canonical" href="https://ouchaochao.github.io/post/go3_8to3_14/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Go语言实战流媒体视频网站3_8至3_14 | LeaveIt
+       
+  </title>
+  <meta name="title" content="Go语言实战流媒体视频网站3_8至3_14 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ouchaochao.github.io\/"
+    },
+    "articleSection" : "post",
+    "name" : "Go语言实战流媒体视频网站3_8至3_14",
+    "headline" : "Go语言实战流媒体视频网站3_8至3_14",
+    "description" : "数据库连接 首先先下载数据库连接工具：\ngo get github.com\/go-sql-driver\/mysql  然后在dbops文件夹中新建三个文件，如下：\ndbops ├── api.go ├── api_test.go \/\/ 测试api └── conn.go \/\/ 连接数据库  下面来看看mysql数据库的连接：\n\/\/conn.go package dbops import ( \x26quot;database\/sql\x26quot; _ \x26quot;github.com\/go-sql-driver\/mysql\x26quot; ) var ( dbConn *sql.DB err error ) func init() { \/\/ 复用dbConn dbConn, err = sql.Open(\x26quot;mysql\x26quot;, \x26quot;root:1@tcp(47.94.131.35:3306)\/video?charset=utf8\x26quot;) if err != nil{ \/\/ 无法连接时抛出异常 panic(err.Error()) } }  连接完数据库，接下来就是对数据库的增删改查了，下面分别按用户，视频，评论这三个模块来展示怎么写代码和测试：\n用户 用户模块有三个功能，分别是增加、查询和删除：\n\/\/api.go package dbops import ( \x26quot;database\/sql\x26quot; _ \x26quot;github.com\/go-sql-driver\/mysql\x26quot; \x26quot;log\x26quot; \x26quot;time\x26quot; \x26quot;video\/api\/defs\x26quot; \x26quot;video\/api\/utils\x26quot; ) \/* 下面三个函数分别是： 添加用户 获取用户信息 删除用户 *\/ func AddUserCredential(loginName string, pwd string) error { \/\/ 千万不要用\x2b号来连接query的各个部分, 不安全, 容易被撞库攻击 \/\/Prepare预编译, 更安全了, 会拦下撞库攻击 stmtIns, err := dbConn.",
+    "inLanguage" : "zh-cn",
+    "author" : "Chaochao Ou",
+    "creator" : "Chaochao Ou",
+    "publisher": "Chaochao Ou",
+    "accountablePerson" : "Chaochao Ou",
+    "copyrightHolder" : "Chaochao Ou",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-08-20 22:07:19 \x2b0800 CST",
+    "dateModified" : "2019-08-20 22:07:19 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/go3_8to3_14\/",
+    "wordCount" : "1001",
+    "keywords" : [ "go", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Go语言实战流媒体视频网站3_8至3_14</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-08-20 itemprop="datePublished">August 20, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ouchaochao.github.io/categories/go/"> go </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="数据库连接">数据库连接</h2>
+
+<p>首先先下载数据库连接工具：</p>
+
+<pre><code class="language-shell">go get github.com/go-sql-driver/mysql
+</code></pre>
+
+<p>然后在<code>dbops</code>文件夹中新建三个文件，如下：</p>
+
+<pre><code class="language-shell">dbops
+├── api.go
+├── api_test.go  // 测试api
+└── conn.go  // 连接数据库
+</code></pre>
+
+<p>下面来看看mysql数据库的连接：</p>
+
+<pre><code class="language-go">//conn.go
+package dbops
+
+import (
+	&quot;database/sql&quot;
+	_ &quot;github.com/go-sql-driver/mysql&quot;
+)
+
+var (
+	dbConn *sql.DB
+	err error
+)
+
+func init()  {
+	// 复用dbConn
+	dbConn, err = sql.Open(&quot;mysql&quot;, &quot;root:1@tcp(47.94.131.35:3306)/video?charset=utf8&quot;)
+	if err != nil{
+		// 无法连接时抛出异常
+		panic(err.Error())
+	}
+}
+</code></pre>
+
+<p>连接完数据库，接下来就是对数据库的增删改查了，下面分别按<code>用户</code>，<code>视频</code>，<code>评论</code>这三个模块来展示怎么写代码和测试：</p>
+
+<h2 id="用户">用户</h2>
+
+<p><code>用户</code>模块有三个功能，分别是增加、查询和删除：</p>
+
+<pre><code class="language-go">//api.go
+package dbops
+
+import (
+	&quot;database/sql&quot;
+	_ &quot;github.com/go-sql-driver/mysql&quot;
+	&quot;log&quot;
+	&quot;time&quot;
+	&quot;video/api/defs&quot;
+	&quot;video/api/utils&quot;
+)
+
+/*
+下面三个函数分别是：
+	添加用户
+	获取用户信息
+	删除用户
+*/
+func AddUserCredential(loginName string, pwd string) error {
+	// 千万不要用+号来连接query的各个部分, 不安全, 容易被撞库攻击
+	//Prepare预编译, 更安全了, 会拦下撞库攻击
+	stmtIns, err := dbConn.Prepare(&quot;INSERT INTO users (login_name, pwd) VALUES (?, ?)&quot;)
+	if err != nil {
+		return err
+	}
+	// 执行, 将两个参数传到上面两个问号处
+	_, err = stmtIns.Exec(loginName, pwd)
+	if err != nil {
+		return err
+	}
+	// defer 是栈退出的时候才调用, 性能会有些许损耗
+	defer stmtIns.Close()
+	return nil
+}
+
+func GetUserCredential(loginName string) (string, error) {
+	stmtOut, err := dbConn.Prepare(&quot;SELECT pwd FROM users WHERE login_name = ?&quot;)
+	if err != nil {
+		log.Printf(&quot;%s&quot;, err)
+		// string 默认是没有内容的
+		return &quot;&quot;, err
+	}
+
+	var pwd string
+	err = stmtOut.QueryRow(loginName).Scan(&amp;pwd)
+	if err != nil &amp;&amp; err != sql.ErrNoRows {
+		return &quot;&quot;, err
+	}
+	defer stmtOut.Close()
+	return pwd, nil
+}
+
+func DeleteUser(loginName string, pwd string) error {
+	stmtDel, err := dbConn.Prepare(&quot;DELETE FROM users WHERE login_name=? AND pwd=?&quot;)
+	if err != nil {
+		log.Printf(&quot;DeleteUser error: %s&quot;, err)
+		return err
+	}
+	_, err = stmtDel.Exec(loginName, pwd)
+	if err != nil {
+		return err
+	}
+
+	stmtDel.Close()
+	return nil
+}
+</code></pre>
+
+<p><code>测试</code>包含对添加、查询和修改的代码，其中多了一个Reget函数，是为了测试删除函数是否起到作用而存在的</p>
+
+<pre><code class="language-go">//api_test.go
+package dbops
+
+import (
+	&quot;fmt&quot;
+	&quot;strconv&quot;
+	&quot;testing&quot;
+	&quot;time&quot;
+)
+
+var tempvid string
+
+func clearTables() {
+	// 初始化, 保证数据库每次都是新的
+	dbConn.Exec(&quot;truncate users&quot;)
+	dbConn.Exec(&quot;truncate video_info&quot;)
+	dbConn.Exec(&quot;truncate comments&quot;)
+	dbConn.Exec(&quot;truncate sessions&quot;)
+}
+
+func TestMain(m *testing.M) {
+	clearTables()
+	m.Run()
+	clearTables()
+}
+
+/*
+测试有关用户的函数
+*/
+func TestUserWorkFlow(t *testing.T) {
+	t.Run(&quot;Add&quot;, testAddUser)
+	t.Run(&quot;Get&quot;, testGetUser)
+	t.Run(&quot;Del&quot;, testDeleteUser)
+	t.Run(&quot;Reget&quot;, testRegetUser)
+}
+
+func testAddUser(t *testing.T) {
+	err := AddUserCredential(&quot;leo&quot;, &quot;123&quot;)
+	if err != nil {
+		t.Errorf(&quot;Error of AddUser: %v&quot;, err)
+	}
+}
+
+func testGetUser(t *testing.T) {
+	pwd, err := GetUserCredential(&quot;leo&quot;)
+	if pwd != &quot;123&quot; || err != nil {
+		t.Errorf(&quot;Error get user&quot;)
+	}
+}
+
+func testDeleteUser(t *testing.T) {
+	err := DeleteUser(&quot;leo&quot;, &quot;123&quot;)
+	if err != nil {
+		t.Errorf(&quot;Error delete user: %v&quot;, err)
+	}
+}
+
+func testRegetUser(t *testing.T) {
+	pwd, err := GetUserCredential(&quot;leo&quot;)
+	if err != nil {
+		t.Errorf(&quot;Error of reget user: %v&quot;, err)
+	}
+	if pwd != &quot;&quot; {
+		t.Errorf(&quot;Delete user test failed&quot;)
+	}
+}
+</code></pre>
+
+<h2 id="视频">视频</h2>
+
+<p><code>视频</code>包含了增加、查询和删除</p>
+
+<pre><code class="language-go">//api.go
+/*
+下面三个函数分别是：
+	添加视频
+	获取视频
+	删除视频
+*/
+func AddVideoInfo(aid int, name string) (*defs.VideoInfo, error) {
+	//Create uuid
+	vid, err := utils.NewUUID()
+	if err != nil {
+		return nil, err
+	}
+	t := time.Now()
+	// 时间格式, go的彩蛋
+	ctime := t.Format(&quot;Jan 02 2006, 15:04:05&quot;)
+	stmtIns, err := dbConn.Prepare(&quot;INSERT INTO video_info (id, author_id, name, display_ctime) VALUES (?,?,?,?)&quot;)
+	if err != nil {
+		return nil, err
+	}
+
+	_, err = stmtIns.Exec(vid, aid, name, ctime)
+	if err != nil {
+		return nil, err
+	}
+	res := &amp;defs.VideoInfo{Id: vid, AuthorId: aid, Name: name, DisplayCtime: ctime}
+	defer stmtIns.Close()
+	//怎么测试：res.XX
+	return res, nil
+}
+
+func GetVideoInfo(vid string) (*defs.VideoInfo, error) {
+	stmtOut, err := dbConn.Prepare(&quot;SELECT author_id, name, display_ctime FROM video_info WHERE id=?&quot;)
+
+	//var不能写在一起
+	var aid int
+	var dct string
+	var name string
+
+	err = stmtOut.QueryRow(vid).Scan(&amp;aid, &amp;name, &amp;dct)
+	if err != nil &amp;&amp; err != sql.ErrNoRows {
+		return nil, err
+	}
+
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+
+	defer stmtOut.Close()
+	res := &amp;defs.VideoInfo{Id: vid, AuthorId: aid, Name: name, DisplayCtime: dct}
+	return res, nil
+}
+
+func DeleteVideoInfo(vid string) error {
+	stmtDel, err := dbConn.Prepare(&quot;DELETE FROM video_info WHERE id=?&quot;)
+	if err != nil {
+		return err
+	}
+	_, err = stmtDel.Exec(vid)
+	if err != nil {
+		return nil
+	}
+	defer stmtDel.Close()
+	return nil
+}
+</code></pre>
+
+<p><code>测试</code></p>
+
+<pre><code class="language-go">//api_test.go
+/*
+测试有关视频的函数，值得注意的是，添加视频前必须要有用户存在
+*/
+func TestVideoWorkFlow(t *testing.T) {
+	clearTables()
+	t.Run(&quot;PrepareUser&quot;, testAddUser)
+	t.Run(&quot;AddVideo&quot;, testAddVideoInfo)
+	t.Run(&quot;GetVideo&quot;, testGetVideoInfo)
+	t.Run(&quot;DelVideo&quot;, testDeleteVideoInfo)
+	t.Run(&quot;RegetVideo&quot;, testRegetVideoInfo)
+}
+
+func testAddVideoInfo(t *testing.T) {
+	vi, err := AddVideoInfo(1, &quot;my_video&quot;)
+	if err != nil {
+		t.Errorf(&quot;Error add video: %v&quot;, err)
+	}
+	tempvid = vi.Id
+}
+
+func testGetVideoInfo(t *testing.T) {
+	_, err := GetVideoInfo(tempvid)
+	if err != nil {
+		t.Errorf(&quot;Error get video: %v&quot;, err)
+	}
+}
+
+func testDeleteVideoInfo(t *testing.T) {
+	err := DeleteVideoInfo(tempvid)
+	if err != nil {
+		t.Errorf(&quot;Error del video:%v&quot;, err)
+	}
+}
+func testRegetVideoInfo(t *testing.T) {
+	vi, err := GetVideoInfo(tempvid)
+	if err != nil || vi != nil {
+		t.Errorf(&quot;Error reget video: %v&quot;, err)
+	}
+}
+</code></pre>
+
+<h2 id="评论">评论</h2>
+
+<p><code>评论</code>包含了添加和查询，没有删除</p>
+
+<pre><code class="language-go">//api.go
+/*
+下面两个函数分别是：
+	添加评论
+	查看评论
+	此处不添加删除评论
+*/
+func AddComments(vid string, aid int, content string) error {
+	id, err := utils.NewUUID()
+	if err != nil {
+		return err
+	}
+
+	stmtIns, err := dbConn.Prepare(&quot;INSERT INTO comments (id, video_id, author_id, content) VALUES (?,?,?,?)&quot;)
+	if err != nil {
+		return err
+	}
+
+	_, err = stmtIns.Exec(id, vid, aid, content)
+	if err != nil {
+		return nil
+	}
+	defer stmtIns.Close()
+	return nil
+}
+
+func ListComments(vid string, from, to int) ([]*defs.Comment, error) {
+	// 连接user和comments表查询字段
+	stmtOut, err := dbConn.Prepare(`SELECT comments.id, users.Login_name, comments.content FROM comments
+		INNER JOIN users ON comments.author_id=users.id
+		WHERE comments.video_id=? AND comments.time &gt; FROM_UNIXTIME(?) AND comments.time &lt;= FROM_UNIXTIME(?)`)
+
+	//此处定义了Comment，放在了apidef.go文件中
+	var res []*defs.Comment
+
+	rows, err := stmtOut.Query(vid, from, to)
+	if err != nil {
+		return res, err
+	}
+
+	for rows.Next() {
+		var id, name, content string
+		if err := rows.Scan(&amp;id, &amp;name, &amp;content); err != nil {
+			return res, err
+		}
+		c := &amp;defs.Comment{Id: id, VideoId: vid, Author: name, Content: content}
+		res = append(res, c)
+	}
+	defer stmtOut.Close()
+	return res, nil
+}
+</code></pre>
+
+<p>附带一下定义了的结构体：</p>
+
+<pre><code class="language-go">//apidef.go
+package defs
+
+type UserCredential struct {
+	Username string `json:&quot;username&quot;`
+	Pwd      string `json:&quot;pwd&quot;`
+}
+
+//Data model
+type VideoInfo struct {
+	Id           string
+	AuthorId     int
+	Name         string
+	DisplayCtime string
+}
+
+type Comment struct {
+	Id      string
+	VideoId string
+	Author  string
+	Content string
+}
+</code></pre>
+
+<p><code>测试</code></p>
+
+<pre><code class="language-go">//api_test.go
+/*
+测试有关评论的函数
+*/
+func TestComments(t *testing.T) {
+	clearTables()
+	t.Run(&quot;AddUser&quot;, testAddUser)
+	t.Run(&quot;AddComments&quot;, testAddComments)
+	t.Run(&quot;ListComments&quot;, testListComments)
+}
+
+func testAddComments(t *testing.T) {
+	vid := &quot;12345&quot;
+	aid := 1
+	content := &quot;test&quot;
+
+	err := AddComments(vid, aid, content)
+	if err != nil {
+		t.Errorf(&quot;Error add comment: %v&quot;, err)
+	}
+}
+
+func testListComments(t *testing.T) {
+	vid := &quot;12345&quot;
+	from := 1514764800
+	// 把当前时间转化成, 单位: 纳秒
+	to, _ := strconv.Atoi(strconv.FormatInt(time.Now().UnixNano()/1000000000, 10))
+	res, err := ListComments(vid, from, to)
+	if err != nil {
+		t.Errorf(&quot;Error list comments: %v&quot;, err)
+	}
+
+	for i, ele := range res {
+		fmt.Printf(&quot;comment:%d,%v\n&quot;, i, ele)
+	}
+}
+</code></pre>
+
+<h2 id="总结">总结</h2>
+
+<p>总体来说，增删改查的代码很基础，也是重复的工作量，这里没有用到花里胡哨的技能，同时也@一下<a href="https://github.com/dobio" rel="nofollow noreferrer" target="_blank">颜威</a>同学，在他那里学到了一个小技巧，就是每写一个函数就写一个测试函数，保证自己的代码能跑通，也能马上获得正反馈。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Chaochao Ou </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ouchaochao.github.io/post/go3_8to3_14/>https://ouchaochao.github.io/post/go3_8to3_14/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/go/">
+                    #go</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ouchaochao.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ouchaochao.github.io/post/developgo/" class="prev" rel="prev" title="Go自动化部署项目"><i class="iconfont icon-left"></i>&nbsp;Go自动化部署项目</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ouchaochao.github.io/">Chaochao Ou</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

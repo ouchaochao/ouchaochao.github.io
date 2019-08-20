@@ -6,18 +6,23 @@
     <description>Recent content in go on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 18 Aug 2019 22:06:27 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Aug 2019 22:07:19 +0800</lastBuildDate>
     
 	<atom:link href="https://ouchaochao.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Test</title>
-      <link>https://ouchaochao.github.io/post/test/</link>
-      <pubDate>Sun, 18 Aug 2019 22:06:27 +0800</pubDate>
+      <title>Go语言实战流媒体视频网站3_8至3_14</title>
+      <link>https://ouchaochao.github.io/post/go3_8to3_14/</link>
+      <pubDate>Tue, 20 Aug 2019 22:07:19 +0800</pubDate>
       
-      <guid>https://ouchaochao.github.io/post/test/</guid>
-      <description>for test</description>
+      <guid>https://ouchaochao.github.io/post/go3_8to3_14/</guid>
+      <description>数据库连接 首先先下载数据库连接工具：
+go get github.com/go-sql-driver/mysql  然后在dbops文件夹中新建三个文件，如下：
+dbops ├── api.go ├── api_test.go // 测试api └── conn.go // 连接数据库  下面来看看mysql数据库的连接：
+//conn.go package dbops import ( &amp;quot;database/sql&amp;quot; _ &amp;quot;github.com/go-sql-driver/mysql&amp;quot; ) var ( dbConn *sql.DB err error ) func init() { // 复用dbConn dbConn, err = sql.Open(&amp;quot;mysql&amp;quot;, &amp;quot;root:1@tcp(47.94.131.35:3306)/video?charset=utf8&amp;quot;) if err != nil{ // 无法连接时抛出异常 panic(err.Error()) } }  连接完数据库，接下来就是对数据库的增删改查了，下面分别按用户，视频，评论这三个模块来展示怎么写代码和测试：
+用户 用户模块有三个功能，分别是增加、查询和删除：
+//api.go package dbops import ( &amp;quot;database/sql&amp;quot; _ &amp;quot;github.com/go-sql-driver/mysql&amp;quot; &amp;quot;log&amp;quot; &amp;quot;time&amp;quot; &amp;quot;video/api/defs&amp;quot; &amp;quot;video/api/utils&amp;quot; ) /* 下面三个函数分别是： 添加用户 获取用户信息 删除用户 */ func AddUserCredential(loginName string, pwd string) error { // 千万不要用+号来连接query的各个部分, 不安全, 容易被撞库攻击 //Prepare预编译, 更安全了, 会拦下撞库攻击 stmtIns, err := dbConn.</description>
     </item>
     
   </channel>
