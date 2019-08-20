@@ -5,8 +5,17 @@
     <description>Recent content in LeaveIt on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 18 Aug 2019 20:14:36 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Aug 2019 22:07:19 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Go3_8</title>
+      <link>https://ouchaochao.github.io/post/go3_8/</link>
+      <pubDate>Tue, 20 Aug 2019 22:07:19 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go3_8/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Go自动化部署项目</title>
@@ -1134,89 +1143,6 @@ Delete a comment:
 &lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/3_3_2.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;本节完&lt;/strong&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Go语言实战流媒体视频网站3_2</title>
-      <link>https://ouchaochao.github.io/post/go3_2/</link>
-      <pubDate>Tue, 06 Aug 2019 09:43:11 +0800</pubDate>
-      
-      <guid>https://ouchaochao.github.io/post/go3_2/</guid>
-      <description>
-
-&lt;h2 id=&#34;api-设计与架构&#34;&gt;API 设计与架构&lt;/h2&gt;
-
-&lt;h3 id=&#34;后端服务&#34;&gt;后端服务&lt;/h3&gt;
-
-&lt;h4 id=&#34;api&#34;&gt;API&lt;/h4&gt;
-
-&lt;ol&gt;
-&lt;li&gt;REST(Representational Status Transfer) API&lt;/li&gt;
-&lt;li&gt;REST是一种设计风格，不是任何架构标准&lt;/li&gt;
-&lt;li&gt;当今RESTful API通常使用HTTP作为通信协议，JSON作为数据格式&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;特点&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;统一接口（Uniform Interface）&amp;lt;接口要统一风格&amp;gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;无状态（Stateless）&amp;lt;我什么时候调用这个API，这个API必须返回是我想要的东西；幂等的&amp;gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;幂等的含义：
-在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同。
-幂等函数，或幂等方法，是指可以使用相同参数重复执行，并能获得相同结果的函数。
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;可缓存（Cacheable）&amp;lt;常用的/读远大于写的数据放在缓存&amp;gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;分层（Layered System）&amp;lt;将一个API的service分层很多层，分成很多个服务&amp;gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;CS模式（Client-server Atchitecture）&lt;client和server都可被替换的&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&#34;api设计原则&#34;&gt;API设计原则&lt;/h4&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;以URL（统一资源定位符）风格设计API&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;通过不同的method（get、post、put、delete）来区分对资源的crud&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;返回码（Status Code）符合HTTP资源描述的规定&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/3_2_1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;api设计-用户&#34;&gt;API设计：用户&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;创建（注册）用户：URL：/user，Method：post，SC：201/400/500&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;201：(已创建)请求成功并且服务器创建了新的资源。
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;用户登录：URL：/user/:username，Method：post， SC：200/400/500&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;获取用户基本信息：URL：/user/:username，Method：get，SC：200/400/401/403/500&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;为什么多加了401和403：
-对用户验证的时候，由于验证不通过而返回的错误码
-401：并没有验证
-403：通过验证，但是不具备操作某一项资源的权限
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;用户注销：URL：/user/:username，Method：delete， SC：204/400/401/403/500&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;204：表示请求执行成功，但是没有数据，浏览器不用刷新页面.也不用导向新的页面。
-用户注销后，我们不用返回任何东西，但是要表示确实注销成功了
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;延伸阅读：&lt;/strong&gt;
-HTTP的状态码有很多种,主要有1xx（临时响应）、2xx（成功）、3xx（已重定向）、4xx（请求错误）以及5xx（服务器错误）五个大类，每个大类还对应一些具体的分类。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://baike.baidu.com/item/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/5053660?fr=aladdin&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;百度百科状态码&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

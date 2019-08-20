@@ -6,9 +6,19 @@
     <description>Recent content in Categories on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+    <lastBuildDate>Tue, 20 Aug 2019 22:07:19 +0800</lastBuildDate>
     
 	<atom:link href="https://ouchaochao.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title></title>
+      <link>https://ouchaochao.github.io/categories/</link>
+      <pubDate>Tue, 20 Aug 2019 22:07:19 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/categories/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
