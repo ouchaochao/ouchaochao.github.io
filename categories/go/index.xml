@@ -6,10 +6,24 @@
     <description>Recent content in go on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 20 Aug 2019 22:07:19 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Aug 2019 22:52:15 +0800</lastBuildDate>
     
 	<atom:link href="https://ouchaochao.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go语言实战流媒体视频网站3_15至3_18</title>
+      <link>https://ouchaochao.github.io/post/go3_15to3_16/</link>
+      <pubDate>Tue, 20 Aug 2019 22:52:15 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/go3_15to3_16/</guid>
+      <description>聊聊session 在了解session之前先要了解什么是cookie:
+在网站中，http请求是无状态的。也就是说即使第一次和服务器连接后并且登录成功后，第二次请求服务器依然不能知道当前请求是哪个用户。cookie的出现就是为了解决这个问题，第一次登录后服务器返回一些数据（cookie）给浏览器，然后浏览器保存在本地，当该用户发送第二次请求的时候，就会自动的把上次请求存储的cookie数据自动的携带给服务器，服务器通过浏览器携带的数据就能判断当前用户是哪个了。cookie存储的数据量有限，不同的浏览器有不同的存储大小，但一般不超过4KB。因此使用cookie只能存储一些小量的数据。  什么是session？
+session和cookie的作用有点类似，都是为了存储用户相关的信息。不同的是，cookie是存储在本地浏览器，而session存储在服务器。存储在服务器的数据会更加的安全，不容易被窃取。但存储在服务器也有一定的弊端，就是会占用服务器的资源，但现在服务器已经发展至今，一些session信息还是绰绰有余的。  cookie和session结合使用：
+web开发发展至今，cookie和session的使用已经出现了一些非常成熟的方案。在如今的市场或者企业里，一般有两种存储方式： 1、存储在服务端：通过cookie存储一个session_id，然后具体的数据则是保存在session中。如果用户已经登录，则服务器会在cookie中保存一个session_id，下次再次请求的时候，会把该session_id携带上来，服务器根据session_id在session库中获取用户的session数据。就能知道该用户到底是谁，以及之前保存的一些状态信息。这种专业术语叫做server side session。 2、将session数据加密，然后存储在cookie中。这种专业术语叫做client side session。flask采用的就是这种方式，但是也可以替换成其他形式。  Session 创建过程
+当用户访问Web应用时，服务端程序会随需要创建session，这个过程可以概括为三个步骤： 生成全局唯一标识符（sessionid）； 开辟数据存储空间。一般会在内存中创建相应的数据结构，但这种情况下，系统一旦掉电，所有的会话数据就会丢失，如果是电子商务类网站，这将造成严重的后果。所以为了解决这类问题，你可以将会话数据写到文件里或存储在数据库中，当然这样会增加 I/O 开销，但是它可以实现某种程度的 session 持久化，也更有利于 session 的共享； 将 session 的全局唯一标示符发送给客户端。 以上三个步骤中，最关键的是如何发送这个 session 的唯一标识这一步上。考虑到 HTTP 协议的定义，数据无非可以放到请求行、头域或 Body 里，所以一般来说会有两种常用的方式： cookie 和 URL 重写。 Cookie 服务端通过设置 Set-cookie 头就可以将 session 的标识符传送到客户端，而客户端此后的每一次请求都会带上这个标识符，另外一般包含 session 信息的 cookie 会将失效时间设置为0(会话 cookie)，即浏览器进程有效时间。至于浏览器怎么处理这个0，每个浏览器都有自己的方案，但差别都不会太大(一般体现在新建浏览器窗口的时候)； URL重写， 所谓URL重写，就是在返回给用户的页面里的所有的URL后面追加session标识符，这样用户在收到响应之后，无论点击响应页面里的哪个链接或提交表单，都会自动带上session标识符，从而就实现了会话的保持。虽然这种做法比较麻烦，但是，如果客户端禁用了cookie的话，此种方案将会是首选。  GO中的session 流程 main-&amp;gt;middleware-&amp;gt;defs(message, err)-&amp;gt;handlers-&amp;gt;dbops-&amp;gt;response  在main.go中添加middleware，在middleware中处理校验、健全、流控等：
+//main.go package main import ( &amp;quot;github.com/julienschmidt/httprouter&amp;quot; &amp;quot;net/http&amp;quot; &amp;quot;video/api/handlers&amp;quot; ) type middleWareHandler struct { r *httprouter.</description>
+    </item>
     
     <item>
       <title>Go语言实战流媒体视频网站3_8至3_14</title>

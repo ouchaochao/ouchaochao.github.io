@@ -22,10 +22,10 @@
   <title>
        
        
-           Go3_15to3_16 | LeaveIt
+           Go语言实战流媒体视频网站3_15至3_18 | LeaveIt
        
   </title>
-  <meta name="title" content="Go3_15to3_16 | LeaveIt">
+  <meta name="title" content="Go语言实战流媒体视频网站3_15至3_18 | LeaveIt">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,9 +44,9 @@
          "@id": "https:\/\/ouchaochao.github.io\/"
     },
     "articleSection" : "post",
-    "name" : "Go3_15to3_16",
-    "headline" : "Go3_15to3_16",
-    "description" : "",
+    "name" : "Go语言实战流媒体视频网站3_15至3_18",
+    "headline" : "Go语言实战流媒体视频网站3_15至3_18",
+    "description" : "聊聊session 在了解session之前先要了解什么是cookie:\n在网站中，http请求是无状态的。也就是说即使第一次和服务器连接后并且登录成功后，第二次请求服务器依然不能知道当前请求是哪个用户。cookie的出现就是为了解决这个问题，第一次登录后服务器返回一些数据（cookie）给浏览器，然后浏览器保存在本地，当该用户发送第二次请求的时候，就会自动的把上次请求存储的cookie数据自动的携带给服务器，服务器通过浏览器携带的数据就能判断当前用户是哪个了。cookie存储的数据量有限，不同的浏览器有不同的存储大小，但一般不超过4KB。因此使用cookie只能存储一些小量的数据。  什么是session？\nsession和cookie的作用有点类似，都是为了存储用户相关的信息。不同的是，cookie是存储在本地浏览器，而session存储在服务器。存储在服务器的数据会更加的安全，不容易被窃取。但存储在服务器也有一定的弊端，就是会占用服务器的资源，但现在服务器已经发展至今，一些session信息还是绰绰有余的。  cookie和session结合使用：\nweb开发发展至今，cookie和session的使用已经出现了一些非常成熟的方案。在如今的市场或者企业里，一般有两种存储方式： 1、存储在服务端：通过cookie存储一个session_id，然后具体的数据则是保存在session中。如果用户已经登录，则服务器会在cookie中保存一个session_id，下次再次请求的时候，会把该session_id携带上来，服务器根据session_id在session库中获取用户的session数据。就能知道该用户到底是谁，以及之前保存的一些状态信息。这种专业术语叫做server side session。 2、将session数据加密，然后存储在cookie中。这种专业术语叫做client side session。flask采用的就是这种方式，但是也可以替换成其他形式。  Session 创建过程\n当用户访问Web应用时，服务端程序会随需要创建session，这个过程可以概括为三个步骤： 生成全局唯一标识符（sessionid）； 开辟数据存储空间。一般会在内存中创建相应的数据结构，但这种情况下，系统一旦掉电，所有的会话数据就会丢失，如果是电子商务类网站，这将造成严重的后果。所以为了解决这类问题，你可以将会话数据写到文件里或存储在数据库中，当然这样会增加 I\/O 开销，但是它可以实现某种程度的 session 持久化，也更有利于 session 的共享； 将 session 的全局唯一标示符发送给客户端。 以上三个步骤中，最关键的是如何发送这个 session 的唯一标识这一步上。考虑到 HTTP 协议的定义，数据无非可以放到请求行、头域或 Body 里，所以一般来说会有两种常用的方式： cookie 和 URL 重写。 Cookie 服务端通过设置 Set-cookie 头就可以将 session 的标识符传送到客户端，而客户端此后的每一次请求都会带上这个标识符，另外一般包含 session 信息的 cookie 会将失效时间设置为0(会话 cookie)，即浏览器进程有效时间。至于浏览器怎么处理这个0，每个浏览器都有自己的方案，但差别都不会太大(一般体现在新建浏览器窗口的时候)； URL重写， 所谓URL重写，就是在返回给用户的页面里的所有的URL后面追加session标识符，这样用户在收到响应之后，无论点击响应页面里的哪个链接或提交表单，都会自动带上session标识符，从而就实现了会话的保持。虽然这种做法比较麻烦，但是，如果客户端禁用了cookie的话，此种方案将会是首选。  GO中的session 流程 main-\x26gt;middleware-\x26gt;defs(message, err)-\x26gt;handlers-\x26gt;dbops-\x26gt;response  在main.go中添加middleware，在middleware中处理校验、健全、流控等：\n\/\/main.go package main import ( \x26quot;github.com\/julienschmidt\/httprouter\x26quot; \x26quot;net\/http\x26quot; \x26quot;video\/api\/handlers\x26quot; ) type middleWareHandler struct { r *httprouter.",
     "inLanguage" : "zh-cn",
     "author" : "Chaochao Ou",
     "creator" : "Chaochao Ou",
@@ -57,8 +57,8 @@
     "datePublished": "2019-08-20 22:52:15 \x2b0800 CST",
     "dateModified" : "2019-08-20 22:52:15 \x2b0800 CST",
     "url" : "https:\/\/ouchaochao.github.io\/post\/go3_15to3_16\/",
-    "wordCount" : "0",
-    "keywords" : [ "", "LeaveIt"]
+    "wordCount" : "697",
+    "keywords" : [ "go", "LeaveIt"]
 }
 </script>
 
@@ -108,7 +108,7 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Go3_15to3_16</h1>
+        <h1 class="post-title" itemprop="name headline">Go语言实战流媒体视频网站3_15至3_18</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
                 <span class="post-time">
@@ -117,6 +117,7 @@
                 in
                 <i class="iconfont icon-folder"></i>
                 <span class="post-category">
+                        <a href="https://ouchaochao.github.io/categories/go/"> go </a>
                         
                 </span>
         </div>
@@ -124,6 +125,8 @@
     <div class="post-content">
         
 
+        
+            
         
 
         
@@ -138,6 +141,356 @@
           
 
           
+
+<h2 id="聊聊session">聊聊session</h2>
+
+<p>在了解session之前先要了解什么是cookie:</p>
+
+<pre><code class="language-shell">在网站中，http请求是无状态的。也就是说即使第一次和服务器连接后并且登录成功后，第二次请求服务器依然不能知道当前请求是哪个用户。cookie的出现就是为了解决这个问题，第一次登录后服务器返回一些数据（cookie）给浏览器，然后浏览器保存在本地，当该用户发送第二次请求的时候，就会自动的把上次请求存储的cookie数据自动的携带给服务器，服务器通过浏览器携带的数据就能判断当前用户是哪个了。cookie存储的数据量有限，不同的浏览器有不同的存储大小，但一般不超过4KB。因此使用cookie只能存储一些小量的数据。
+</code></pre>
+
+<p>什么是session？</p>
+
+<pre><code class="language-shell">session和cookie的作用有点类似，都是为了存储用户相关的信息。不同的是，cookie是存储在本地浏览器，而session存储在服务器。存储在服务器的数据会更加的安全，不容易被窃取。但存储在服务器也有一定的弊端，就是会占用服务器的资源，但现在服务器已经发展至今，一些session信息还是绰绰有余的。
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://img.ouchaochao.cn/go/3_15_1.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>cookie和session结合使用：</p>
+
+<pre><code class="language-shell">web开发发展至今，cookie和session的使用已经出现了一些非常成熟的方案。在如今的市场或者企业里，一般有两种存储方式：
+
+1、存储在服务端：通过cookie存储一个session_id，然后具体的数据则是保存在session中。如果用户已经登录，则服务器会在cookie中保存一个session_id，下次再次请求的时候，会把该session_id携带上来，服务器根据session_id在session库中获取用户的session数据。就能知道该用户到底是谁，以及之前保存的一些状态信息。这种专业术语叫做server side session。
+
+2、将session数据加密，然后存储在cookie中。这种专业术语叫做client side session。flask采用的就是这种方式，但是也可以替换成其他形式。
+</code></pre>
+
+<p>Session 创建过程</p>
+
+<pre><code class="language-shell">当用户访问Web应用时，服务端程序会随需要创建session，这个过程可以概括为三个步骤：
+
+生成全局唯一标识符（sessionid）；
+开辟数据存储空间。一般会在内存中创建相应的数据结构，但这种情况下，系统一旦掉电，所有的会话数据就会丢失，如果是电子商务类网站，这将造成严重的后果。所以为了解决这类问题，你可以将会话数据写到文件里或存储在数据库中，当然这样会增加 I/O 开销，但是它可以实现某种程度的 session 持久化，也更有利于 session 的共享；
+将 session 的全局唯一标示符发送给客户端。
+以上三个步骤中，最关键的是如何发送这个 session 的唯一标识这一步上。考虑到 HTTP 协议的定义，数据无非可以放到请求行、头域或 Body 里，所以一般来说会有两种常用的方式： cookie 和 URL 重写。
+
+Cookie 服务端通过设置 Set-cookie 头就可以将 session 的标识符传送到客户端，而客户端此后的每一次请求都会带上这个标识符，另外一般包含 session 信息的 cookie 会将失效时间设置为0(会话 cookie)，即浏览器进程有效时间。至于浏览器怎么处理这个0，每个浏览器都有自己的方案，但差别都不会太大(一般体现在新建浏览器窗口的时候)；
+URL重写， 所谓URL重写，就是在返回给用户的页面里的所有的URL后面追加session标识符，这样用户在收到响应之后，无论点击响应页面里的哪个链接或提交表单，都会自动带上session标识符，从而就实现了会话的保持。虽然这种做法比较麻烦，但是，如果客户端禁用了cookie的话，此种方案将会是首选。
+</code></pre>
+
+<h2 id="go中的session">GO中的session</h2>
+
+<pre><code class="language-shell">流程
+main-&gt;middleware-&gt;defs(message, err)-&gt;handlers-&gt;dbops-&gt;response
+</code></pre>
+
+<p>在<code>main.go</code>中添加<code>middleware</code>，在<code>middleware</code>中处理校验、健全、流控等：</p>
+
+<pre><code class="language-go">//main.go
+package main
+
+import (
+	&quot;github.com/julienschmidt/httprouter&quot;
+	&quot;net/http&quot;
+	&quot;video/api/handlers&quot;
+)
+
+type middleWareHandler struct {
+	r *httprouter.Router
+}
+
+func NewMiddleWareHandler(r *httprouter.Router) http.Handler {
+	m := middleWareHandler{}
+	m.r = r
+	return m
+}
+func (m middleWareHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	//check session
+	handlers.ValidateUserSession(r)
+	m.r.ServeHTTP(w, r)
+}
+
+func RegisterHandlers() *httprouter.Router {
+	router := httprouter.New()
+	router.POST(&quot;/user&quot;, handlers.CreateUser)
+	router.POST(&quot;/user/:username&quot;, handlers.Login)
+	return router
+}
+
+func main() {
+	r := RegisterHandlers()
+	mh := NewMiddleWareHandler(r)
+	http.ListenAndServe(&quot;:8000&quot;, mh)
+}
+
+</code></pre>
+
+<p>这里<code>NewMiddleWareHandler</code>用到duck type。调用过程如下：</p>
+
+<p><code>NewMiddleWareHandler</code>-&gt;<code>middleWareHandler</code>-&gt;<code>ServeHTTP</code>-&gt;<code>auth.go</code>用户合法校验放在这里面，<code>response.go</code>返回消息-&gt;<code>ops.go</code>session的产生和验证过期否 -&gt;<code>internal.go</code>数据库的增删查session</p>
+
+<pre><code class="language-go">/*
+auth.go
+文件初始化
+ */
+package handlers
+
+import (
+	&quot;net/http&quot;
+	&quot;video/api/defs&quot;
+	&quot;video/api/session&quot;
+)
+
+//X开头的都是自定义的header,加到原生http header调用里面,构成整个健全过程
+var HEADER_FIELD_SESSION = &quot;X-Session-Id&quot;
+var HEADER_FAILD_UNAME = &quot;X-User-Name&quot;
+
+//检测用户session是否合法，是就返回username
+func ValidateUserSession(r *http.Request) bool {
+	//get获取sessionId
+	sid := r.Header.Get(HEADER_FIELD_SESSION)
+	if len(sid) == 0 {
+		return false
+	}
+
+	//检测过期否?
+	uname, ok := session.IsSessionExpired(sid)
+	if ok {
+		return false
+	}
+
+	r.Header.Add(HEADER_FAILD_UNAME, uname)
+	return true
+}
+
+func ValidateUser(w http.ResponseWriter, r *http.Request) bool {
+	uname := r.Header.Get(HEADER_FAILD_UNAME)
+	if len(uname) == 0 {
+		sendErrorResponse(w, defs.ErrorNotAuthUser)
+		return false
+	}
+	return true
+}
+
+</code></pre>
+
+<pre><code class="language-go">// session ops.go
+package session
+
+import (
+	&quot;sync&quot;
+	&quot;time&quot;
+	&quot;video/api/dbops&quot;
+	&quot;video/api/defs&quot;
+	&quot;video/api/utils&quot;
+)
+
+//sync.Map自己实现了一套线程安全的机制,优化了并发读,写的话要加锁
+var sessionMap *sync.Map
+
+func init() {
+	sessionMap = &amp;sync.Map{}
+}
+
+//从数据库读取sessionId到cache
+func LoadSessionsFromDB() {
+	r, err := dbops.RetrieveAllSessions()
+	if err != nil {
+		//不对外返回东西
+		return
+	}
+
+	//返回值
+	r.Range(func(k, v interface{}) bool {
+		ss := v.(*defs.SimpleSession)
+		sessionMap.Store(k, ss)
+		return true
+	})
+}
+
+
+func nowInMilli() int64 {
+	//UnixNano纳秒级别, '/ 100000'后变成毫秒级别
+	return time.Now().UnixNano() / 100000
+}
+//产生sessionId
+func GenerateNewSessionId(un string) string {
+	id, _ := utils.NewUUID()
+	ct := nowInMilli()
+	//过期时间30min(单位:毫秒)
+	ttl := ct + 30*60*1000
+
+	ss := &amp;defs.SimpleSession{Username: un, TTL: ttl}
+	sessionMap.Store(id, ss)
+	dbops.InsertSession(id, ttl, un)
+	return id
+
+}
+
+//session过期否?
+func IsSessionExpired(sid string) (string, bool) {
+	ss, ok := sessionMap.Load(sid)
+	if ok {
+		ct := nowInMilli()
+		if ss.(*defs.SimpleSession).TTL &lt; ct {
+			deleteExpieredSession(sid)
+			return &quot;&quot;, true
+		}
+		return ss.(*defs.SimpleSession).Username, false
+	}
+	return &quot;&quot;, true
+}
+//删除过期的session
+func deleteExpieredSession(sid string) {
+	sessionMap.Delete(sid)
+	dbops.DeleteSession(sid)
+}
+
+</code></pre>
+
+<pre><code class="language-go">//response.go
+package handlers
+
+import (
+	&quot;encoding/json&quot;
+	&quot;io&quot;
+	&quot;net/http&quot;
+	&quot;video/api/defs&quot;
+)
+
+func sendErrorResponse(w http.ResponseWriter, errResp defs.ErrResponse) {
+	w.WriteHeader(errResp.HttpSC)
+
+	//Marshal:struct序列化成json
+	resStr, _ := json.Marshal(&amp;errResp.Error)
+	io.WriteString(w, string(resStr))
+}
+
+func sendNormalResponse(w http.ResponseWriter, resp string, sc int) {
+	w.WriteHeader(sc)
+	io.WriteString(w, resp)
+
+}
+</code></pre>
+
+<pre><code class="language-go">//internal.go
+/*
+和session相关的db操作单独放在这个文件中
+ */
+package dbops
+
+import (
+	&quot;database/sql&quot;
+	&quot;log&quot;
+	&quot;strconv&quot;
+	&quot;sync&quot;
+	&quot;video/api/defs&quot;
+)
+
+//往DB中插入session
+func InsertSession(sid string, ttl int64, uname string) error {
+	/*
+	strconv是golang用来做数据类型转换的一个库
+	FormatInt 将十进制的Int类型转换为String类型
+	ParseInt 将字符串转换为值
+	最常见的数值转换是 Atoi(string to int)和 Itoa(int to string)
+	*/
+	ttlstr := strconv.FormatInt(ttl, 10)
+	stmtIns, err := dbConn.Prepare(&quot;INSERT INTO sessions (session_id, TTL, login_name) VALUES (?, ?, ?)&quot;)
+	if err != nil {
+		return err
+	}
+
+	_, err = stmtIns.Exec(sid, ttlstr, uname)
+	if err != nil {
+		return err
+	}
+
+	defer stmtIns.Close()
+	return nil
+}
+
+func RetrieveSession(sid string) (*defs.SimpleSession, error) {
+	ss := &amp;defs.SimpleSession{}
+	stmtOut, err := dbConn.Prepare(&quot;SELECT TTL, login_name FROM sessions WHERE session_id=?&quot;)
+	if err != nil {
+		return nil, err
+	}
+
+	var ttl string
+	var uname string
+	stmtOut.QueryRow(sid).Scan(&amp;ttl, &amp;uname)
+	if err != nil &amp;&amp; err != sql.ErrNoRows {
+		return nil, err
+	}
+
+	if res, err := strconv.ParseInt(ttl, 10, 64); err == nil {
+		ss.TTL = res
+		ss.Username = uname
+	} else {
+		return nil, err
+	}
+	defer stmtOut.Close()
+	return ss, nil
+}
+
+//sessions放在map里,一块返回
+func RetrieveAllSessions() (*sync.Map, error) {
+	m := &amp;sync.Map{}
+	stmtOut, err := dbConn.Prepare(&quot;SELECT * FROM sessions&quot;)
+	if err != nil {
+		log.Printf(&quot;%s&quot;, err)
+		return nil, err
+	}
+
+	rows, err := stmtOut.Query()
+	if err != nil {
+		log.Printf(&quot;%s&quot;, err)
+		return nil, err
+	}
+
+	for rows.Next() {
+		var id string
+		var ttlstr string
+		var login_name string
+		if er := rows.Scan(&amp;id, &amp;ttlstr, &amp;login_name); er != nil {
+			log.Printf(&quot;retrive sessions error: %s&quot;, er)
+			break
+		}
+		if ttl, err1 := strconv.ParseInt(ttlstr, 10, 64); err1 == nil {
+			ss := &amp;defs.SimpleSession{Username: login_name, TTL: ttl}
+			m.Store(id, ss)
+			log.Printf(&quot;session id: %s,ttl:%d&quot;, id, ss.TTL)
+		}
+	}
+	return m, nil
+}
+
+func DeleteSession(sid string) error {
+	stmtOut, err := dbConn.Prepare(&quot;DELETE FROM sessions WHERE session_id=?&quot;)
+	if err != nil {
+		log.Printf(&quot;%s&quot;, err)
+		return err
+	}
+
+	if _, err := stmtOut.Query(sid); err != nil {
+		return err
+	}
+	return nil
+
+}
+</code></pre>
+
+<h2 id="总结">总结</h2>
+
+<p>至此session部分和middleware部分告一段落，但是关于middleware的这个调用过程还不是很熟悉，需要再加深理解。</p>
+
+<h2 id="refers">Refers</h2>
+
+<p><a href="https://www.cnblogs.com/xxtalhr/p/9053906.html" rel="nofollow noreferrer" target="_blank">flask中cookie和session介绍</a></p>
+
+<p><a href="https://blog.csdn.net/bingfeilongxin/article/details/88285305" rel="nofollow noreferrer" target="_blank">Go 语言 Session机制和 Cookie机制</a></p>
+
     </div>
 
     <div class="post-copyright">
@@ -167,8 +520,8 @@
             <section>
             <i class="iconfont icon-tag"></i>Tag(s): 
             
-            <span class="tag"><a href="https://ouchaochao.github.io/tags//">
-                    #</a></span>
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/go/">
+                    #go</a></span>
             
             </section>
         
@@ -223,8 +576,9 @@
 
 
     
-    
-    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
     
   
 
