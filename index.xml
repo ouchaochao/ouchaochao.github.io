@@ -1305,66 +1305,58 @@ $ docker run cc/halo
       <description>&lt;p&gt;写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;#!/bin/sh
-input = &amp;quot;&amp;quot;
 
 function list(){
-echo &amp;quot;查询到有以下md文件:&amp;quot;
-cd content/post/
-ls
-cd ../../
+  echo &amp;quot;查询到有以下md文件:&amp;quot;
+  cd content/post/
+  ls
+  cd ../../
 }
 
 function add(){
-echo &amp;quot;请输入文章的题目：&amp;quot;
-read input
-hugo new post/$input.md
-vim content/post/$input.md
-hugo
-cd public
-git add .
-git commit -m &amp;quot;add $input&amp;quot;
-git push origin master
-echo &amp;quot;&amp;quot;
-echo &amp;quot;Add $input done!&amp;quot;
+  echo &amp;quot;请输入文章的题目：&amp;quot;
+  read input
+  hugo new post/$input.md
+  echo &amp;quot;&amp;quot;
+  echo &amp;quot;Add $input done!&amp;quot;
 }
 
 function deploy(){
-hugo
-cd public
-git add .
-git commit -m &amp;quot;add $input&amp;quot;
-git push origin master
-echo &amp;quot;&amp;quot;
-echo &amp;quot;Deploy done!&amp;quot;
+  hugo
+  cd public
+  git add .
+  git commit -m &amp;quot;add $input&amp;quot;
+  git push origin master
+  echo &amp;quot;&amp;quot;
+  echo &amp;quot;Deploy done!&amp;quot;
 }
 
 function change(){
-list
-echo &amp;quot;请输入要修改的文章题目：&amp;quot;
-read input    
-vim content/post/$input.md
-hugo
-cd public
-git add .
-git commit -m &amp;quot;change $input&amp;quot;
-git push origin master
-echo &amp;quot;&amp;quot;
-echo &amp;quot;Change $input done!&amp;quot;
-
+  list
+  echo &amp;quot;请输入要修改的文章题目：&amp;quot;
+  read input    
+  vim content/post/$input.md
+  hugo
+  cd public
+  git add .
+  git commit -m &amp;quot;change $input&amp;quot;
+  git push origin master
+  echo &amp;quot;&amp;quot;
+  echo &amp;quot;Change $input done!&amp;quot;
 }
 
 function del(){
-list
-echo &amp;quot;请输入要删除的文章题目：&amp;quot;
-read input    
-rm content/post/$input.md
-hugo
-cd public
-git add .
-git commit -m &amp;quot;del $input&amp;quot;
-git push origin master
-echo &amp;quot;&amp;quot;
-echo &amp;quot;Del $input done!&amp;quot;
+  list
+  echo &amp;quot;请输入要删除的文章题目：&amp;quot;
+  read input    
+  rm content/post/$input.md
+  hugo
+  cd public
+  git add .
+  git commit -m &amp;quot;del $input&amp;quot;
+  git push origin master
+  echo &amp;quot;&amp;quot;
+  echo &amp;quot;Del $input done!&amp;quot;
 }
 
 echo &amp;quot;请输入序号：&amp;quot;
@@ -1376,15 +1368,15 @@ echo &amp;quot;    5.退出&amp;quot;
 read b
 
 if (( $b==1 ));then
-add
+	add
 elif (( $b==2 ));then
-change
+	change
 elif (( $b==3 ));then
-del
+	del
 elif (( $b==4 ));then
-deploy
+	deploy
 else
-echo &amp;quot;退出成功&amp;quot;
+	echo &amp;quot;退出成功&amp;quot;
 fi
 
 
@@ -1405,7 +1397,7 @@ fi
 └── themes
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;我把它放在了myblog文件夹下，命名为new.sh，当我要新建/修改/删除博客的时候就只要输入&lt;code&gt;./new.sh&lt;/code&gt;就行了，下面是操作示例：&lt;/p&gt;
+&lt;p&gt;我把它放在了myblog文件夹下，命名为new.sh，然后输入&lt;code&gt;chmod +x new.sh&lt;/code&gt;赋予权限，当我要新建/修改/删除博客的时候就只要输入&lt;code&gt;./new.sh&lt;/code&gt;就行了，下面是操作示例：&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;新建&lt;/strong&gt;&lt;/p&gt;
 

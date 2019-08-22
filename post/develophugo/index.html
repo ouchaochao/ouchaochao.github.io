@@ -46,7 +46,7 @@
     "articleSection" : "post",
     "name" : "自动部署hugo脚本",
     "headline" : "自动部署hugo脚本",
-    "description" : "写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：\n#!\/bin\/sh input = \x26quot;\x26quot; function list(){ echo \x26quot;查询到有以下md文件:\x26quot; cd content\/post\/ ls cd ..\/..\/ } function add(){ echo \x26quot;请输入文章的题目：\x26quot; read input hugo new post\/$input.md vim content\/post\/$input.md hugo cd public git add . git commit -m \x26quot;add $input\x26quot; git push origin master echo \x26quot;\x26quot; echo \x26quot;Add $input done!\x26quot; } function deploy(){ hugo cd public git add . git commit -m \x26quot;add $input\x26quot; git push origin master echo \x26quot;\x26quot; echo \x26quot;Deploy done!\x26quot; } function change(){ list echo \x26quot;请输入要修改的文章题目：\x26quot; read input vim content\/post\/$input.",
+    "description" : "写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：\n#!\/bin\/sh function list(){ echo \x26quot;查询到有以下md文件:\x26quot; cd content\/post\/ ls cd ..\/..\/ } function add(){ echo \x26quot;请输入文章的题目：\x26quot; read input hugo new post\/$input.md echo \x26quot;\x26quot; echo \x26quot;Add $input done!\x26quot; } function deploy(){ hugo cd public git add . git commit -m \x26quot;add $input\x26quot; git push origin master echo \x26quot;\x26quot; echo \x26quot;Deploy done!\x26quot; } function change(){ list echo \x26quot;请输入要修改的文章题目：\x26quot; read input vim content\/post\/$input.md hugo cd public git add . git commit -m \x26quot;change $input\x26quot; git push origin master echo \x26quot;\x26quot; echo \x26quot;Change $input done!",
     "inLanguage" : "zh-cn",
     "author" : "Chaochao Ou",
     "creator" : "Chaochao Ou",
@@ -57,7 +57,7 @@
     "datePublished": "2019-08-18 19:09:42 \x2b0800 CST",
     "dateModified" : "2019-08-18 19:09:42 \x2b0800 CST",
     "url" : "https:\/\/ouchaochao.github.io\/post\/develophugo\/",
-    "wordCount" : "414",
+    "wordCount" : "396",
     "keywords" : [ "other", "LeaveIt"]
 }
 </script>
@@ -137,66 +137,58 @@
           <p>写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：</p>
 
 <pre><code class="language-shell">#!/bin/sh
-input = &quot;&quot;
 
 function list(){
-echo &quot;查询到有以下md文件:&quot;
-cd content/post/
-ls
-cd ../../
+  echo &quot;查询到有以下md文件:&quot;
+  cd content/post/
+  ls
+  cd ../../
 }
 
 function add(){
-echo &quot;请输入文章的题目：&quot;
-read input
-hugo new post/$input.md
-vim content/post/$input.md
-hugo
-cd public
-git add .
-git commit -m &quot;add $input&quot;
-git push origin master
-echo &quot;&quot;
-echo &quot;Add $input done!&quot;
+  echo &quot;请输入文章的题目：&quot;
+  read input
+  hugo new post/$input.md
+  echo &quot;&quot;
+  echo &quot;Add $input done!&quot;
 }
 
 function deploy(){
-hugo
-cd public
-git add .
-git commit -m &quot;add $input&quot;
-git push origin master
-echo &quot;&quot;
-echo &quot;Deploy done!&quot;
+  hugo
+  cd public
+  git add .
+  git commit -m &quot;add $input&quot;
+  git push origin master
+  echo &quot;&quot;
+  echo &quot;Deploy done!&quot;
 }
 
 function change(){
-list
-echo &quot;请输入要修改的文章题目：&quot;
-read input    
-vim content/post/$input.md
-hugo
-cd public
-git add .
-git commit -m &quot;change $input&quot;
-git push origin master
-echo &quot;&quot;
-echo &quot;Change $input done!&quot;
-
+  list
+  echo &quot;请输入要修改的文章题目：&quot;
+  read input    
+  vim content/post/$input.md
+  hugo
+  cd public
+  git add .
+  git commit -m &quot;change $input&quot;
+  git push origin master
+  echo &quot;&quot;
+  echo &quot;Change $input done!&quot;
 }
 
 function del(){
-list
-echo &quot;请输入要删除的文章题目：&quot;
-read input    
-rm content/post/$input.md
-hugo
-cd public
-git add .
-git commit -m &quot;del $input&quot;
-git push origin master
-echo &quot;&quot;
-echo &quot;Del $input done!&quot;
+  list
+  echo &quot;请输入要删除的文章题目：&quot;
+  read input    
+  rm content/post/$input.md
+  hugo
+  cd public
+  git add .
+  git commit -m &quot;del $input&quot;
+  git push origin master
+  echo &quot;&quot;
+  echo &quot;Del $input done!&quot;
 }
 
 echo &quot;请输入序号：&quot;
@@ -208,15 +200,15 @@ echo &quot;    5.退出&quot;
 read b
 
 if (( $b==1 ));then
-add
+	add
 elif (( $b==2 ));then
-change
+	change
 elif (( $b==3 ));then
-del
+	del
 elif (( $b==4 ));then
-deploy
+	deploy
 else
-echo &quot;退出成功&quot;
+	echo &quot;退出成功&quot;
 fi
 
 
@@ -237,7 +229,7 @@ fi
 └── themes
 </code></pre>
 
-<p>我把它放在了myblog文件夹下，命名为new.sh，当我要新建/修改/删除博客的时候就只要输入<code>./new.sh</code>就行了，下面是操作示例：</p>
+<p>我把它放在了myblog文件夹下，命名为new.sh，然后输入<code>chmod +x new.sh</code>赋予权限，当我要新建/修改/删除博客的时候就只要输入<code>./new.sh</code>就行了，下面是操作示例：</p>
 
 <p><strong>新建</strong></p>
 

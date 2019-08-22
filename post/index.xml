@@ -166,7 +166,7 @@ $ mkdir halo $ cd halo $ vim halo.c #include&amp;lt;stdio.h&amp;gt; int main() {
       
       <guid>https://ouchaochao.github.io/post/develophugo/</guid>
       <description>写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：
-#!/bin/sh input = &amp;quot;&amp;quot; function list(){ echo &amp;quot;查询到有以下md文件:&amp;quot; cd content/post/ ls cd ../../ } function add(){ echo &amp;quot;请输入文章的题目：&amp;quot; read input hugo new post/$input.md vim content/post/$input.md hugo cd public git add . git commit -m &amp;quot;add $input&amp;quot; git push origin master echo &amp;quot;&amp;quot; echo &amp;quot;Add $input done!&amp;quot; } function deploy(){ hugo cd public git add . git commit -m &amp;quot;add $input&amp;quot; git push origin master echo &amp;quot;&amp;quot; echo &amp;quot;Deploy done!&amp;quot; } function change(){ list echo &amp;quot;请输入要修改的文章题目：&amp;quot; read input vim content/post/$input.</description>
+#!/bin/sh function list(){ echo &amp;quot;查询到有以下md文件:&amp;quot; cd content/post/ ls cd ../../ } function add(){ echo &amp;quot;请输入文章的题目：&amp;quot; read input hugo new post/$input.md echo &amp;quot;&amp;quot; echo &amp;quot;Add $input done!&amp;quot; } function deploy(){ hugo cd public git add . git commit -m &amp;quot;add $input&amp;quot; git push origin master echo &amp;quot;&amp;quot; echo &amp;quot;Deploy done!&amp;quot; } function change(){ list echo &amp;quot;请输入要修改的文章题目：&amp;quot; read input vim content/post/$input.md hugo cd public git add . git commit -m &amp;quot;change $input&amp;quot; git push origin master echo &amp;quot;&amp;quot; echo &amp;quot;Change $input done!</description>
     </item>
     
     <item>
