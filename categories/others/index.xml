@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>others on LeaveIt</title>
+    <link>https://ouchaochao.github.io/categories/others/</link>
+    <description>Recent content in others on LeaveIt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 06 Sep 2019 22:47:36 +0800</lastBuildDate>
+    
+	<atom:link href="https://ouchaochao.github.io/categories/others/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>富途现场笔试感受</title>
+      <link>https://ouchaochao.github.io/post/%E5%AF%8C%E9%80%94%E7%8E%B0%E5%9C%BA%E7%AC%94%E8%AF%95%E6%84%9F%E5%8F%97/</link>
+      <pubDate>Fri, 06 Sep 2019 22:47:36 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/%E5%AF%8C%E9%80%94%E7%8E%B0%E5%9C%BA%E7%AC%94%E8%AF%95%E6%84%9F%E5%8F%97/</guid>
+      <description>今晚去了富途的宣讲会，感觉这是一个朝气蓬勃的公司，我自己而言是非常喜欢互联网和金融这两块内容的，所以还是很希望自己能进入这样的公司。
+讲讲现场笔试吧。真的是许久没有手写过笔试题了，很怀念的感觉，一共90分钟，做的是后台的题目，考的内容包括数据结构、计算机网络、操作系统、数据库，题型包括选择题、填空题和编程题。
+选择题做的比较顺畅，里面有几道智力题，其中有一道是：
+有4个人，ABCD，每个人都头上都带了个帽子，帽子只有黑色或白色，4个人中分别有两个人带黑色，有两个人带白色，4个人的站位是A|B C D,|是一堵墙，B，C，D分别站在平地，一层台阶，二层台阶上，每个人都看不到自己带的帽子，一开始大家都不讲话，突然有个人说，我知道自己带的什么颜色的帽子了，请问是谁  我想了很久也没有想出来，觉得可能出错题？于是就填了D，上网看了一下答案：
+是C或者D 理由如下：首先考虑C，他看见D和B的帽子，但是他没有推理出自己的颜色（一开始大家都不讲话），所以B和D异色。 同样的由于D也没有推理出自己的颜色，于是C和B异色。 此时，C明白过来，因为D也没有推理出自己的颜色，于是自己和D共色，于是他便说出了D头上帽子的颜色便是自己的颜色。 由于A和B相当于什么都看不见，仅仅凭着别人的推理只能知道共边关系，但是由于没有初始条件，不知道某一帽子的配置，于是无法推知自己帽子的颜色  其它的选择题做的还算顺利。
+填空题就有点难受了，忘了MySQL怎么写查询了，略尴尬，问题：
+查询出每个部门的人员总数  答案：
+select count(人员id) from 部门人员表 group by 部门编号  还有一道网络的题目，计算包大小的，包越大丢包率越大，要怎么设计，表示不会。。。
+编程题是写计算地铁票该算多少钱的，这道题感觉自己都写对了？emmm，蜜汁自信。
+总的来说，经历了第一次笔试，感觉很良好，同时也发现自己有很多的不足，趁着还有点时间多看看书吧，2333</description>
+    </item>
+    
+  </channel>
+</rss>
