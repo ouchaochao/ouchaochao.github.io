@@ -5,8 +5,400 @@
     <description>Recent content in LeaveIt on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 06 Sep 2019 22:47:36 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 09 Sep 2019 21:08:49 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MySQL Crash Course 1</title>
+      <link>https://ouchaochao.github.io/post/mysql/</link>
+      <pubDate>Mon, 09 Sep 2019 21:08:49 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/mysql/</guid>
+      <description>
+
+&lt;p&gt;以下是看&lt;code&gt;MySQL必知必会&lt;/code&gt;这本书总结的一些知识点，备忘。&lt;/p&gt;
+
+&lt;h2 id=&#34;检索数据&#34;&gt;检索数据&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 检索单个列
+SELECT prod_name FROM products;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 检索多个列
+SELECT prod_id, prod_name, prod_price FROM products;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 检索所有列
+SELECT * FROM products;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 检索不同行（相同行只会显示一次）
+SELECT DISTINCT prod_id FROM products;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 限制结果
+SELECT prod_name FROM products LIMIT 5; # 返回5行
+
+SELECT prod_name FROM products LIMIT 5,5; # 返回第五行开始的5行
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;排序检索数据&#34;&gt;排序检索数据&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 排序数据
+SELECT prod_name FROM products ORDER BY prod_name; # 升序（A-Z）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 按多个列排序
+SELECT prod_id, prod_name, prod_price FROM products ORDER BY prod_price, prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 指定排序方向
+SELECT prod_name FROM products ORDER BY prod_name DESC; # 降序（Z-A）
+
+SELECT prod_id, prod_name, prod_price FROM products ORDER BY prod_price DESC, prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;过滤数据&#34;&gt;过滤数据&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 使用WHERE子句
+SELECT prod_name FROM products WHERE prod_price = 2.5;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;操作符&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;=&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;等于&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;lt;&amp;gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;不等于&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;!=&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;不等于&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;lt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;小于&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;lt;=&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;小于等于&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;大于&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;gt;=&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;大于等于&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;BETWEEN&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;在指定的两个值之间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 使用BETWEEN
+SELECT prod_name FROM products WHERE prod_price BETWEEN 2 AND 5;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 空值检查
+SELECT prod_name FROM products WHERE prod_price IS NULL;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;数据过滤&#34;&gt;数据过滤&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# AND
+SELECT prod_name FROM products WHERE prod_price = 2.5 AND prod_id = 1001;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# OR
+SELECT prod_name FROM products WHERE prod_price = 2.5 OR prod_price = 3.0;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 注意计算次序
+SELECT prod_name FROM products WHERE (prod_price = 2.5 OR prod_price = 3.0) AND prod_id = 1001;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# IN
+SELECT prod_name FROM products WHERE prod_price IN (2.5,3.0) ORDER BY prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# NOT
+SELECT prod_name FROM products WHERE prod_price NOT IN (2.5,3.0) ORDER BY prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;用通配符进行过滤&#34;&gt;用通配符进行过滤&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# LIKE %
+SELECT prod_name FROM products WHERE prod_name LIKE &#39;%jet%&#39;; # %表示任何字符出现任意次数
+
+SELECT prod_name FROM products WHERE prod_name LIKE &#39;j%t&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# _ 匹配单个任意字符
+SELECT prod_name FROM products WHERE prod_name LIKE &#39;j_t&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;用正则表达式进行搜索&#34;&gt;用正则表达式进行搜索&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# REGEXP MySQL中的正则表达式匹配不区分大小写
+SELECT prod_name FROM products WHERE prod_id REGEXP &#39;1001&#39; ORDER BY prod_name;
+
+# BINARY 使得正则表达式区分大小写
+SELECT prod_name FROM products WHERE prod_name REGEXP BINARY &#39;AbCd&#39; ORDER BY prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# . 表示匹配任意一个字符
+SELECT prod_name FROM products WHERE prod_name REGEXP &#39;.001&#39; ORDER BY prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# OR
+SELECT prod_name FROM products WHERE prod_id REGEXP &#39;1001 | 1002&#39; ORDER BY prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 匹配几个字符中之一: []
+SELECT prod_name FROM products WHERE prod_id REGEXP &#39;[123]001&#39; ORDER BY prod_name;
+# 等价于
+SELECT prod_name FROM products WHERE prod_id REGEXP &#39;1|2|3 001&#39; ORDER BY prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 匹配范围
+SELECT prod_name FROM products WHERE prod_id REGEXP &#39;[1-9]001&#39; ORDER BY prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 匹配特殊字符加 \\
+SELECT prod_name FROM products WHERE prod_name REGEXP &#39;\\.&#39; ORDER BY prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;元字符&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;\\f&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;换页&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;\\n&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;换行&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;\\r&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;回车&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;\\t&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;制表&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;\\v&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;纵向制表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 匹配字符类（多个实例）
+SELECT prod_name FROM products WHERE prod_name REGEXP &#39;\\([0-9]sticks?\\)&#39; ORDER BY prod_name; # ?的存在使得 stick 和 sticks 能同时存在，它匹配0或1个匹配
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;元字符&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;*&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0或多个匹配&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;+&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1或多个匹配&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;?&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0或1个匹配&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;{n}&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;指定数目的匹配&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;{n,}&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;不少于指定数目的匹配&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;{n,m}&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;匹配数目范围[n,m]，m&amp;lt;255&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 匹配字符类
+SELECT prod_name FROM products WHERE prod_id REGEXP &#39;[[:digits:]]{4}&#39; ORDER BY prod_name;
+# [[:digits:]]{4} 等价于 [0-9][0-9][0-9][0-9]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;字符类&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:alnum:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;[a-zA-Z0-9]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:alpha:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;[a-zA-Z]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:blank:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;空格和制表 [\\t]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:cntrl:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;ASCII 控制字符（ASCII 0到31和127）&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:digit:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;[0-9]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:graph:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;与[:print:]相同，但不包括空格&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:lower:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;[a-z]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:print:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;任意可打印字符&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:punct:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;不在[:alnum:]和[:cntrl:]中的任意字符&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:space:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;包括空格在内的空白字符[\\f\\n\\r\\t\\v]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:upper:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;[A-Z]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[:xdigit:]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;任意16进制数字[a-fA-F0-9]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 定位符
+SELECT prod_name FROM products WHERE prod_name REGEXP &#39;^[0-9]&#39; ORDER BY prod_name;
+# ^ 表示文本的开始位置进行检索
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;元字符&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;^&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;文本的开始&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;文本的结尾&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[[:&amp;lt;:]]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;词的开始&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;[[::&amp;gt;]]&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;词的结尾&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;创建计算字段&#34;&gt;创建计算字段&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;# 拼接
+SELECT Concat(prod_name,&#39;(&#39;, prod_price, &#39;)&#39;) FROM products ORDER BY prod_name
+
+# RTrim 去掉右边的空格， LTrim 去掉左边的空格， Trim去掉两边的空格
+SELECT Concat(RTrim(prod_name),&#39;(&#39;, RTrim(prod_price), &#39;)&#39;) 
+FROM products ORDER BY prod_name
+
+# 使用别名 AS
+SELECT Concat(RTrim(prod_name),&#39;(&#39;, RTrim(prod_price), &#39;)&#39;) 
+AS prod_name_price
+FROM products ORDER BY prod_name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;今天就先到这吧~&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>富途现场笔试感受</title>
@@ -1496,176 +1888,6 @@ Add test done!
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;其它的操作同理，在此就不一一赘述了。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Go语言实战流媒体视频网站3_7</title>
-      <link>https://ouchaochao.github.io/post/go3_7/</link>
-      <pubDate>Fri, 09 Aug 2019 09:21:36 +0800</pubDate>
-      
-      <guid>https://ouchaochao.github.io/post/go3_7/</guid>
-      <description>
-
-&lt;h2 id=&#34;api数据库层设计&#34;&gt;api数据库层设计&lt;/h2&gt;
-
-&lt;h3 id=&#34;数据库设计-用户&#34;&gt;数据库设计: 用户&lt;/h3&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;TABLE&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;users&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;postscript&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;id&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;UNSIGNED INT&lt;br&gt;PRIMARY KEY&lt;br&gt;AUTO_INCREMENT&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;用户不可见&lt;br&gt;主键&lt;br&gt;自动增量更新&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;login_name&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;VARCHAR(64)&lt;br&gt;UNIQUE KEY&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;-&lt;br&gt;用户名不能重复&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;pwd&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;TEXT&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&#34;数据库设计-视频资源&#34;&gt;数据库设计: 视频资源&lt;/h3&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;TABLE&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;video_info&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;postscript&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;id&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;VARCHAR(64)&lt;br&gt;PRIMARY KEY&lt;br&gt;NOT NULL&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;资源多,要长&lt;br&gt;主键&lt;br&gt;不为空&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;author_id&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;UNSIGNED INT&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;上传视频的用户id&lt;br&gt;起到外键作用, 但是是在代码逻辑中处理&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;name&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;TEXT&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;display_ctime&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;TEXT&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;展示给用户看&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;create_time&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;DATETIME&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;用户理解会有困难, 所以创建display_ctime&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&#34;数据库设计-评论&#34;&gt;数据库设计: 评论&lt;/h3&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;TABLE&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;comments&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;postscript&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;id&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;VARCHAR(64)&lt;br&gt;PRIMARY KEY&lt;br&gt;NOT NULL&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;-&lt;br&gt;-&lt;br&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;video_id&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;VARCHAR(64)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;视频的id&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;author_id&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;UNSIGNED INT&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;上传视频的用户id&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;content&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;TEXT&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;time&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;DATETIME&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&#34;数据库设计-sessions&#34;&gt;数据库设计: sessions&lt;/h3&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;TABLE&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;sessions&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;postscript&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;id&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;TINYTEXT&lt;br&gt;PRIMARY KEY&lt;br&gt;NOT NULL&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;用户登录是无限次的, 所以要非常大的数字&lt;br&gt;-&lt;br&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;TTL&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;TINYTEXT&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Time To Live: 过期时间&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;login_name&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;VARCHAR(64)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&#34;四张表的关系&#34;&gt;四张表的关系&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/3_7_1.png&#34; alt=&#34;&#34; /&gt;
-接下来在mysql中创建对应的表格即可:
-&lt;img src=&#34;https://ouchaochao.oss-cn-shenzhen.aliyuncs.com/go/3_7_2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

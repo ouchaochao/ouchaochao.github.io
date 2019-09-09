@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Chaochao Ou">
+  
+  
+  
+  <link rel="prev" href="https://ouchaochao.github.io/post/%E5%AF%8C%E9%80%94%E7%8E%B0%E5%9C%BA%E7%AC%94%E8%AF%95%E6%84%9F%E5%8F%97/" />
+  
+  <link rel="canonical" href="https://ouchaochao.github.io/post/mysql/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           MySQL Crash Course 1 | LeaveIt
+       
+  </title>
+  <meta name="title" content="MySQL Crash Course 1 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ouchaochao.github.io\/"
+    },
+    "articleSection" : "post",
+    "name" : "MySQL Crash Course 1",
+    "headline" : "MySQL Crash Course 1",
+    "description" : "以下是看MySQL必知必会这本书总结的一些知识点，备忘。\n检索数据 # 检索单个列 SELECT prod_name FROM products;  # 检索多个列 SELECT prod_id, prod_name, prod_price FROM products;  # 检索所有列 SELECT * FROM products;  # 检索不同行（相同行只会显示一次） SELECT DISTINCT prod_id FROM products;  # 限制结果 SELECT prod_name FROM products LIMIT 5; # 返回5行 SELECT prod_name FROM products LIMIT 5,5; # 返回第五行开始的5行  排序检索数据 # 排序数据 SELECT prod_name FROM products ORDER BY prod_name; # 升序（A-Z）  # 按多个列排序 SELECT prod_id, prod_name, prod_price FROM products ORDER BY prod_price, prod_name;  # 指定排序方向 SELECT prod_name FROM products ORDER BY prod_name DESC; # 降序（Z-A） SELECT prod_id, prod_name, prod_price FROM products ORDER BY prod_price DESC, prod_name;  过滤数据 # 使用WHERE子句 SELECT prod_name FROM products WHERE prod_price = 2.",
+    "inLanguage" : "zh-cn",
+    "author" : "Chaochao Ou",
+    "creator" : "Chaochao Ou",
+    "publisher": "Chaochao Ou",
+    "accountablePerson" : "Chaochao Ou",
+    "copyrightHolder" : "Chaochao Ou",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-09-09 21:08:49 \x2b0800 CST",
+    "dateModified" : "2019-09-09 21:08:49 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/mysql\/",
+    "wordCount" : "525",
+    "keywords" : [ "SQL", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">MySQL Crash Course 1</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-09-09 itemprop="datePublished">September 9, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ouchaochao.github.io/categories/sql/"> SQL </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>以下是看<code>MySQL必知必会</code>这本书总结的一些知识点，备忘。</p>
+
+<h2 id="检索数据">检索数据</h2>
+
+<pre><code class="language-mysql"># 检索单个列
+SELECT prod_name FROM products;
+</code></pre>
+
+<pre><code class="language-mysql"># 检索多个列
+SELECT prod_id, prod_name, prod_price FROM products;
+</code></pre>
+
+<pre><code class="language-mysql"># 检索所有列
+SELECT * FROM products;
+</code></pre>
+
+<pre><code class="language-mysql"># 检索不同行（相同行只会显示一次）
+SELECT DISTINCT prod_id FROM products;
+</code></pre>
+
+<pre><code class="language-mysql"># 限制结果
+SELECT prod_name FROM products LIMIT 5; # 返回5行
+
+SELECT prod_name FROM products LIMIT 5,5; # 返回第五行开始的5行
+</code></pre>
+
+<h2 id="排序检索数据">排序检索数据</h2>
+
+<pre><code class="language-mysql"># 排序数据
+SELECT prod_name FROM products ORDER BY prod_name; # 升序（A-Z）
+</code></pre>
+
+<pre><code class="language-mysql"># 按多个列排序
+SELECT prod_id, prod_name, prod_price FROM products ORDER BY prod_price, prod_name;
+</code></pre>
+
+<pre><code class="language-mysql"># 指定排序方向
+SELECT prod_name FROM products ORDER BY prod_name DESC; # 降序（Z-A）
+
+SELECT prod_id, prod_name, prod_price FROM products ORDER BY prod_price DESC, prod_name;
+</code></pre>
+
+<h2 id="过滤数据">过滤数据</h2>
+
+<pre><code class="language-mysql"># 使用WHERE子句
+SELECT prod_name FROM products WHERE prod_price = 2.5;
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">=</td>
+<td align="center">等于</td>
+</tr>
+
+<tr>
+<td align="center">&lt;&gt;</td>
+<td align="center">不等于</td>
+</tr>
+
+<tr>
+<td align="center">!=</td>
+<td align="center">不等于</td>
+</tr>
+
+<tr>
+<td align="center">&lt;</td>
+<td align="center">小于</td>
+</tr>
+
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">小于等于</td>
+</tr>
+
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于</td>
+</tr>
+
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">大于等于</td>
+</tr>
+
+<tr>
+<td align="center">BETWEEN</td>
+<td align="center">在指定的两个值之间</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-mysql"># 使用BETWEEN
+SELECT prod_name FROM products WHERE prod_price BETWEEN 2 AND 5;
+</code></pre>
+
+<pre><code class="language-mysql"># 空值检查
+SELECT prod_name FROM products WHERE prod_price IS NULL;
+</code></pre>
+
+<h2 id="数据过滤">数据过滤</h2>
+
+<pre><code class="language-mysql"># AND
+SELECT prod_name FROM products WHERE prod_price = 2.5 AND prod_id = 1001;
+</code></pre>
+
+<pre><code class="language-mysql"># OR
+SELECT prod_name FROM products WHERE prod_price = 2.5 OR prod_price = 3.0;
+</code></pre>
+
+<pre><code class="language-mysql"># 注意计算次序
+SELECT prod_name FROM products WHERE (prod_price = 2.5 OR prod_price = 3.0) AND prod_id = 1001;
+</code></pre>
+
+<pre><code class="language-mysql"># IN
+SELECT prod_name FROM products WHERE prod_price IN (2.5,3.0) ORDER BY prod_name;
+</code></pre>
+
+<pre><code class="language-mysql"># NOT
+SELECT prod_name FROM products WHERE prod_price NOT IN (2.5,3.0) ORDER BY prod_name;
+</code></pre>
+
+<h2 id="用通配符进行过滤">用通配符进行过滤</h2>
+
+<pre><code class="language-mysql"># LIKE %
+SELECT prod_name FROM products WHERE prod_name LIKE '%jet%'; # %表示任何字符出现任意次数
+
+SELECT prod_name FROM products WHERE prod_name LIKE 'j%t';
+</code></pre>
+
+<pre><code class="language-mysql"># _ 匹配单个任意字符
+SELECT prod_name FROM products WHERE prod_name LIKE 'j_t';
+</code></pre>
+
+<h2 id="用正则表达式进行搜索">用正则表达式进行搜索</h2>
+
+<pre><code class="language-mysql"># REGEXP MySQL中的正则表达式匹配不区分大小写
+SELECT prod_name FROM products WHERE prod_id REGEXP '1001' ORDER BY prod_name;
+
+# BINARY 使得正则表达式区分大小写
+SELECT prod_name FROM products WHERE prod_name REGEXP BINARY 'AbCd' ORDER BY prod_name;
+</code></pre>
+
+<pre><code class="language-mysql"># . 表示匹配任意一个字符
+SELECT prod_name FROM products WHERE prod_name REGEXP '.001' ORDER BY prod_name;
+</code></pre>
+
+<pre><code class="language-mysql"># OR
+SELECT prod_name FROM products WHERE prod_id REGEXP '1001 | 1002' ORDER BY prod_name;
+</code></pre>
+
+<pre><code class="language-mysql"># 匹配几个字符中之一: []
+SELECT prod_name FROM products WHERE prod_id REGEXP '[123]001' ORDER BY prod_name;
+# 等价于
+SELECT prod_name FROM products WHERE prod_id REGEXP '1|2|3 001' ORDER BY prod_name;
+</code></pre>
+
+<pre><code class="language-mysql"># 匹配范围
+SELECT prod_name FROM products WHERE prod_id REGEXP '[1-9]001' ORDER BY prod_name;
+</code></pre>
+
+<pre><code class="language-mysql"># 匹配特殊字符加 \\
+SELECT prod_name FROM products WHERE prod_name REGEXP '\\.' ORDER BY prod_name;
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="center">元字符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">\\f</td>
+<td align="center">换页</td>
+</tr>
+
+<tr>
+<td align="center">\\n</td>
+<td align="center">换行</td>
+</tr>
+
+<tr>
+<td align="center">\\r</td>
+<td align="center">回车</td>
+</tr>
+
+<tr>
+<td align="center">\\t</td>
+<td align="center">制表</td>
+</tr>
+
+<tr>
+<td align="center">\\v</td>
+<td align="center">纵向制表</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-mysql"># 匹配字符类（多个实例）
+SELECT prod_name FROM products WHERE prod_name REGEXP '\\([0-9]sticks?\\)' ORDER BY prod_name; # ?的存在使得 stick 和 sticks 能同时存在，它匹配0或1个匹配
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="center">元字符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">*</td>
+<td align="center">0或多个匹配</td>
+</tr>
+
+<tr>
+<td align="center">+</td>
+<td align="center">1或多个匹配</td>
+</tr>
+
+<tr>
+<td align="center">?</td>
+<td align="center">0或1个匹配</td>
+</tr>
+
+<tr>
+<td align="center">{n}</td>
+<td align="center">指定数目的匹配</td>
+</tr>
+
+<tr>
+<td align="center">{n,}</td>
+<td align="center">不少于指定数目的匹配</td>
+</tr>
+
+<tr>
+<td align="center">{n,m}</td>
+<td align="center">匹配数目范围[n,m]，m&lt;255</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-mysql"># 匹配字符类
+SELECT prod_name FROM products WHERE prod_id REGEXP '[[:digits:]]{4}' ORDER BY prod_name;
+# [[:digits:]]{4} 等价于 [0-9][0-9][0-9][0-9]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="center">字符类</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">[:alnum:]</td>
+<td align="center">[a-zA-Z0-9]</td>
+</tr>
+
+<tr>
+<td align="center">[:alpha:]</td>
+<td align="center">[a-zA-Z]</td>
+</tr>
+
+<tr>
+<td align="center">[:blank:]</td>
+<td align="center">空格和制表 [\\t]</td>
+</tr>
+
+<tr>
+<td align="center">[:cntrl:]</td>
+<td align="center">ASCII 控制字符（ASCII 0到31和127）</td>
+</tr>
+
+<tr>
+<td align="center">[:digit:]</td>
+<td align="center">[0-9]</td>
+</tr>
+
+<tr>
+<td align="center">[:graph:]</td>
+<td align="center">与[:print:]相同，但不包括空格</td>
+</tr>
+
+<tr>
+<td align="center">[:lower:]</td>
+<td align="center">[a-z]</td>
+</tr>
+
+<tr>
+<td align="center">[:print:]</td>
+<td align="center">任意可打印字符</td>
+</tr>
+
+<tr>
+<td align="center">[:punct:]</td>
+<td align="center">不在[:alnum:]和[:cntrl:]中的任意字符</td>
+</tr>
+
+<tr>
+<td align="center">[:space:]</td>
+<td align="center">包括空格在内的空白字符[\\f\\n\\r\\t\\v]</td>
+</tr>
+
+<tr>
+<td align="center">[:upper:]</td>
+<td align="center">[A-Z]</td>
+</tr>
+
+<tr>
+<td align="center">[:xdigit:]</td>
+<td align="center">任意16进制数字[a-fA-F0-9]</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-mysql"># 定位符
+SELECT prod_name FROM products WHERE prod_name REGEXP '^[0-9]' ORDER BY prod_name;
+# ^ 表示文本的开始位置进行检索
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="center">元字符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">^</td>
+<td align="center">文本的开始</td>
+</tr>
+
+<tr>
+<td align="center">$</td>
+<td align="center">文本的结尾</td>
+</tr>
+
+<tr>
+<td align="center">[[:&lt;:]]</td>
+<td align="center">词的开始</td>
+</tr>
+
+<tr>
+<td align="center">[[::&gt;]]</td>
+<td align="center">词的结尾</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="创建计算字段">创建计算字段</h2>
+
+<pre><code class="language-mysql"># 拼接
+SELECT Concat(prod_name,'(', prod_price, ')') FROM products ORDER BY prod_name
+
+# RTrim 去掉右边的空格， LTrim 去掉左边的空格， Trim去掉两边的空格
+SELECT Concat(RTrim(prod_name),'(', RTrim(prod_price), ')') 
+FROM products ORDER BY prod_name
+
+# 使用别名 AS
+SELECT Concat(RTrim(prod_name),'(', RTrim(prod_price), ')') 
+AS prod_name_price
+FROM products ORDER BY prod_name
+</code></pre>
+
+<p>今天就先到这吧~</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Chaochao Ou </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ouchaochao.github.io/post/mysql/>https://ouchaochao.github.io/post/mysql/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/sql/">
+                    #SQL</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ouchaochao.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ouchaochao.github.io/post/%E5%AF%8C%E9%80%94%E7%8E%B0%E5%9C%BA%E7%AC%94%E8%AF%95%E6%84%9F%E5%8F%97/" class="prev" rel="prev" title="富途现场笔试感受"><i class="iconfont icon-left"></i>&nbsp;富途现场笔试感受</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ouchaochao.github.io/">Chaochao Ou</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
