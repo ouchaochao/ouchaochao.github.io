@@ -5,8 +5,160 @@
     <description>Recent content in LeaveIt on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 09 Sep 2019 21:08:49 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 19 Sep 2019 20:29:34 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Java Introduction</title>
+      <link>https://ouchaochao.github.io/post/java_introduction/</link>
+      <pubDate>Thu, 19 Sep 2019 20:29:34 +0800</pubDate>
+      
+      <guid>https://ouchaochao.github.io/post/java_introduction/</guid>
+      <description>
+
+&lt;p&gt;慕课链接&lt;/p&gt;
+
+&lt;h2 id=&#34;基础概念&#34;&gt;基础概念&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;JavaSE：基础核心；面向对象、API、JVM、
+JavaME：移动设备、游戏、通信
+JavaEE：JSP、EJB、服务
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;JVM：Java Virtual Machine 
+JRE：Java Development Kit Java开发工具包
+JDK：Java Runtime Environment Java运行时环境
+
+JRE = JVM + JavaSE标准类库
+JDK = JRE + 开发工具集（如：Javac编译工具等） 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# 环境变量
+JAVA_HOME：配置JDK安装路径 （JDK）
+PATH：配置JDK命令文件的位置（JDK/bin）
+CLASSPATH：配置类库文件的位置（JDK/lib）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;javac XXX.java：编译文件，生成XXX.class
+java XXX：解释器；运行文件（不用带.class后缀！）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;第一个程序&#34;&gt;第一个程序&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;package helloworld;
+
+public class helloworld {
+    public static void main(String[] args){
+        System.out.println(&amp;quot;Hello world&amp;quot;);
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;认识java标识符&#34;&gt;认识Java标识符&lt;/h2&gt;
+
+&lt;p&gt;标识符就是用于给 Java 程序中变量、类、方法等命名的符号。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://img.ouchaochao.cn/blog/%E6%A0%87%E8%AF%86%E7%AC%A6.jpg&#34; alt=&#34;标识符&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;使用标识符时，需要遵守几条规则：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;标识符&lt;strong&gt;可以&lt;/strong&gt;由&lt;strong&gt;字母、数字、下划线（_）、美元符（$）&lt;/strong&gt;组成，但不能包含 @、%、空格等其它特殊字符&lt;strong&gt;，不能以数字开头&lt;/strong&gt;。譬如：123name 就是不合法滴&lt;/li&gt;
+&lt;li&gt;标识符&lt;strong&gt;不能是 Java 关键字和保留字&lt;/strong&gt;（ Java 预留的关键字，以后的升级版本中有可能作为关键字），但可以包含关键字和保留字。如：不可以使用 void 作为标识符，但是 Myvoid 可以&lt;/li&gt;
+&lt;li&gt;标识符是&lt;strong&gt;严格区分大小写&lt;/strong&gt;的。 所以涅，一定要分清楚 imooc 和 IMooc 是两个不同的标识符哦！&lt;/li&gt;
+&lt;li&gt;标识符的命名最好能反映出其作用，做到&lt;strong&gt;见名知意&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;如何命名java变量&#34;&gt;如何命名Java变量&lt;/h2&gt;
+
+&lt;p&gt;优秀攻城师的习惯：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;变量名由多单词组成时，&lt;strong&gt;第一个单词的首字母小写&lt;/strong&gt;，&lt;strong&gt;其后单词的首字母大写&lt;/strong&gt;，俗称骆驼式命名法（也称驼峰命名法），如 myAge&lt;/li&gt;
+&lt;li&gt;变量命名时，尽量简短且能清楚的表达变量的作用，做到&lt;strong&gt;见名知意&lt;/strong&gt;。如：定义变量名 stuName 保存“学生姓名”信息&lt;/li&gt;
+&lt;li&gt;PS： Java 变量名的&lt;strong&gt;长度没有限制&lt;/strong&gt;，但 Java 语言&lt;strong&gt;是区分大小写&lt;/strong&gt;的，所以 price 和 Price 是两个完全不同的变量哦！&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;java中的数据类型&#34;&gt;Java中的数据类型&lt;/h2&gt;
+
+&lt;p&gt;Java 语言是一种&lt;strong&gt;强类型&lt;/strong&gt;语言。通俗点说就是，在 Java 中存储的数据都是有类型的，而且必须在编译时就确定其类型。 Java 中有两类数据类型：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://img.ouchaochao.cn/blog/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B1.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在 Java 的领域里&lt;strong&gt;，基本数据类型变量&lt;/strong&gt;存的是&lt;strong&gt;数据本身&lt;/strong&gt;，而&lt;strong&gt;引用类型变量&lt;/strong&gt;存的是保存&lt;strong&gt;数据的空间地址&lt;/strong&gt;。说白了，基本数据类型变量里存储的是直接放在抽屉里的东西，而引用数据类型变量里存储的是这个抽屉的钥匙，钥匙和抽屉一一对应。&lt;/p&gt;
+
+&lt;p&gt;常用的基本数据类型有：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://img.ouchaochao.cn/blog/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B2.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://img.ouchaochao.cn/blog/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B3.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;注：关于 float 型和 double 型的区别，以及 char 型和 String 型的不同，在 wiki 中有相关的总结，小伙伴们可以去查看哦~~&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;String&lt;/strong&gt; 是一种常见的&lt;strong&gt;引用数据类型&lt;/strong&gt;，用来表示字符串。在程序开发中，很多操作都要使用字符串来完成，例如系统中的用户名、密码、电子邮箱等。&lt;/p&gt;
+
+&lt;h2 id=&#34;java常量的应用&#34;&gt;Java常量的应用&lt;/h2&gt;
+
+&lt;p&gt;所谓常量，我们可以理解为是一种特殊的变量，它的值被设定后，在&lt;strong&gt;程序运行过程中不允许改变&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;语法：&lt;strong&gt;final 常量名 = 值;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://img.ouchaochao.cn/blog/final.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;程序中使用常量可以提高代码的&lt;strong&gt;可维护性&lt;/strong&gt;。例如，在项目开发时，我们需要指定用户的性别，此时可以定义一个常量 SEX，赋值为 &amp;ldquo;男&amp;rdquo;，在需要指定用户性别的地方直接调用此常量即可，避免了由于用户的不规范赋值导致程序出错的情况。&lt;/p&gt;
+
+&lt;p&gt;伙计们注意啦：常量名一般使用&lt;strong&gt;大写字符&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;如何在java中使用注释&#34;&gt;如何在Java中使用注释&lt;/h2&gt;
+
+&lt;p&gt;Java 中注释有三种类型：&lt;strong&gt;单行注释、多行注释、文档注释&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://img.ouchaochao.cn/blog/notes.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;java中的条件运算符&#34;&gt;Java中的条件运算符&lt;/h2&gt;
+
+&lt;p&gt;条件运算符（ ? : ）也称为 “三元运算符”。&lt;/p&gt;
+
+&lt;p&gt;语法形式：&lt;strong&gt;布尔表达式 ？ 表达式1 ：表达式2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;运算过程：如果布尔表达式的值为 &lt;strong&gt;true&lt;/strong&gt; ，则返回 &lt;strong&gt;表达式1&lt;/strong&gt; 的值，否则返回 &lt;strong&gt;表达式2&lt;/strong&gt; 的值&lt;/p&gt;
+
+&lt;h2 id=&#34;如何使用-java-中的数组&#34;&gt;如何使用 Java 中的数组&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// 1
+int[] s = new int[5];
+
+// 2
+int[] s = {1, 2, 3, 4, 5};
+// equal
+int[] s = new int[]{1, 2, 3, 4, 5};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;java-中的二维数组&#34;&gt;Java 中的二维数组&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class HelloWorld {
+    public static void main(String[] args) {
+        
+		// 定义两行三列的二维数组并赋值
+		String[][] names={{&amp;quot;tom&amp;quot;,&amp;quot;jack&amp;quot;,&amp;quot;mike&amp;quot;},{&amp;quot;zhangsan&amp;quot;,&amp;quot;lisi&amp;quot;,&amp;quot;wangwu&amp;quot;}};
+                 
+		// 通过二重循环输出二维数组中元素的值
+    // 定位行
+		for (int i = 0; i &amp;lt;   names.length  ; i++) {
+      // 定位列      
+			for (int j = 0; j &amp;lt; names[i].length; j++) {
+                
+				System.out.println(names[i][j]);
+			}
+      
+			System.out.println();
+		}
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>MySQL Crash Course 1</title>
@@ -1729,165 +1881,6 @@ $ docker run cc/halo
 &lt;a href=&#34;https://docs.docker.com/install/linux/docker-ce/ubuntu/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;ubuntu&lt;/a&gt;
 &lt;a href=&#34;https://docs.docker.com/docker-for-mac/install/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;mac&lt;/a&gt;
 &lt;a href=&#34;https://docs.docker.com/docker-for-windows/install/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;windows&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>自动部署hugo脚本</title>
-      <link>https://ouchaochao.github.io/post/develophugo/</link>
-      <pubDate>Sun, 18 Aug 2019 19:09:42 +0800</pubDate>
-      
-      <guid>https://ouchaochao.github.io/post/develophugo/</guid>
-      <description>&lt;p&gt;写完markdowm再输入手动命令行进行部署hugo太费事了，于是就写了这个脚本：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;#!/bin/sh
-
-function list(){
-  echo &amp;quot;查询到有以下md文件:&amp;quot;
-  cd content/post/
-  ls
-  cd ../../
-}
-
-function add(){
-  echo &amp;quot;请输入文章的题目：&amp;quot;
-  read input
-  hugo new post/$input.md
-  echo &amp;quot;&amp;quot;
-  echo &amp;quot;Add $input done!&amp;quot;
-}
-
-function deploy(){
-  hugo
-  cd public
-  git add .
-  git commit -m &amp;quot;add $input&amp;quot;
-  git push origin master
-  echo &amp;quot;&amp;quot;
-  echo &amp;quot;Deploy done!&amp;quot;
-}
-
-function change(){
-  list
-  echo &amp;quot;请输入要修改的文章题目：&amp;quot;
-  read input    
-  vim content/post/$input.md
-  hugo
-  cd public
-  git add .
-  git commit -m &amp;quot;change $input&amp;quot;
-  git push origin master
-  echo &amp;quot;&amp;quot;
-  echo &amp;quot;Change $input done!&amp;quot;
-}
-
-function del(){
-  list
-  echo &amp;quot;请输入要删除的文章题目：&amp;quot;
-  read input    
-  rm content/post/$input.md
-  hugo
-  cd public
-  git add .
-  git commit -m &amp;quot;del $input&amp;quot;
-  git push origin master
-  echo &amp;quot;&amp;quot;
-  echo &amp;quot;Del $input done!&amp;quot;
-}
-
-echo &amp;quot;请输入序号：&amp;quot;
-echo &amp;quot;    1.新建post&amp;quot;
-echo &amp;quot;    2.修改post&amp;quot;
-echo &amp;quot;    3.删除post&amp;quot;
-echo &amp;quot;    4.部署&amp;quot;
-echo &amp;quot;    5.退出&amp;quot;
-read b
-
-if (( $b==1 ));then
-	add
-elif (( $b==2 ));then
-	change
-elif (( $b==3 ));then
-	del
-elif (( $b==4 ));then
-	deploy
-else
-	echo &amp;quot;退出成功&amp;quot;
-fi
-
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;目录结构如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;myblog
-├── archetypes
-├── config.toml
-├── content
-├── data
-├── layouts
-├── new.sh
-├── public
-├── resources
-├── static
-└── themes
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;我把它放在了myblog文件夹下，命名为new.sh，然后输入&lt;code&gt;chmod +x new.sh&lt;/code&gt;赋予权限，当我要新建/修改/删除博客的时候就只要输入&lt;code&gt;./new.sh&lt;/code&gt;就行了，下面是操作示例：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;新建&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;myblog ./new.sh
-./new.sh: line 2: input: command not found
-请输入序号：
-	1.新建post
-	2.修改post
-	3.删除post
-	4.退出
-1
-请输入文章的题目：
-test
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;接着就是在vim中编辑Markdown文件了，保存退出后会自动部署到github上&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;/Users/ouchaochao/myblog/content/post/test.md created
-Building sites … WARN 2019/08/18 19:16:54 Page&#39;s .URL is deprecated and will be removed in a future release. Use .Permalink or .RelPermalink. If what you want is the front matter URL value, use .Params.url.
-WARN 2019/08/18 19:16:54 Page&#39;s .RSSLink is deprecated and will be removed in a future release. Use the Output Format&#39;s link, e.g. something like: 
-    {{ with .OutputFormats.Get &amp;quot;RSS&amp;quot; }}{{ .RelPermalink }}{{ end }}.
-WARN 2019/08/18 19:16:54 Page&#39;s .Hugo is deprecated and will be removed in a future release. Use the global hugo function.
-
-                   | EN  
-+------------------+----+
-  Pages            | 19  
-  Paginator pages  |  2  
-  Non-page files   |  0  
-  Static files     | 28  
-  Processed images |  0  
-  Aliases          |  6  
-  Sitemaps         |  1  
-  Cleaned          |  0  
-
-Total in 15 ms
-[master 364f578] add test
- 12 files changed, 1274 insertions(+), 108 deletions(-)
- create mode 100644 &amp;quot;2019/08/18/\350\207\252\345\212\250\351\203\250\347\275\262hugo\350\204\232\346\234\254/index.html&amp;quot;
- create mode 100644 page/2/index.html
- create mode 100644 post/page/2/index.html
-枚举对象: 45, 完成.
-对象计数中: 100% (45/45), 完成.
-使用 6 个线程进行压缩
-压缩对象中: 100% (19/19), 完成.
-写入对象中: 100% (26/26), 6.20 KiB | 6.20 MiB/s, 完成.
-总共 26 （差异 13），复用 0 （差异 0）
-remote: Resolving deltas: 100% (13/13), completed with 8 local objects.
-To https://github.com/ouchaochao/ouchaochao.github.io.git
-   fa466d6..364f578  master -&amp;gt; master
-
-Add test done!
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;其它的操作同理，在此就不一一赘述了。&lt;/p&gt;
 </description>
     </item>
     

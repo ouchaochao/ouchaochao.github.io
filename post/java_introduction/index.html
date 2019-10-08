@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Chaochao Ou">
+  
+  
+  
+  <link rel="prev" href="https://ouchaochao.github.io/post/mysql/" />
+  
+  <link rel="canonical" href="https://ouchaochao.github.io/post/java_introduction/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Java Introduction | LeaveIt
+       
+  </title>
+  <meta name="title" content="Java Introduction | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ouchaochao.github.io\/"
+    },
+    "articleSection" : "post",
+    "name" : "Java Introduction",
+    "headline" : "Java Introduction",
+    "description" : "慕课链接\n基础概念 JavaSE：基础核心；面向对象、API、JVM、 JavaME：移动设备、游戏、通信 JavaEE：JSP、EJB、服务  JVM：Java Virtual Machine JRE：Java Development Kit Java开发工具包 JDK：Java Runtime Environment Java运行时环境 JRE = JVM \x2b JavaSE标准类库 JDK = JRE \x2b 开发工具集（如：Javac编译工具等）  # 环境变量 JAVA_HOME：配置JDK安装路径 （JDK） PATH：配置JDK命令文件的位置（JDK\/bin） CLASSPATH：配置类库文件的位置（JDK\/lib）  javac XXX.java：编译文件，生成XXX.class java XXX：解释器；运行文件（不用带.class后缀！）  第一个程序 package helloworld; public class helloworld { public static void main(String[] args){ System.out.println(\x26quot;Hello world\x26quot;); } }  认识Java标识符 标识符就是用于给 Java 程序中变量、类、方法等命名的符号。\n使用标识符时，需要遵守几条规则：\n 标识符可以由字母、数字、下划线（_）、美元符（$）组成，但不能包含 @、%、空格等其它特殊字符，不能以数字开头。譬如：123name 就是不合法滴 标识符不能是 Java 关键字和保留字（ Java 预留的关键字，以后的升级版本中有可能作为关键字），但可以包含关键字和保留字。如：不可以使用 void 作为标识符，但是 Myvoid 可以 标识符是严格区分大小写的。 所以涅，一定要分清楚 imooc 和 IMooc 是两个不同的标识符哦！ 标识符的命名最好能反映出其作用，做到见名知意。  如何命名Java变量 优秀攻城师的习惯：",
+    "inLanguage" : "zh-cn",
+    "author" : "Chaochao Ou",
+    "creator" : "Chaochao Ou",
+    "publisher": "Chaochao Ou",
+    "accountablePerson" : "Chaochao Ou",
+    "copyrightHolder" : "Chaochao Ou",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-09-19 20:29:34 \x2b0800 CST",
+    "dateModified" : "2019-09-19 20:29:34 \x2b0800 CST",
+    "url" : "https:\/\/ouchaochao.github.io\/post\/java_introduction\/",
+    "wordCount" : "226",
+    "keywords" : [ "Java", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ouchaochao.github.io/">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/post/" title="">Blog</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Java Introduction</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ouchaochao.github.io/" rel="author">Chaochao Ou</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-09-19 itemprop="datePublished">September 19, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ouchaochao.github.io/categories/java/"> Java </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>慕课链接</p>
+
+<h2 id="基础概念">基础概念</h2>
+
+<pre><code class="language-shell">JavaSE：基础核心；面向对象、API、JVM、
+JavaME：移动设备、游戏、通信
+JavaEE：JSP、EJB、服务
+</code></pre>
+
+<pre><code class="language-shell">JVM：Java Virtual Machine 
+JRE：Java Development Kit Java开发工具包
+JDK：Java Runtime Environment Java运行时环境
+
+JRE = JVM + JavaSE标准类库
+JDK = JRE + 开发工具集（如：Javac编译工具等） 
+</code></pre>
+
+<pre><code class="language-shell"># 环境变量
+JAVA_HOME：配置JDK安装路径 （JDK）
+PATH：配置JDK命令文件的位置（JDK/bin）
+CLASSPATH：配置类库文件的位置（JDK/lib）
+</code></pre>
+
+<pre><code class="language-shell">javac XXX.java：编译文件，生成XXX.class
+java XXX：解释器；运行文件（不用带.class后缀！）
+</code></pre>
+
+<h2 id="第一个程序">第一个程序</h2>
+
+<pre><code class="language-java">package helloworld;
+
+public class helloworld {
+    public static void main(String[] args){
+        System.out.println(&quot;Hello world&quot;);
+    }
+
+}
+</code></pre>
+
+<h2 id="认识java标识符">认识Java标识符</h2>
+
+<p>标识符就是用于给 Java 程序中变量、类、方法等命名的符号。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://img.ouchaochao.cn/blog/%E6%A0%87%E8%AF%86%E7%AC%A6.jpg" alt="标识符" class="lazyload"><figcaption class="image-caption">标识符</figcaption></figure></p>
+
+<p>使用标识符时，需要遵守几条规则：</p>
+
+<ol>
+<li>标识符<strong>可以</strong>由<strong>字母、数字、下划线（_）、美元符（$）</strong>组成，但不能包含 @、%、空格等其它特殊字符<strong>，不能以数字开头</strong>。譬如：123name 就是不合法滴</li>
+<li>标识符<strong>不能是 Java 关键字和保留字</strong>（ Java 预留的关键字，以后的升级版本中有可能作为关键字），但可以包含关键字和保留字。如：不可以使用 void 作为标识符，但是 Myvoid 可以</li>
+<li>标识符是<strong>严格区分大小写</strong>的。 所以涅，一定要分清楚 imooc 和 IMooc 是两个不同的标识符哦！</li>
+<li>标识符的命名最好能反映出其作用，做到<strong>见名知意</strong>。</li>
+</ol>
+
+<h2 id="如何命名java变量">如何命名Java变量</h2>
+
+<p>优秀攻城师的习惯：</p>
+
+<ol>
+<li>变量名由多单词组成时，<strong>第一个单词的首字母小写</strong>，<strong>其后单词的首字母大写</strong>，俗称骆驼式命名法（也称驼峰命名法），如 myAge</li>
+<li>变量命名时，尽量简短且能清楚的表达变量的作用，做到<strong>见名知意</strong>。如：定义变量名 stuName 保存“学生姓名”信息</li>
+<li>PS： Java 变量名的<strong>长度没有限制</strong>，但 Java 语言<strong>是区分大小写</strong>的，所以 price 和 Price 是两个完全不同的变量哦！</li>
+</ol>
+
+<h2 id="java中的数据类型">Java中的数据类型</h2>
+
+<p>Java 语言是一种<strong>强类型</strong>语言。通俗点说就是，在 Java 中存储的数据都是有类型的，而且必须在编译时就确定其类型。 Java 中有两类数据类型：</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://img.ouchaochao.cn/blog/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B1.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>在 Java 的领域里<strong>，基本数据类型变量</strong>存的是<strong>数据本身</strong>，而<strong>引用类型变量</strong>存的是保存<strong>数据的空间地址</strong>。说白了，基本数据类型变量里存储的是直接放在抽屉里的东西，而引用数据类型变量里存储的是这个抽屉的钥匙，钥匙和抽屉一一对应。</p>
+
+<p>常用的基本数据类型有：</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://img.ouchaochao.cn/blog/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B2.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://img.ouchaochao.cn/blog/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B3.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>注：关于 float 型和 double 型的区别，以及 char 型和 String 型的不同，在 wiki 中有相关的总结，小伙伴们可以去查看哦~~</p>
+
+<p><strong>String</strong> 是一种常见的<strong>引用数据类型</strong>，用来表示字符串。在程序开发中，很多操作都要使用字符串来完成，例如系统中的用户名、密码、电子邮箱等。</p>
+
+<h2 id="java常量的应用">Java常量的应用</h2>
+
+<p>所谓常量，我们可以理解为是一种特殊的变量，它的值被设定后，在<strong>程序运行过程中不允许改变</strong>。</p>
+
+<p>语法：<strong>final 常量名 = 值;</strong></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://img.ouchaochao.cn/blog/final.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>程序中使用常量可以提高代码的<strong>可维护性</strong>。例如，在项目开发时，我们需要指定用户的性别，此时可以定义一个常量 SEX，赋值为 &ldquo;男&rdquo;，在需要指定用户性别的地方直接调用此常量即可，避免了由于用户的不规范赋值导致程序出错的情况。</p>
+
+<p>伙计们注意啦：常量名一般使用<strong>大写字符</strong></p>
+
+<h2 id="如何在java中使用注释">如何在Java中使用注释</h2>
+
+<p>Java 中注释有三种类型：<strong>单行注释、多行注释、文档注释</strong></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://img.ouchaochao.cn/blog/notes.jpg" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<h2 id="java中的条件运算符">Java中的条件运算符</h2>
+
+<p>条件运算符（ ? : ）也称为 “三元运算符”。</p>
+
+<p>语法形式：<strong>布尔表达式 ？ 表达式1 ：表达式2</strong></p>
+
+<p>运算过程：如果布尔表达式的值为 <strong>true</strong> ，则返回 <strong>表达式1</strong> 的值，否则返回 <strong>表达式2</strong> 的值</p>
+
+<h2 id="如何使用-java-中的数组">如何使用 Java 中的数组</h2>
+
+<pre><code class="language-java">// 1
+int[] s = new int[5];
+
+// 2
+int[] s = {1, 2, 3, 4, 5};
+// equal
+int[] s = new int[]{1, 2, 3, 4, 5};
+</code></pre>
+
+<h2 id="java-中的二维数组">Java 中的二维数组</h2>
+
+<pre><code class="language-java">public class HelloWorld {
+    public static void main(String[] args) {
+        
+		// 定义两行三列的二维数组并赋值
+		String[][] names={{&quot;tom&quot;,&quot;jack&quot;,&quot;mike&quot;},{&quot;zhangsan&quot;,&quot;lisi&quot;,&quot;wangwu&quot;}};
+                 
+		// 通过二重循环输出二维数组中元素的值
+    // 定位行
+		for (int i = 0; i &lt;   names.length  ; i++) {
+      // 定位列      
+			for (int j = 0; j &lt; names[i].length; j++) {
+                
+				System.out.println(names[i][j]);
+			}
+      
+			System.out.println();
+		}
+	}
+}
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Chaochao Ou </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ouchaochao.github.io/post/java_introduction/>https://ouchaochao.github.io/post/java_introduction/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ouchaochao.github.io/tags/java/">
+                    #Java</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ouchaochao.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ouchaochao.github.io/post/mysql/" class="prev" rel="prev" title="MySQL Crash Course 1"><i class="iconfont icon-left"></i>&nbsp;MySQL Crash Course 1</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ouchaochao.github.io/">Chaochao Ou</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
